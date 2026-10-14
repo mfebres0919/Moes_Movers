@@ -1133,9 +1133,10 @@ textarea.form-control {
     top: 100%;
     left: 0;
     right: 0;
-    max-height: calc(100svh - 4.5rem);
+    max-height: calc(100svh - var(--menu-top, 4.5rem)); /* --menu-top: where the panel starts, set when it opens */
     padding: 0.5rem var(--gutter) 1.5rem;
     overflow-y: auto;
+    overscroll-behavior: contain;
     background-color: var(--color-white);
     border-top: 1px solid var(--color-cream);
     box-shadow: var(--shadow-md);

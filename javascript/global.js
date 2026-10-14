@@ -122,6 +122,8 @@
 
     /* ---------- Mobile menu ---------- */
     function setMenu(open) {
+        // The panel starts lower while the top bar is showing; fit it to the space left
+        if (open) siteMenu.style.setProperty("--menu-top", `${Math.max(0, siteMenu.offsetParent?.getBoundingClientRect().bottom ?? 72)}px`);
         siteMenu.classList.toggle("is-open", open);
         menuToggle.setAttribute("aria-expanded", String(open));
         document.body.classList.toggle("menu-open", open && !desktopQuery.matches);

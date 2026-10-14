@@ -749,6 +749,11 @@
             detail.classList.toggle("is-active", i === active);
             detail.setAttribute("aria-hidden", String(i !== active));
         });
+        // Only the front card's "Learn more" link can be tabbed to
+        cards.forEach((card, i) => {
+            const link = card.querySelector(".process-card-link");
+            if (link) link.tabIndex = i === active ? 0 : -1;
+        });
     }
 
     function turnTo(value) {
@@ -832,7 +837,10 @@
 
     stage.addEventListener("pointercancel", () => { dragStartX = null; });
 
-    cards.forEach((card, i) => card.addEventListener("click", () => {
+    cards.forEach((card, i) => card.addEventListener("click", (event) => {
+        // "Learn more" only opens from the front card; on a side card (or after a drag) it just turns the ring
+        const link = event.target.closest(".process-card-link");
+        if (link && (dragged || i !== wrap(Math.round(target)))) event.preventDefault();
         if (!dragged) manual(() => goTo(i));
     }));
 

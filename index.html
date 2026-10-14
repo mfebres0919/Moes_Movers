@@ -96,7 +96,7 @@
                     <span class="menu-toggle-icon" aria-hidden="true"><span></span></span>
                 </button>
 
-                <div class="site-menu" id="site-menu">
+                <div class="site-menu" id="site-menu" data-lenis-prevent>
                     <nav aria-label="Primary">
                         <ul class="nav-list">
                             <li><a class="nav-link is-active" href="#home" aria-current="page">Home</a></li>
@@ -745,11 +745,6 @@
                             <p class="process-timing">
                                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L2 12V2h10l8.6 8.6a2 2 0 0 1 0 2.8z"/><circle cx="7" cy="7" r="1.5"/></svg>
                                 <strong class="price-highlight">Clear, upfront pricing</strong></p>
-                            <!-- TODO: html/services.html once the Services page is built -->
-                            <a class="process-learn" href="html/services.html#home-moves">
-                                Learn more<span class="visually-hidden"> about Home Moves</span>
-                                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                            </a>
                         </div>
                         <div class="process-detail-item" data-index="1" aria-hidden="true">
                             <p class="process-detail-step">Service 02 of 05</p>
@@ -762,11 +757,6 @@
                             <p class="process-timing">
                                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L2 12V2h10l8.6 8.6a2 2 0 0 1 0 2.8z"/><circle cx="7" cy="7" r="1.5"/></svg>
                                 <strong class="price-highlight">Clear, upfront pricing</strong></p>
-                            <!-- TODO: html/services.html once the Services page is built -->
-                            <a class="process-learn" href="html/services.html#apartment-condo-moves">
-                                Learn more<span class="visually-hidden"> about Apartment and Condo Moves</span>
-                                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                            </a>
                         </div>
                         <div class="process-detail-item" data-index="2" aria-hidden="true">
                             <p class="process-detail-step">Service 03 of 05</p>
@@ -779,11 +769,6 @@
                             <p class="process-timing">
                                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L2 12V2h10l8.6 8.6a2 2 0 0 1 0 2.8z"/><circle cx="7" cy="7" r="1.5"/></svg>
                                 Add it to any move</p>
-                            <!-- TODO: html/services.html once the Services page is built -->
-                            <a class="process-learn" href="html/services.html#packing-unpacking">
-                                Learn more<span class="visually-hidden"> about Packing and Unpacking</span>
-                                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                            </a>
                         </div>
                         <div class="process-detail-item" data-index="3" aria-hidden="true">
                             <p class="process-detail-step">Service 04 of 05</p>
@@ -796,11 +781,6 @@
                             <p class="process-timing">
                                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L2 12V2h10l8.6 8.6a2 2 0 0 1 0 2.8z"/><circle cx="7" cy="7" r="1.5"/></svg>
                                 Free quote</p>
-                            <!-- TODO: html/services.html once the Services page is built -->
-                            <a class="process-learn" href="html/services.html#commercial-office-moves">
-                                Learn more<span class="visually-hidden"> about Commercial and Office Moves</span>
-                                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                            </a>
                         </div>
                         <div class="process-detail-item" data-index="4" aria-hidden="true">
                             <p class="process-detail-step">Service 05 of 05</p>
@@ -813,11 +793,6 @@
                             <p class="process-timing">
                                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L2 12V2h10l8.6 8.6a2 2 0 0 1 0 2.8z"/><circle cx="7" cy="7" r="1.5"/></svg>
                                 <strong class="price-highlight">Clear, upfront pricing</strong></p>
-                            <!-- TODO: html/services.html once the Services page is built -->
-                            <a class="process-learn" href="html/services.html#storage-moves">
-                                Learn more<span class="visually-hidden"> about Storage Moves</span>
-                                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                            </a>
                         </div>
                     </div>
 
@@ -849,6 +824,11 @@
                                 </picture>
                                 <h3 class="process-title">Home Moves</h3>
                                 <p class="process-text">Local Houston moves are our specialty, and we move families between Texas cities too.</p>
+                                <!-- TODO: html/services.html once the Services page is built -->
+                                <a class="process-card-link" href="html/services.html#home-moves">
+                                    Learn more<span class="visually-hidden"> about Home Moves</span>
+                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                </a>
                             </li>
                             <li class="process-card process-card-charcoal" data-index="1" id="apartment-condo-moves">
                                 <div class="process-card-top">
@@ -863,6 +843,10 @@
                                 </picture>
                                 <h3 class="process-title">Apartment and Condo Moves</h3>
                                 <p class="process-text">Loading docks, elevators, and move-in times coordinated with your building.</p>
+                                <a class="process-card-link" href="html/services.html#apartment-condo-moves">
+                                    Learn more<span class="visually-hidden"> about Apartment and Condo Moves</span>
+                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                </a>
                             </li>
                             <li class="process-card process-card-maroon" data-index="2" id="packing-unpacking">
                                 <div class="process-card-top">
@@ -877,6 +861,10 @@
                                 </picture>
                                 <h3 class="process-title">Packing and Unpacking</h3>
                                 <p class="process-text">We pack room by room with our own supplies, then unpack at your new place.</p>
+                                <a class="process-card-link" href="html/services.html#packing-unpacking">
+                                    Learn more<span class="visually-hidden"> about Packing and Unpacking</span>
+                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                </a>
                             </li>
                             <li class="process-card process-card-light" data-index="3" id="commercial-office-moves">
                                 <div class="process-card-top">
@@ -891,6 +879,10 @@
                                 </picture>
                                 <h3 class="process-title">Commercial and Office Moves</h3>
                                 <p class="process-text">Offices and small businesses moved around your hours with minimal downtime.</p>
+                                <a class="process-card-link" href="html/services.html#commercial-office-moves">
+                                    Learn more<span class="visually-hidden"> about Commercial and Office Moves</span>
+                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                </a>
                             </li>
                             <li class="process-card process-card-red" data-index="4" id="storage-moves">
                                 <div class="process-card-top">
@@ -906,6 +898,10 @@
                                 </picture>
                                 <h3 class="process-title">Storage Moves</h3>
                                 <p class="process-text">Into, out of, or between storage units, wrapped and stacked to save space while keeping your things easy to reach.</p>
+                                <a class="process-card-link" href="html/services.html#storage-moves">
+                                    Learn more<span class="visually-hidden"> about Storage Moves</span>
+                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                </a>
                             </li>
                         </ol>
                     </div>
