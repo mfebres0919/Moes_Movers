@@ -13,9 +13,12 @@
     <link rel="preload" href="fonts/bebas-neue-latin-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/poppins-latin-500.woff2" as="font" type="font/woff2" crossorigin>
 
+    <link rel="stylesheet" href="css/vendor/lenis.css">
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/styles.css">
 
+    <script src="javascript/vendor/lenis.min.js" defer></script>
+    <script src="javascript/smooth-scroll.js" defer></script>
     <script src="javascript/global.js" defer></script>
     <script src="javascript/script.js" defer></script>
 </head>
@@ -96,7 +99,7 @@
                 <div class="site-menu" id="site-menu">
                     <nav aria-label="Primary">
                         <ul class="nav-list">
-                            <li><a class="nav-link" href="#home">Home</a></li>
+                            <li><a class="nav-link is-active" href="#home" aria-current="page">Home</a></li>
                             <li><a class="nav-link" href="#about">About</a></li>
 
                             <li class="nav-item has-dropdown">
@@ -117,7 +120,6 @@
                             </li>
 
                             <li><a class="nav-link" href="#work">Our Work</a></li>
-                            <li><a class="nav-link" href="#reviews">Reviews</a></li>
                             <li><a class="nav-link" href="#contact">Contact</a></li>
                         </ul>
                     </nav>
@@ -182,7 +184,7 @@
                 </h1>
 
                 <p class="hero-text">
-                    Local Houston home moves are our specialty, and we move families between Texas cities too. A careful, fully insured crew and clear, upfront pricing based on the details of your move.
+                    Local Houston home moves are our specialty, and we move families between Texas cities too. A careful, fully insured crew and <strong class="price-highlight">clear, upfront pricing based on the details of your move</strong>.
                 </p>
 
                 <div class="hero-actions">
@@ -207,7 +209,7 @@
                     </li>
                     <li>
                         <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L2 12V2h10l8.6 8.6a2 2 0 0 1 0 2.8z"/><circle cx="7" cy="7" r="1.5"/></svg>
-                        Upfront pricing, no hidden fees
+                        <strong class="price-highlight">Upfront pricing, no hidden fees</strong>
                     </li>
                 </ul>
 
@@ -232,7 +234,7 @@
                     <div class="quote-card">
                 <div class="quote-intro">
                     <h2 class="quote-title" id="quote-title">Get your free moving quote</h2>
-                    <p class="quote-subtitle">Tell us about your move in about a minute. Moe&rsquo;s team will reach out with clear, upfront pricing based on the details of your move.</p>
+                    <p class="quote-subtitle">Tell us about your move in about a minute. Moe&rsquo;s team will reach out with <strong class="price-highlight">clear, upfront pricing based on the details of your move</strong>.</p>
                 </div>
 
                 <div class="quote-progress">
@@ -390,6 +392,10 @@
                             <legend class="form-label">How would you like to plan it?</legend>
                             <div class="option-list option-list-compact">
                                 <label class="option-card option-card-detail">
+                                    <input type="radio" name="consultation" value="in-person">
+                                    <span><strong>Free in-person moving estimate</strong> <small class="option-desc">Moe walks through your home, sees exactly what&rsquo;s moving, and gives you <strong class="price-highlight">a clear, upfront price</strong>.</small></span>
+                                </label>                                
+                                <label class="option-card option-card-detail">
                                     <input type="radio" name="consultation" value="quote" checked>
                                     <span><strong>Get a free quote</strong> <small class="option-desc">We&rsquo;ll send your price by phone or email.</small></span>
                                 </label>
@@ -398,10 +404,6 @@
                                     <span><strong>Free video walkthrough</strong> <small class="option-desc">Show us your space on a quick video call.</small></span>
                                 </label>
                                 <!-- PLACEHOLDER description until Moe sends his wording -->
-                                <label class="option-card option-card-detail">
-                                    <input type="radio" name="consultation" value="in-person">
-                                    <span><strong>Free in-person moving estimate</strong> <small class="option-desc">Moe walks through your home, sees exactly what&rsquo;s moving, and gives you a clear, upfront price.</small></span>
-                                </label>
                             </div>
                         </fieldset>
                     </fieldset>
@@ -470,7 +472,9 @@
                 <div class="about-content">
                     <p class="section-eyebrow">About Moe&rsquo;s Movers</p>
                     <h2 class="section-title" id="about-title">Houston&rsquo;s local movers who treat your home like our own.</h2>
-                    <p class="section-text">Moe&rsquo;s Movers is a fully insured, local Houston moving company. We keep it simple: a careful crew, a clean truck, and clear, upfront pricing based on the details of each move, so you know what to expect before moving day.</p>
+                    <!-- Short version of Moe's story; the full story goes on the About page -->
+                    <p class="section-text">Moe started Moe&rsquo;s Movers after years of helping Houston families find their next home. Again and again, he saw how stressful it was to find movers people could trust, so he built the moving company he&rsquo;d want to hire himself.</p>
+                    <p class="section-text">He knows Houston&rsquo;s neighborhoods, and his goal is simple: a smooth, stress-free moving day with <strong class="price-highlight">clear, upfront pricing based on the details of each move</strong>, so you can focus on the excitement of a new chapter, not the move itself.</p>
 
                     <div class="about-columns">
                         <div class="about-tabs" data-tabs>
@@ -483,7 +487,7 @@
                             <div class="about-panel" role="tabpanel" id="panel-mission" aria-labelledby="tab-mission">
                                 <p>To make every move stress free, with honest pricing and a crew that handles your belongings with care from the first box to the last.</p>
                                 <ul class="about-checks">
-                                    <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Transparent pricing, no hidden fees</li>
+                                    <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><strong class="price-highlight">Transparent pricing, no hidden fees</strong></li>
                                     <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Fully insured, licensed, and accredited<span class="about-license">TXDMV # 010005908C · USDOT # 4288855</span></span></li>
                                 </ul>
                             </div>
@@ -502,8 +506,9 @@
                                 </ul>
                             </div>
 
-                            <a class="btn btn-primary btn-lg about-cta" href="#quote" data-consultation="in-person">
-                                Schedule a Free Walkthrough
+                            <!-- TODO: html/about.html once the About page is built -->
+                            <a class="btn btn-primary btn-lg about-cta" href="html/about.html">
+                                Read More
                                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
                             </a>
                             <p class="about-stat about-stat-cta"><strong data-count-to="543" data-count-suffix="+">543+</strong><span>Stress-free<br>moves</span></p>
@@ -639,62 +644,58 @@
                     <p class="section-eyebrow section-eyebrow-light">Areas we serve</p>
                     <h2 class="section-title section-title-light" id="areas-title">Proudly moving Houston and nearby.</h2>
                     <p class="section-text section-text-light">
-                        Houston is home base, with Sugar Land, Spring, and Katy close by. We also move families between Texas cities like Austin, San Antonio, and Dallas. We don&rsquo;t do moves outside Texas. Tap a region to see the communities we serve, or check your ZIP below.
+                        Houston is home base, with Sugar Land, Spring, and Katy close by. We also move families between Texas cities, never out of state.
                     </p>
 
+                    <ul class="region-list" aria-label="Service regions">
+                        <li>
+                            <button class="region-btn is-active" type="button" data-region="houston" aria-pressed="true">
+                                <span class="region-swatch" aria-hidden="true"></span>
+                                <span class="region-name">Houston</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="region-btn" type="button" data-region="nearby" aria-pressed="false">
+                                <span class="region-swatch" aria-hidden="true"></span>
+                                <span class="region-name">Nearby</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="region-btn" type="button" data-region="texas" aria-pressed="false">
+                                <span class="region-swatch" aria-hidden="true"></span>
+                                <span class="region-name">Texas cities</span>
+                            </button>
+                        </li>
+                    </ul>
+
+                    <!-- Places in the area picked above (script.js shows one area's
+                         list); each one fills its ZIP into the quote form -->
+                    <div class="area-places">
+                        <p class="area-places-head"><span id="communities-region">Houston</span> <span class="area-places-note" id="communities-fee">Our home base</span></p>
+                        <ul class="area-chips" id="communities-track" aria-label="Places in the selected area">
+                            <li class="community-slide" data-region="houston"><a class="community-btn area-chip" href="#quote" data-zip="77002">Downtown</a></li>
+                            <li class="community-slide" data-region="houston"><a class="community-btn area-chip" href="#quote" data-zip="77004">Midtown</a></li>
+                            <li class="community-slide" data-region="houston"><a class="community-btn area-chip" href="#quote" data-zip="77006">Montrose</a></li>
+                            <li class="community-slide" data-region="houston"><a class="community-btn area-chip" href="#quote" data-zip="77008">The Heights</a></li>
+                            <li class="community-slide" data-region="houston"><a class="community-btn area-chip" href="#quote" data-zip="77019">River Oaks</a></li>
+                            <li class="community-slide" data-region="houston"><a class="community-btn area-chip" href="#quote" data-zip="77024">Memorial</a></li>
+                            <li class="community-slide" data-region="nearby" hidden><a class="community-btn area-chip" href="#quote" data-zip="77479">Sugar Land</a></li>
+                            <li class="community-slide" data-region="nearby" hidden><a class="community-btn area-chip" href="#quote" data-zip="77494">Katy</a></li>
+                            <li class="community-slide" data-region="nearby" hidden><a class="community-btn area-chip" href="#quote" data-zip="77373">Spring</a></li>
+                            <li class="community-slide" data-region="texas" hidden><a class="community-btn area-chip" href="#quote" data-zip="78701">Austin</a></li>
+                            <li class="community-slide" data-region="texas" hidden><a class="community-btn area-chip" href="#quote" data-zip="78205">San Antonio</a></li>
+                            <li class="community-slide" data-region="texas" hidden><a class="community-btn area-chip" href="#quote" data-zip="75201">Dallas</a></li>
+                        </ul>
+                    </div>
+
                     <form class="zip-check" id="zip-check" novalidate>
-                        <label class="zip-check-label" for="zip-input">Do we serve your ZIP?</label>
+                        <label class="zip-check-label" for="zip-input">Not sure? Check your ZIP</label>
                         <div class="zip-check-row">
                             <input class="form-control" type="text" id="zip-input" name="zip" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" placeholder="Enter ZIP code" autocomplete="postal-code">
                             <button class="btn btn-primary" type="submit">Check</button>
                         </div>
                         <p class="zip-check-result" id="zip-result" role="status" aria-live="polite"></p>
                     </form>
-
-                    <ul class="region-list" aria-label="Service regions">
-                        <li>
-                            <button class="region-btn is-active" type="button" data-region="central" aria-pressed="true">
-                                <span class="region-swatch" aria-hidden="true"></span>
-                                <span class="region-name">Central Houston</span>
-                                <span class="region-fee">Local service</span>
-                            </button>
-                        </li>
-                        <li>
-                            <button class="region-btn" type="button" data-region="west" aria-pressed="false">
-                                <span class="region-swatch" aria-hidden="true"></span>
-                                <span class="region-name">West Houston</span>
-                                <span class="region-fee">Local service</span>
-                            </button>
-                        </li>
-                        <li>
-                            <button class="region-btn" type="button" data-region="north" aria-pressed="false">
-                                <span class="region-swatch" aria-hidden="true"></span>
-                                <span class="region-name">North Houston</span>
-                                <span class="region-fee">Local service</span>
-                            </button>
-                        </li>
-                        <li>
-                            <button class="region-btn" type="button" data-region="east" aria-pressed="false">
-                                <span class="region-swatch" aria-hidden="true"></span>
-                                <span class="region-name">East Houston</span>
-                                <span class="region-fee">Local service</span>
-                            </button>
-                        </li>
-                        <li>
-                            <button class="region-btn" type="button" data-region="south" aria-pressed="false">
-                                <span class="region-swatch" aria-hidden="true"></span>
-                                <span class="region-name">South Houston</span>
-                                <span class="region-fee">Local service</span>
-                            </button>
-                        </li>
-                        <li>
-                            <button class="region-btn" type="button" data-region="outside" aria-pressed="false">
-                                <span class="region-swatch" aria-hidden="true"></span>
-                                <span class="region-name">Nearby suburbs</span>
-                                <span class="region-fee">Call to confirm</span>
-                            </button>
-                        </li>
-                    </ul>
                 </div>
 
                 <div class="map-card">
@@ -703,377 +704,17 @@
                         <span class="map-card-dots" aria-hidden="true"><span></span><span></span><span></span></span>
                     </div>
                     <div class="map-ticker" aria-hidden="true">
-                        <ul class="map-ticker-track"><li>Downtown</li><li>Midtown</li><li>Montrose</li><li>Heights</li><li>Museum District</li><li>River Oaks</li><li>Memorial</li><li>Energy Corridor</li><li>Katy</li><li>Cypress</li><li>Sugar Land</li><li>Richmond</li><li>The Woodlands</li><li>Spring</li><li>Tomball</li><li>Conroe</li><li>Humble</li><li>Kingwood</li><li>Pasadena</li><li>Baytown</li><li>Channelview</li><li>Clear Lake</li><li>Webster</li><li>Pearland</li><li>Friendswood</li><li>League City</li><li>Missouri City</li><li>Stafford</li><li>Galveston</li><li>Brenham</li><li>College Station</li><li>Beaumont</li><li>Downtown</li><li>Midtown</li><li>Montrose</li><li>Heights</li><li>Museum District</li><li>River Oaks</li><li>Memorial</li><li>Energy Corridor</li><li>Katy</li><li>Cypress</li><li>Sugar Land</li><li>Richmond</li><li>The Woodlands</li><li>Spring</li><li>Tomball</li><li>Conroe</li><li>Humble</li><li>Kingwood</li><li>Pasadena</li><li>Baytown</li><li>Channelview</li><li>Clear Lake</li><li>Webster</li><li>Pearland</li><li>Friendswood</li><li>League City</li><li>Missouri City</li><li>Stafford</li><li>Galveston</li><li>Brenham</li><li>College Station</li><li>Beaumont</li></ul>
+                        <ul class="map-ticker-track"><li>Downtown</li><li>Midtown</li><li>Montrose</li><li>The Heights</li><li>River Oaks</li><li>Memorial</li><li>Sugar Land</li><li>Katy</li><li>Spring</li><li>Austin</li><li>San Antonio</li><li>Dallas</li><li>Downtown</li><li>Midtown</li><li>Montrose</li><li>The Heights</li><li>River Oaks</li><li>Memorial</li><li>Sugar Land</li><li>Katy</li><li>Spring</li><li>Austin</li><li>San Antonio</li><li>Dallas</li></ul>
                     </div>
                     <div class="map-frame">
                         <div class="areas-map" id="areas-map" role="region" aria-label="Map of Moe's Movers service regions">
                             <p class="areas-map-loading">Loading map&hellip;</p>
                         </div>
-                        <p class="map-legend"><span class="map-legend-dot" aria-hidden="true"></span>Live service areas</p>
+                        <p class="map-legend"><span class="map-legend-dot" aria-hidden="true"></span>Where we move</p>
                     </div>
                 </div>
             </div>
 
-            <div class="container communities">
-                <div class="communities-header">
-                    <h3 class="communities-title">Communities in <span id="communities-region">Central Houston</span></h3>
-                    <p class="communities-fee" id="communities-fee">Local service</p>
-                </div>
-                <ul class="communities-track" id="communities-track" tabindex="0" aria-label="Communities in the selected region">
-                        <li class="community-slide" data-region="central">
-                            <article class="community-card">
-                                <p class="community-region">Central Houston</p>
-                                <h4 class="community-name">Downtown</h4>
-                                <p class="community-fact">High rises, loading docks, and freight elevators booked ahead.</p>
-                                <a class="community-btn" href="#quote" data-zip="77002">
-                                    Get a Quote in Downtown
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                        <li class="community-slide" data-region="central">
-                            <article class="community-card">
-                                <p class="community-region">Central Houston</p>
-                                <h4 class="community-name">Midtown</h4>
-                                <p class="community-fact">Walk ups and new builds, with street parking handled for you.</p>
-                                <a class="community-btn" href="#quote" data-zip="77004">
-                                    Get a Quote in Midtown
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                        <li class="community-slide" data-region="central">
-                            <article class="community-card">
-                                <p class="community-region">Central Houston</p>
-                                <h4 class="community-name">Montrose</h4>
-                                <p class="community-fact">Quirky floor plans and narrow streets, packed with care.</p>
-                                <a class="community-btn" href="#quote" data-zip="77006">
-                                    Get a Quote in Montrose
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                        <li class="community-slide" data-region="central">
-                            <article class="community-card">
-                                <p class="community-region">Central Houston</p>
-                                <h4 class="community-name">Heights</h4>
-                                <p class="community-fact">Bungalows, tight driveways, and we know every alley.</p>
-                                <a class="community-btn" href="#quote" data-zip="77008">
-                                    Get a Quote in Heights
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                        <li class="community-slide" data-region="central">
-                            <article class="community-card">
-                                <p class="community-region">Central Houston</p>
-                                <h4 class="community-name">Museum District</h4>
-                                <p class="community-fact">Art, antiques, and heirlooms wrapped like gallery pieces.</p>
-                                <a class="community-btn" href="#quote" data-zip="77004">
-                                    Get a Quote in Museum District
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                        <li class="community-slide" data-region="central">
-                            <article class="community-card">
-                                <p class="community-region">Central Houston</p>
-                                <h4 class="community-name">River Oaks</h4>
-                                <p class="community-fact">Big homes, fine furniture, and white glove service.</p>
-                                <a class="community-btn" href="#quote" data-zip="77019">
-                                    Get a Quote in River Oaks
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                        <li class="community-slide" data-region="west" hidden>
-                            <article class="community-card">
-                                <p class="community-region">West Houston</p>
-                                <h4 class="community-name">Memorial</h4>
-                                <p class="community-fact">Wooded lots and long driveways, no truck too big.</p>
-                                <a class="community-btn" href="#quote" data-zip="77024">
-                                    Get a Quote in Memorial
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                        <li class="community-slide" data-region="west" hidden>
-                            <article class="community-card">
-                                <p class="community-region">West Houston</p>
-                                <h4 class="community-name">Energy Corridor</h4>
-                                <p class="community-fact">Home and office moves timed around your work week.</p>
-                                <a class="community-btn" href="#quote" data-zip="77077">
-                                    Get a Quote in Energy Corridor
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                        <li class="community-slide" data-region="west" hidden>
-                            <article class="community-card">
-                                <p class="community-region">West Houston</p>
-                                <h4 class="community-name">Katy</h4>
-                                <p class="community-fact">Growing families and new builds, moved in a single day.</p>
-                                <a class="community-btn" href="#quote" data-zip="77494">
-                                    Get a Quote in Katy
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                        <li class="community-slide" data-region="west" hidden>
-                            <article class="community-card">
-                                <p class="community-region">West Houston</p>
-                                <h4 class="community-name">Cypress</h4>
-                                <p class="community-fact">Master planned communities and HOA rules followed to the letter.</p>
-                                <a class="community-btn" href="#quote" data-zip="77429">
-                                    Get a Quote in Cypress
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                        <li class="community-slide" data-region="west" hidden>
-                            <article class="community-card">
-                                <p class="community-region">West Houston</p>
-                                <h4 class="community-name">Sugar Land</h4>
-                                <p class="community-fact">Two story homes, careful on every staircase.</p>
-                                <a class="community-btn" href="#quote" data-zip="77479">
-                                    Get a Quote in Sugar Land
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                        <li class="community-slide" data-region="west" hidden>
-                            <article class="community-card">
-                                <p class="community-region">West Houston</p>
-                                <h4 class="community-name">Richmond</h4>
-                                <p class="community-fact">Historic charm to new subdivisions, same trusted crew.</p>
-                                <a class="community-btn" href="#quote" data-zip="77469">
-                                    Get a Quote in Richmond
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                        <li class="community-slide" data-region="north" hidden>
-                            <article class="community-card">
-                                <p class="community-region">North Houston</p>
-                                <h4 class="community-name">The Woodlands</h4>
-                                <p class="community-fact">Tree lined streets and village HOAs we know well.</p>
-                                <a class="community-btn" href="#quote" data-zip="77380">
-                                    Get a Quote in The Woodlands
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                        <li class="community-slide" data-region="north" hidden>
-                            <article class="community-card">
-                                <p class="community-region">North Houston</p>
-                                <h4 class="community-name">Spring</h4>
-                                <p class="community-fact">Quick hops up I-45 with same week openings.</p>
-                                <a class="community-btn" href="#quote" data-zip="77373">
-                                    Get a Quote in Spring
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                        <li class="community-slide" data-region="north" hidden>
-                            <article class="community-card">
-                                <p class="community-region">North Houston</p>
-                                <h4 class="community-name">Tomball</h4>
-                                <p class="community-fact">Acreage and farmhouses, plus the barn if you need it.</p>
-                                <a class="community-btn" href="#quote" data-zip="77375">
-                                    Get a Quote in Tomball
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                        <li class="community-slide" data-region="north" hidden>
-                            <article class="community-card">
-                                <p class="community-region">North Houston</p>
-                                <h4 class="community-name">Conroe</h4>
-                                <p class="community-fact">Lake homes and boat gear handled with care.</p>
-                                <a class="community-btn" href="#quote" data-zip="77301">
-                                    Get a Quote in Conroe
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                        <li class="community-slide" data-region="north" hidden>
-                            <article class="community-card">
-                                <p class="community-region">North Houston</p>
-                                <h4 class="community-name">Humble</h4>
-                                <p class="community-fact">Close to IAH, flexible around early flights.</p>
-                                <a class="community-btn" href="#quote" data-zip="77338">
-                                    Get a Quote in Humble
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                        <li class="community-slide" data-region="north" hidden>
-                            <article class="community-card">
-                                <p class="community-region">North Houston</p>
-                                <h4 class="community-name">Kingwood</h4>
-                                <p class="community-fact">Winding roads through the forest, careful with every tree.</p>
-                                <a class="community-btn" href="#quote" data-zip="77339">
-                                    Get a Quote in Kingwood
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                        <li class="community-slide" data-region="east" hidden>
-                            <article class="community-card">
-                                <p class="community-region">East Houston</p>
-                                <h4 class="community-name">Pasadena</h4>
-                                <p class="community-fact">Hardworking neighborhoods and honest, upfront pricing.</p>
-                                <a class="community-btn" href="#quote" data-zip="77506">
-                                    Get a Quote in Pasadena
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                        <li class="community-slide" data-region="east" hidden>
-                            <article class="community-card">
-                                <p class="community-region">East Houston</p>
-                                <h4 class="community-name">Baytown</h4>
-                                <p class="community-fact">Bayside homes and shift friendly scheduling.</p>
-                                <a class="community-btn" href="#quote" data-zip="77520">
-                                    Get a Quote in Baytown
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                        <li class="community-slide" data-region="east" hidden>
-                            <article class="community-card">
-                                <p class="community-region">East Houston</p>
-                                <h4 class="community-name">Channelview</h4>
-                                <p class="community-fact">Quick moves along the Ship Channel, in and out fast.</p>
-                                <a class="community-btn" href="#quote" data-zip="77530">
-                                    Get a Quote in Channelview
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                        <li class="community-slide" data-region="east" hidden>
-                            <article class="community-card">
-                                <p class="community-region">East Houston</p>
-                                <h4 class="community-name">Clear Lake</h4>
-                                <p class="community-fact">NASA neighbors and waterfront homes, moved with precision.</p>
-                                <a class="community-btn" href="#quote" data-zip="77058">
-                                    Get a Quote in Clear Lake
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                        <li class="community-slide" data-region="east" hidden>
-                            <article class="community-card">
-                                <p class="community-region">East Houston</p>
-                                <h4 class="community-name">Webster</h4>
-                                <p class="community-fact">Apartments and condos with elevators reserved ahead.</p>
-                                <a class="community-btn" href="#quote" data-zip="77598">
-                                    Get a Quote in Webster
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                        <li class="community-slide" data-region="south" hidden>
-                            <article class="community-card">
-                                <p class="community-region">South Houston</p>
-                                <h4 class="community-name">Pearland</h4>
-                                <p class="community-fact">Fast growing suburbs with new move ins every week.</p>
-                                <a class="community-btn" href="#quote" data-zip="77581">
-                                    Get a Quote in Pearland
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                        <li class="community-slide" data-region="south" hidden>
-                            <article class="community-card">
-                                <p class="community-region">South Houston</p>
-                                <h4 class="community-name">Friendswood</h4>
-                                <p class="community-fact">Quiet streets and big backyards, patio sets included.</p>
-                                <a class="community-btn" href="#quote" data-zip="77546">
-                                    Get a Quote in Friendswood
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                        <li class="community-slide" data-region="south" hidden>
-                            <article class="community-card">
-                                <p class="community-region">South Houston</p>
-                                <h4 class="community-name">League City</h4>
-                                <p class="community-fact">Coastal style homes, hurricane season ready.</p>
-                                <a class="community-btn" href="#quote" data-zip="77573">
-                                    Get a Quote in League City
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                        <li class="community-slide" data-region="south" hidden>
-                            <article class="community-card">
-                                <p class="community-region">South Houston</p>
-                                <h4 class="community-name">Missouri City</h4>
-                                <p class="community-fact">Gated communities with access and permits sorted.</p>
-                                <a class="community-btn" href="#quote" data-zip="77459">
-                                    Get a Quote in Missouri City
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                        <li class="community-slide" data-region="south" hidden>
-                            <article class="community-card">
-                                <p class="community-region">South Houston</p>
-                                <h4 class="community-name">Stafford</h4>
-                                <p class="community-fact">Small city, big moves, quick trips off 59.</p>
-                                <a class="community-btn" href="#quote" data-zip="77477">
-                                    Get a Quote in Stafford
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                        <li class="community-slide" data-region="outside" hidden>
-                            <article class="community-card">
-                                <p class="community-region">Outside the Metro</p>
-                                <h4 class="community-name">Galveston</h4>
-                                <p class="community-fact">Island homes and beach houses, worth the trip.</p>
-                                <a class="community-btn" href="#quote" data-zip="77550">
-                                    Get a Quote in Galveston
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                        <li class="community-slide" data-region="outside" hidden>
-                            <article class="community-card">
-                                <p class="community-region">Outside the Metro</p>
-                                <h4 class="community-name">Brenham</h4>
-                                <p class="community-fact">Country moves with the same Houston crew.</p>
-                                <a class="community-btn" href="#quote" data-zip="77833">
-                                    Get a Quote in Brenham
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                        <li class="community-slide" data-region="outside" hidden>
-                            <article class="community-card">
-                                <p class="community-region">Outside the Metro</p>
-                                <h4 class="community-name">College Station</h4>
-                                <p class="community-fact">Dorms, apartments, and Aggie move ins.</p>
-                                <a class="community-btn" href="#quote" data-zip="77840">
-                                    Get a Quote in College Station
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                        <li class="community-slide" data-region="outside" hidden>
-                            <article class="community-card">
-                                <p class="community-region">Outside the Metro</p>
-                                <h4 class="community-name">Beaumont</h4>
-                                <p class="community-fact">Longer trips east, with clear pricing and on-time arrival.</p>
-                                <a class="community-btn" href="#quote" data-zip="77701">
-                                    Get a Quote in Beaumont
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                                </a>
-                            </article>
-                        </li>
-                </ul>
-            </div>
 
             <svg class="divider-peaks" style="--divider-fill: var(--color-mist)" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true">
                 <path class="divider-peaks-fill" d="M0 4l250 64 125-32 250 64 375-96V100H0z"/>
@@ -1088,7 +729,7 @@
                     <div class="process-header">
                         <p class="section-eyebrow">Our services</p>
                         <h2 class="section-title" id="services-title">Home moves, handled from start to finish.</h2>
-                        <p class="section-text">Local Houston moves are our focus and what we do every week. When you&rsquo;re heading farther, we also move you between Texas cities like Austin, San Antonio, and Dallas. We don&rsquo;t do moves outside Texas. Every service comes with a careful crew and clear, upfront pricing.</p>
+                        <p class="section-text">Local Houston moves are our focus and what we do every week. When you&rsquo;re heading farther, we also move you between Texas cities like Austin, San Antonio, and Dallas. We don&rsquo;t do moves outside Texas. Every service comes with a careful crew and <strong class="price-highlight">clear, upfront pricing</strong>.</p>
                     </div>
 
                     <div class="process-details">
@@ -1103,7 +744,12 @@
                             </ul>
                             <p class="process-timing">
                                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L2 12V2h10l8.6 8.6a2 2 0 0 1 0 2.8z"/><circle cx="7" cy="7" r="1.5"/></svg>
-                                Clear, upfront pricing</p>
+                                <strong class="price-highlight">Clear, upfront pricing</strong></p>
+                            <!-- TODO: html/services.html once the Services page is built -->
+                            <a class="process-learn" href="html/services.html#home-moves">
+                                Learn more<span class="visually-hidden"> about Home Moves</span>
+                                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </a>
                         </div>
                         <div class="process-detail-item" data-index="1" aria-hidden="true">
                             <p class="process-detail-step">Service 02 of 05</p>
@@ -1115,7 +761,12 @@
                             </ul>
                             <p class="process-timing">
                                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L2 12V2h10l8.6 8.6a2 2 0 0 1 0 2.8z"/><circle cx="7" cy="7" r="1.5"/></svg>
-                                Clear, upfront pricing</p>
+                                <strong class="price-highlight">Clear, upfront pricing</strong></p>
+                            <!-- TODO: html/services.html once the Services page is built -->
+                            <a class="process-learn" href="html/services.html#apartment-condo-moves">
+                                Learn more<span class="visually-hidden"> about Apartment and Condo Moves</span>
+                                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </a>
                         </div>
                         <div class="process-detail-item" data-index="2" aria-hidden="true">
                             <p class="process-detail-step">Service 03 of 05</p>
@@ -1128,6 +779,11 @@
                             <p class="process-timing">
                                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L2 12V2h10l8.6 8.6a2 2 0 0 1 0 2.8z"/><circle cx="7" cy="7" r="1.5"/></svg>
                                 Add it to any move</p>
+                            <!-- TODO: html/services.html once the Services page is built -->
+                            <a class="process-learn" href="html/services.html#packing-unpacking">
+                                Learn more<span class="visually-hidden"> about Packing and Unpacking</span>
+                                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </a>
                         </div>
                         <div class="process-detail-item" data-index="3" aria-hidden="true">
                             <p class="process-detail-step">Service 04 of 05</p>
@@ -1140,6 +796,11 @@
                             <p class="process-timing">
                                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L2 12V2h10l8.6 8.6a2 2 0 0 1 0 2.8z"/><circle cx="7" cy="7" r="1.5"/></svg>
                                 Free quote</p>
+                            <!-- TODO: html/services.html once the Services page is built -->
+                            <a class="process-learn" href="html/services.html#commercial-office-moves">
+                                Learn more<span class="visually-hidden"> about Commercial and Office Moves</span>
+                                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </a>
                         </div>
                         <div class="process-detail-item" data-index="4" aria-hidden="true">
                             <p class="process-detail-step">Service 05 of 05</p>
@@ -1151,7 +812,12 @@
                             </ul>
                             <p class="process-timing">
                                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L2 12V2h10l8.6 8.6a2 2 0 0 1 0 2.8z"/><circle cx="7" cy="7" r="1.5"/></svg>
-                                Clear, upfront pricing</p>
+                                <strong class="price-highlight">Clear, upfront pricing</strong></p>
+                            <!-- TODO: html/services.html once the Services page is built -->
+                            <a class="process-learn" href="html/services.html#storage-moves">
+                                Learn more<span class="visually-hidden"> about Storage Moves</span>
+                                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </a>
                         </div>
                     </div>
 
@@ -1604,7 +1270,7 @@
                     <a class="footer-logo" href="#home" aria-label="Move with Moe, home">
                         <img class="footer-logo-wordmark" src="images/logo-teal.png" alt="" width="900" height="103" loading="lazy" decoding="async">
                     </a>
-                    <p class="footer-blurb">A fully insured, local Houston moving company. Clear, upfront pricing based on the details of each move, and a crew that treats your home like our own.</p>
+                    <p class="footer-blurb">A fully insured, local Houston moving company. <strong class="price-highlight">Clear, upfront pricing based on the details of each move</strong>, and a crew that treats your home like our own.</p>
                     <ul class="footer-social" aria-label="Social media">
                         <li><a href="https://www.facebook.com/Moesmovershouston" target="_blank" rel="noopener" aria-label="Moe's Movers on Facebook"><svg class="icon icon-fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v9h4v-9h3l.5-4h-3.5V9c0-.6.4-1 1-1z"/></svg></a></li>
                         <li><a href="https://www.instagram.com/movewithmoehtx/" target="_blank" rel="noopener" aria-label="Moe's Movers on Instagram"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle class="icon-dot" cx="17.5" cy="6.5" r="1"/></svg></a></li>
@@ -1626,12 +1292,9 @@
                 <nav class="footer-col" aria-labelledby="footer-areas">
                     <h2 class="footer-heading" id="footer-areas">Service Areas</h2>
                     <ul class="footer-links">
-                        <li><a href="#areas" data-region="central">Central Houston</a></li>
-                        <li><a href="#areas" data-region="west">West Houston</a></li>
-                        <li><a href="#areas" data-region="north">North Houston</a></li>
-                        <li><a href="#areas" data-region="east">East Houston</a></li>
-                        <li><a href="#areas" data-region="south">South Houston</a></li>
-                        <li><a href="#areas" data-region="outside">Nearby suburbs</a></li>
+                        <li><a href="#areas" data-region="houston">Houston</a></li>
+                        <li><a href="#areas" data-region="nearby">Sugar Land, Spring &amp; Katy</a></li>
+                        <li><a href="#areas" data-region="texas">Texas cities</a></li>
                     </ul>
                 </nav>
 

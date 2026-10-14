@@ -72,8 +72,8 @@
 
     --container-max: 80rem;
     --gutter: 1rem;
-    --radius-pill: 999px;
-    --radius-md: 0.75rem;
+    --radius-pill: 0; /* square corners site-wide */
+    --radius-md: 0;
     --shadow-md: 0 0.75rem 2rem rgba(11, 31, 36, 0.12);
     --transition: 0.25s ease;
 }
@@ -99,6 +99,11 @@ html {
     html {
         scroll-behavior: smooth;
     }
+}
+
+/* Lenis does its own smoothing; CSS smooth scroll on top would fight it */
+html.lenis.lenis-smooth {
+    scroll-behavior: auto;
 }
 
 body {
@@ -185,7 +190,7 @@ h4 {
     font-weight: 600;
     color: var(--color-white);
     background-color: var(--color-black);
-    border-radius: var(--radius-md);
+    border-radius: 0;
     transform: translateY(-150%);
     transition: transform var(--transition);
 }
@@ -750,7 +755,7 @@ h4 {
     color: var(--color-black);
     background-color: var(--color-white);
     border: 1px solid #DDDDDD;
-    border-radius: var(--radius-md);
+    border-radius: 0;
     transition: border-color var(--transition), box-shadow var(--transition);
 }
 
@@ -803,7 +808,7 @@ textarea.form-control {
     font-size: 0.9375rem;
     background-color: var(--color-white);
     border: 1px solid #DDDDDD;
-    border-radius: var(--radius-pill);
+    border-radius: 0;
     cursor: pointer;
     transition: border-color var(--transition), background-color var(--transition);
 }
@@ -1086,7 +1091,7 @@ textarea.form-control {
     width: 1.5rem;
     height: 2px;
     background-color: currentColor;
-    border-radius: 2px;
+    border-radius: 0;
     transition: transform var(--transition), opacity var(--transition);
 }
 
@@ -1660,7 +1665,7 @@ textarea.form-control {
         overflow: visible;
         background-color: var(--color-white);
         border-top: 3px solid var(--color-red);
-        border-radius: 0 0 var(--radius-md) var(--radius-md);
+        border-radius: 0;
         box-shadow: var(--shadow-md);
         visibility: hidden;
         opacity: 0;
@@ -1791,3 +1796,4 @@ textarea.form-control {
     padding-top: 0.25rem;
     border-top: 1px solid var(--color-cream);
 }
+

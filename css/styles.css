@@ -82,7 +82,7 @@
     text-transform: uppercase;
     background-color: rgba(11, 31, 36, 0.35);
     border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: var(--radius-pill);
+    border-radius: 0;
     backdrop-filter: blur(6px);
 }
 
@@ -162,7 +162,7 @@
     height: 3px;
     overflow: hidden;
     background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 3px;
+    border-radius: 0;
 }
 
 .hero-indicators span::after {
@@ -233,7 +233,7 @@
     padding: 1.75rem 1.25rem;
     background-color: var(--color-white);
     border-top: 4px solid var(--color-red);
-    border-radius: 1.25rem;
+    border-radius: 0;
     box-shadow: 0 1.5rem 3.5rem rgba(11, 31, 36, 0.14);
 }
 
@@ -259,7 +259,7 @@
     inset: -0.5rem;
     z-index: -1;
     background-image: linear-gradient(135deg, var(--color-maroon), var(--color-red-bright) 50%, var(--color-maroon));
-    border-radius: inherit;
+    border-radius: 0;
     opacity: 0.5;
     filter: blur(24px);
 }
@@ -280,7 +280,7 @@
     margin-top: 0.5rem;
     overflow: hidden;
     background-color: var(--color-cream);
-    border-radius: 6px;
+    border-radius: 0;
 }
 
 .quote-progress-fill {
@@ -288,7 +288,7 @@
     width: 25%;
     height: 100%;
     background-image: linear-gradient(90deg, var(--color-maroon), var(--color-red-bright));
-    border-radius: inherit;
+    border-radius: 0;
     transition: width 0.5s ease;
 }
 
@@ -421,7 +421,7 @@
     text-align: center;
     background-color: var(--color-white);
     border: 2px solid var(--color-cream);
-    border-radius: var(--radius-md);
+    border-radius: 0;
     cursor: pointer;
     transition: border-color var(--transition), background-color var(--transition), transform var(--transition);
 }
@@ -678,7 +678,7 @@
     padding: 0.75rem;
     background-color: var(--color-white);
     border: 1px solid var(--color-cream);
-    border-radius: 1.5rem;
+    border-radius: 0;
     box-shadow: 0 0.5rem 1.25rem rgba(11, 31, 36, 0.07);
     transition: box-shadow 0.4s ease;
 }
@@ -709,7 +709,7 @@
     overflow: hidden;
     background-color: var(--color-cream);
     background-image: linear-gradient(135deg, #F2F2F2 0%, #E2E2E2 100%);
-    border-radius: 1.1rem;
+    border-radius: 0;
 }
 
 .service-card-media picture {
@@ -734,7 +734,7 @@
     font-weight: 600;
     color: var(--color-maroon);
     background-color: var(--color-white);
-    border-radius: var(--radius-pill);
+    border-radius: 0;
     box-shadow: 0 0.25rem 0.75rem rgba(11, 31, 36, 0.12);
 }
 
@@ -749,7 +749,7 @@
     text-align: center;
     color: var(--color-white);
     background-image: linear-gradient(160deg, var(--color-maroon) 0%, var(--color-red) 100%);
-    border-radius: 1.25rem;
+    border-radius: 0;
 }
 
 .service-icon {
@@ -759,7 +759,7 @@
     height: 3.5rem;
     color: var(--color-maroon);
     background-color: var(--color-white);
-    border-radius: 1rem;
+    border-radius: 0;
 }
 
 .service-icon .icon {
@@ -948,7 +948,7 @@
     text-align: left;
     background-color: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.16);
-    border-radius: 0.9rem;
+    border-radius: 0;
     transition: background-color var(--transition), border-color var(--transition);
 }
 
@@ -968,7 +968,7 @@
     height: 0.9rem;
     background-color: rgba(226, 228, 29, 0.35);
     border: 2px solid var(--color-red-bright);
-    border-radius: 4px;
+    border-radius: 0;
 }
 
 .region-name {
@@ -989,7 +989,7 @@
     min-width: 0;
     overflow: hidden;
     background-color: var(--color-white);
-    border-radius: 1.25rem;
+    border-radius: 0;
     box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.45);
 }
 
@@ -1106,7 +1106,7 @@
     font-weight: 500;
     color: var(--color-white);
     background-color: rgba(11, 31, 36, 0.82);
-    border-radius: var(--radius-pill);
+    border-radius: 0;
     pointer-events: none;
 }
 
@@ -1189,7 +1189,7 @@
     font-weight: 600;
     background-color: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: var(--radius-pill);
+    border-radius: 0;
 }
 
 .communities-track {
@@ -1232,7 +1232,7 @@
     padding: 1.5rem;
     background-color: rgba(255, 255, 255, 0.06);
     border: 1px solid rgba(255, 255, 255, 0.14);
-    border-radius: 1.1rem;
+    border-radius: 0;
     backdrop-filter: blur(8px);
     transition: border-color var(--transition), background-color var(--transition);
 }
@@ -1355,7 +1355,7 @@
     padding: 1.75rem;
     text-align: left;
     color: var(--color-white);
-    border-radius: 1.25rem;
+    border-radius: 0;
     box-shadow: 0 2rem 3.5rem rgba(11, 31, 36, 0.28);
     transform: translate3d(var(--x, 0px), 0, var(--z, 0px)) rotateY(var(--ry, 0deg));
     cursor: pointer;
@@ -1368,7 +1368,7 @@
     position: absolute;
     inset: 0;
     background-color: #000000;
-    border-radius: inherit;
+    border-radius: 0;
     opacity: var(--shade, 0);
     pointer-events: none;
 }
@@ -1416,7 +1416,7 @@
     height: 3.25rem;
     background-color: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.28);
-    border-radius: 0.9rem;
+    border-radius: 0;
 }
 
 .process-icon .icon {
@@ -1437,7 +1437,7 @@
     min-height: 0;
     margin-top: 1rem;
     overflow: hidden;
-    border-radius: 0.9rem;
+    border-radius: 0;
 }
 
 .process-media img {
@@ -1518,7 +1518,7 @@
     background-color: var(--color-white);
     border: 1px solid var(--color-cream);
     border-left: 4px solid var(--color-red);
-    border-radius: 1.25rem;
+    border-radius: 0;
     box-shadow: 0 1rem 2.5rem rgba(11, 31, 36, 0.07);
     visibility: hidden;
     opacity: 0;
@@ -1633,7 +1633,7 @@
     padding: 1.1rem 1.4rem;
     background-color: var(--color-white);
     border: 1px solid var(--color-cream);
-    border-radius: 1rem;
+    border-radius: 0;
     box-shadow: 0 0.5rem 1.25rem rgba(11, 31, 36, 0.05);
 }
 
@@ -1776,7 +1776,7 @@
     color: var(--color-white);
     background-color: rgba(27, 27, 27, 0.92);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 1.75rem;
+    border-radius: 0;
     box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.45);
     backdrop-filter: blur(6px);
 }
@@ -1786,7 +1786,7 @@
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    border-radius: 1.25rem;
+    border-radius: 0;
 }
 
 .contact-info-bg {
@@ -2686,7 +2686,7 @@
 .about-media {
     position: relative;
     overflow: hidden;
-    border-radius: 1.25rem;
+    border-radius: 0;
     aspect-ratio: 4 / 5;
     max-height: 34rem;
 }
@@ -2703,7 +2703,7 @@
     bottom: 1.25rem;
     width: 4.5rem;
     height: 4.5rem;
-    border-radius: 1rem;
+    border-radius: 0;
     box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.3);
 }
 
@@ -2805,7 +2805,7 @@
 
 .about-aside img {
     width: 100%;
-    border-radius: 1rem;
+    border-radius: 0;
     aspect-ratio: 16 / 9;
     object-fit: cover;
 }
@@ -2975,7 +2975,7 @@
 .project-card {
     position: relative;
     overflow: hidden;
-    border-radius: 1rem;
+    border-radius: 0;
     aspect-ratio: 8 / 7;
     background-color: var(--color-maroon);
     animation: project-in 0.45s ease;
@@ -3110,7 +3110,7 @@
     flex-direction: column;
     padding: 2rem;
     border: 1px solid rgba(11, 31, 36, 0.1);
-    border-radius: 1rem;
+    border-radius: 0;
     background-color: var(--color-offwhite);
     scroll-snap-align: start;
     transition: border-color var(--transition), transform var(--transition);
@@ -3196,7 +3196,7 @@
     gap: 0.85rem;
     padding: 0.75rem 1.25rem 0.75rem 0.9rem;
     border: 1px solid rgba(11, 31, 36, 0.14);
-    border-radius: var(--radius-pill);
+    border-radius: 0;
     background-color: var(--color-white);
     color: var(--color-black);
     font-size: 0.9375rem;
@@ -3383,7 +3383,7 @@
     position: relative;
     overflow: hidden;
     border: 0;
-    border-radius: 1.25rem;
+    border-radius: 0;
     background-color: var(--color-white);
     box-shadow: 0 1rem 2.5rem rgba(11, 31, 36, 0.1), 0 0 0 1px rgba(11, 31, 36, 0.06);
     transition: transform 0.35s ease, box-shadow 0.35s ease;
@@ -3821,7 +3821,7 @@
     margin-top: 4rem;
     overflow: hidden;
     background-color: var(--color-white);
-    border-radius: 1.25rem;
+    border-radius: 0;
     border-left: 4px solid var(--color-red-bright);
     box-shadow: var(--shadow-md);
 }
@@ -3887,12 +3887,22 @@
     }
 }
 
-/* Badges: one per line on desktop's narrow copy column, so the license line
-   under the first doesn't push the others into odd wraps */
+/* Badges side by side on desktop, two per row, top-aligned so the license
+   line under the first one doesn't throw the row out of line */
 @media (min-width: 64rem) {
     .hero-badges {
-        grid-template-columns: 1fr;
-        gap: 0.7rem;
+        grid-template-columns: repeat(2, minmax(0, max-content));
+        justify-content: start;
+        align-items: start;
+        gap: 0.9rem 2.25rem;
+    }
+
+    .hero-badges li {
+        align-items: flex-start;
+    }
+
+    .hero-badges .icon {
+        margin-top: 0.15rem;
     }
 }
 
@@ -3956,4 +3966,181 @@
     letter-spacing: 0.04em;
     color: var(--color-black);
     background-color: var(--color-red-bright);
+}
+
+/* Transparent-pricing phrases: bold, so the pricing promise stands out */
+.price-highlight {
+    font-weight: 700;
+    color: inherit;
+}
+
+/* About, desktop: the photo is sticky. It stays pinned below the menu bar
+   while the taller text column scrolls past, so there's never empty space
+   above or below it. The truck photo on the right is kept small. */
+@media (min-width: 64rem) {
+    .about-layout {
+        align-items: start;
+    }
+
+    .about-media {
+        position: sticky;
+        top: 7rem;
+        height: min(36rem, calc(100vh - 9rem));
+    }
+
+    .about-aside {
+        max-width: 17rem;
+        justify-self: end;
+    }
+
+    .about-aside img {
+        aspect-ratio: 4 / 3;
+    }
+
+    .about-aside p {
+        font-size: 0.9375rem;
+    }
+}
+
+/* Service areas: three region buttons, stacked on wide screens so their
+   names never get cut off by the map beside them */
+@media (min-width: 64rem) {
+    .region-list {
+        grid-template-columns: 1fr;
+        max-width: 24rem;
+    }
+}
+
+/* "Learn more" link under each service, to its section on the Services page */
+.process-learn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1rem;
+    font-weight: 600;
+    color: var(--color-red);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+}
+
+.process-learn .icon {
+    width: 1rem;
+    height: 1rem;
+    transition: transform var(--transition);
+}
+
+.process-learn:hover .icon {
+    transform: translateX(3px);
+}
+
+
+/* ==========================================================================
+   Service areas, simplified: three area tabs, the places in the picked
+   area as chips, then the ZIP check
+   ========================================================================== */
+#areas .region-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    max-width: none;
+    margin: 1.75rem 0 0;
+    padding: 0;
+    overflow: visible;
+}
+
+#areas .region-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.6rem 1.1rem;
+    border-radius: 0;
+}
+
+#areas .region-name {
+    font-size: 0.9375rem;
+}
+
+.area-places {
+    margin-top: 1.5rem;
+    padding: 1.25rem 1.35rem;
+    background-color: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 0;
+}
+
+.area-places-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 0.75rem;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    letter-spacing: 0.02em;
+    color: var(--color-white);
+}
+
+.area-places-note {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    letter-spacing: 0;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.area-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0.85rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.area-chips li[hidden] {
+    display: none;
+}
+
+.area-chip {
+    display: inline-block;
+    padding: 0.45rem 0.9rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-white);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 0;
+    transition: background-color var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.area-chip:hover {
+    color: var(--color-black);
+    background-color: var(--color-red-bright);
+    border-color: var(--color-red-bright);
+}
+
+#areas .zip-check {
+    margin-top: 1.75rem;
+}
+
+/* The chips reuse .community-btn for the ZIP prefill; drop its card-button look */
+.area-chips .area-chip {
+    display: inline-block;
+    width: auto;
+    margin: 0;
+    padding: 0.45rem 0.9rem;
+    white-space: nowrap;
+    line-height: 1.3;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.area-chips .area-chip:hover {
+    color: var(--color-black);
+    background-color: var(--color-red-bright);
+}
+
+.area-chips .community-slide {
+    flex: none;
+    width: auto;
+    max-width: none;
+    scroll-snap-align: none;
 }

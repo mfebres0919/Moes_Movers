@@ -120,7 +120,7 @@
         backButton.hidden = current === 0;
         // Past step 1 the intro text has done its job; phones hide it (CSS)
         card.classList.toggle("is-started", current > 0);
-        nextLabel.textContent = current === lastStep ? "Send My Quote Request" : "Next";
+        nextLabel.textContent = current === lastStep ? "Submit" : "Next";
 
         // Bring the card's top back into view below the menu bar. Checked
         // again shortly after, since scrolling can switch the navbar to fixed.
@@ -447,57 +447,40 @@
     const regionLabel = document.getElementById("communities-region");
     const feeLabel = document.getElementById("communities-fee");
 
-    // Approximate region outlines [lat, lng]; neighbors share edges so the map tiles cleanly
-    const C1 = [29.84, -95.44], C2 = [29.84, -95.32], C3 = [29.76, -95.27];
-    const C4 = [29.69, -95.31], C5 = [29.69, -95.44], C6 = [29.76, -95.48];
-
+    // Houston: an approximate outline of the city (roughly Beltway 8).
+    // Nearby and Texas cities are marked as circles on each city.
     const REGIONS = {
-        central: {
-            name: "Central Houston",
-            fee: "Local service",
-            label: "Central",
-            shape: [C1, C2, C3, C4, C5, C6],
+        houston: {
+            name: "Houston",
+            fee: "Our home base",
+            label: "Houston",
+            shape: [[29.96, -95.55], [29.98, -95.4], [29.95, -95.25], [29.86, -95.16], [29.72, -95.15], [29.6, -95.22], [29.58, -95.38], [29.6, -95.52], [29.7, -95.6], [29.86, -95.6]],
         },
-        west: {
-            name: "West Houston",
+        nearby: {
+            name: "Sugar Land, Spring & Katy",
             fee: "Local service",
-            label: "West",
-            shape: [C1, C6, C5, [29.68, -95.56], [29.5, -95.66], [29.48, -95.95], [29.8, -96.02], [30.02, -95.85], [30.02, -95.66]],
-        },
-        north: {
-            name: "North Houston",
-            fee: "Local service",
-            label: "North",
-            shape: [C1, [30.02, -95.66], [30.38, -95.75], [30.42, -95.3], [30.18, -95.02], [29.95, -94.95], [29.9, -95.12], C2],
-        },
-        east: {
-            name: "East Houston",
-            fee: "Local service",
-            label: "East",
-            shape: [C2, [29.9, -95.12], [29.95, -94.95], [29.8, -94.85], [29.62, -94.9], [29.52, -95.0], [29.525, -95.17], [29.64, -95.24], C4, C3],
-        },
-        south: {
-            name: "South Houston",
-            fee: "Local service",
-            label: "South",
-            shape: [C5, C4, [29.64, -95.24], [29.525, -95.17], [29.52, -95.0], [29.4, -95.0], [29.42, -95.4], [29.5, -95.66], [29.68, -95.56]],
-        },
-        outside: {
-            name: "Nearby suburbs",
-            fee: "Call to confirm",
-            label: "Custom quote",
+            radius: 7000,
             spots: [
-                ["Galveston", 29.3013, -94.7977],
-                ["Brenham", 30.1669, -96.3977],
-                ["College Station", 30.628, -96.3344],
-                ["Beaumont", 30.0802, -94.1266],
+                ["Sugar Land", 29.6197, -95.6349],
+                ["Katy", 29.7858, -95.8245],
+                ["Spring", 30.0799, -95.4172],
+            ],
+        },
+        texas: {
+            name: "Texas cities",
+            fee: "Quoted per move",
+            radius: 22000,
+            spots: [
+                ["Austin", 30.2672, -97.7431],
+                ["San Antonio", 29.4241, -98.4936],
+                ["Dallas", 32.7767, -96.797],
             ],
         },
     };
 
     const OFFICE = [29.7604, -95.3698]; // Houston, TX (no street address published)
 
-    let activeRegion = "central";
+    let activeRegion = "houston";
     let map = null;
     const layers = {};
 
@@ -521,7 +504,7 @@
 
         if (map) {
             styleLayers();
-            if (!fromMap || id === "outside") {
+            if (!fromMap || REGIONS[id].spots) {
                 map.flyToBounds(layers[id].getBounds(), { padding: [30, 30], duration: 0.8 });
             }
         }
@@ -545,8 +528,7 @@
     });
 
     /* ---------- ZIP checker ---------- */
-    const OUTSIDE_PREFIXES = ["776", "777", "778"]; // Beaumont, Brenham, College Station areas
-    const METRO_PREFIXES = ["770", "772", "773", "774", "775"];
+    const METRO_PREFIXES = ["770", "772", "773", "774", "775"]; // Houston, Sugar Land, Katy, Spring
     const zipForm = document.getElementById("zip-check");
     const zipInput = document.getElementById("zip-input");
     const zipResult = document.getElementById("zip-result");
@@ -570,14 +552,11 @@
         if (METRO_PREFIXES.includes(prefix)) {
             zipResult.textContent = `Yes! We serve ${zip}. Get your free quote above.`;
             zipResult.classList.add("is-yes");
-        } else if (OUTSIDE_PREFIXES.includes(prefix)) {
-            zipResult.textContent = `Yes, ${zip} is outside the metro, so we will send a custom quote.`;
-            zipResult.classList.add("is-maybe");
-            selectRegion("outside");
         } else if (/^(7[5-9]|885)/.test(zip)) {
             // Elsewhere in Texas: a move between cities, quoted separately
             zipResult.textContent = `${zip} is outside the Houston area, but we move between Texas cities. Get a free quote above or call (979) 888-8887.`;
             zipResult.classList.add("is-maybe");
+            selectRegion("texas");
         } else {
             zipResult.textContent = `${zip} is outside Texas. We only move within Texas, so we can't take this one.`;
             zipResult.classList.add("is-no");
@@ -593,7 +572,7 @@
                 weight: active ? 3 : 1.5,
                 fillColor: active ? "#E2E41D" : "#0E6070",
                 fillOpacity: active ? 0.42 : 0.16,
-                dashArray: id === "outside" ? "6 6" : null,
+                dashArray: REGIONS[id].spots ? "6 6" : null,
             });
             if (active) layer.bringToFront();
         });
@@ -627,7 +606,7 @@
             dragging: !isTouch,
             tap: false,
             zoomSnap: 0.25,
-        });
+        }).setView(OFFICE, 9); // a view first, so the city circles can be placed
 
         // Esri street map: roads, highways, and city names (no API key needed)
         L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}", {
@@ -641,7 +620,7 @@
                 layer = L.polygon(smoothShape(region.shape), { className: "region-shape" });
             } else {
                 layer = L.featureGroup(region.spots.map(([name, lat, lng]) =>
-                    L.circle([lat, lng], { radius: 9000, className: "region-shape" }).bindTooltip(name, {
+                    L.circle([lat, lng], { radius: region.radius, className: "region-shape" }).bindTooltip(name, {
                         permanent: true,
                         direction: "center",
                         className: "region-label",
@@ -672,9 +651,9 @@
             .bindPopup("<strong>Moe's Movers</strong><br>Local Houston moves, plus moves across Texas")
             .addTo(map);
 
-        // Start framed on the five metro regions
-        const metro = L.featureGroup(["central", "west", "north", "east", "south"].map((id) => layers[id]));
-        map.fitBounds(metro.getBounds(), { padding: [10, 10] });
+        // Start framed on Houston and the nearby cities
+        const local = L.featureGroup(["houston", "nearby"].map((id) => layers[id]));
+        map.fitBounds(local.getBounds(), { padding: [10, 10] });
         styleLayers();
     }
 
@@ -935,7 +914,9 @@ document.querySelectorAll("[data-tabs]").forEach((tabsRoot) => {
         document.querySelectorAll(`a[href="#${card.id}"]`).forEach((link) => {
             link.addEventListener("click", (event) => {
                 event.preventDefault();
-                section.scrollIntoView({ behavior: "smooth" });
+                event.stopPropagation(); // smooth scrolling would otherwise aim for the card itself
+                if (window.lenis) window.lenis.scrollTo(section);
+                else section.scrollIntoView({ behavior: "smooth" });
                 section.querySelector(`.process-dot[data-step="${card.dataset.index}"]`)?.click();
             });
         });
