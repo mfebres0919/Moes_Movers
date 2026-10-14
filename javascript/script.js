@@ -915,7 +915,7 @@ document.querySelectorAll("[data-tabs]").forEach((tabsRoot) => {
             link.addEventListener("click", (event) => {
                 event.preventDefault();
                 event.stopPropagation(); // smooth scrolling would otherwise aim for the card itself
-                if (window.lenis) window.lenis.scrollTo(section);
+                if (window.lenis) window.lenis.scrollTo(section, { offset: -parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0 });
                 else section.scrollIntoView({ behavior: "smooth" });
                 section.querySelector(`.process-dot[data-step="${card.dataset.index}"]`)?.click();
             });
