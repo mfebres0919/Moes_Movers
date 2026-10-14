@@ -97,27 +97,54 @@
         progressFill.style.width = `${(completed / steps.length) * 100}%`;
     }
 
+    // Steps marked data-skip (Details, for types with no extra questions) are
+    // passed over, and their marker is hidden so the count stays honest
+    const inUse = () => [...steps].filter((step) => step.dataset.skip !== "true");
+
     function showStep(index) {
         steps[current].hidden = true;
         current = index;
         const step = steps[current];
         step.hidden = false;
 
+        const active = inUse();
+        const position = active.indexOf(step);
         markers.forEach((marker, i) => {
+            marker.hidden = steps[i].dataset.skip === "true";
             marker.classList.toggle("is-complete", i < current);
             marker.classList.toggle("is-active", i === current);
         });
 
-        setProgress(current + 1);
-        progressText.textContent = `Step ${current + 1} of ${steps.length}: ${step.dataset.title}`;
+        progressFill.style.width = `${((position + 1) / active.length) * 100}%`;
+        progressText.textContent = `Step ${position + 1} of ${active.length}: ${step.dataset.title}`;
         backButton.hidden = current === 0;
+        // Past step 1 the intro text has done its job; phones hide it (CSS)
+        card.classList.toggle("is-started", current > 0);
         nextLabel.textContent = current === lastStep ? "Send My Quote Request" : "Next";
 
-        // Keep the top of the card in view on small screens
-        if (card.getBoundingClientRect().top < 0) {
-            card.scrollIntoView({ block: "start" });
-        }
+        // Bring the card's top back into view below the menu bar. Checked
+        // again shortly after, since scrolling can switch the navbar to fixed.
+        // Once fixed, the bar slides in, so use its full height rather than
+        // where it happens to be mid-slide.
+        const header = document.getElementById("site-header");
+        const navbar = document.getElementById("navbar");
+        const keepClear = () => {
+            if (!navbar) return;
+            const barBottom = header.classList.contains("is-scrolled")
+                ? navbar.offsetHeight
+                : Math.max(0, navbar.getBoundingClientRect().bottom);
+            const top = card.getBoundingClientRect().top;
+            if (top < barBottom + 8) window.scrollBy(0, top - barBottom - 16);
+        };
+        keepClear();
+        setTimeout(keepClear, 400);
         step.querySelector(".quote-step-title").focus({ preventScroll: true });
+    }
+
+    function nextIndex(from, dir) {
+        let i = from + dir;
+        while (steps[i] && steps[i].dataset.skip === "true") i += dir;
+        return i;
     }
 
     // Validate only the fields in the visible step
@@ -132,7 +159,7 @@
         return true;
     }
 
-    backButton.addEventListener("click", () => showStep(current - 1));
+    backButton.addEventListener("click", () => showStep(nextIndex(current, -1)));
 
     // Enter key and the main button both go through submit
     form.addEventListener("submit", (event) => {
@@ -140,7 +167,7 @@
         if (!stepIsValid(steps[current])) return;
 
         if (current < lastStep) {
-            showStep(current + 1);
+            showStep(nextIndex(current, 1));
             return;
         }
 
@@ -157,6 +184,49 @@
         success.hidden = false;
         success.focus();
     });
+})();
+
+/* ---------- Quote form: questions that match the property type ----------
+   Each .quote-detail lists the types it belongs to in data-for. The rest
+   are hidden and their fields disabled, so they're skipped when the step
+   is checked and left out of the request. */
+(function () {
+    const form = document.getElementById("quote-form");
+    if (!form) return;
+
+    const details = [...form.querySelectorAll(".quote-detail")];
+    const detailsStep = form.querySelector(".quote-step-details");
+    const specialNotes = form.querySelector(".quote-special-notes");
+
+    function update() {
+        const picked = form.querySelector('input[name="property_type"]:checked');
+        const type = picked ? picked.value : "";
+        let any = false;
+        details.forEach((detail) => {
+            const show = detail.dataset.for.split(" ").includes(type);
+            if (show) any = true;
+            detail.hidden = !show;
+            detail.querySelectorAll("input, select, textarea").forEach((field) => {
+                field.disabled = !show;
+            });
+        });
+        // No questions for this type: the Details step is skipped
+        detailsStep.dataset.skip = String(!any);
+    }
+
+    // The notes box only appears once a special item is ticked
+    function updateNotes() {
+        const ticked = form.querySelector('input[name="special_items"]:checked');
+        specialNotes.hidden = !ticked;
+        specialNotes.querySelector("textarea").disabled = !ticked;
+    }
+
+    form.addEventListener("change", (event) => {
+        if (event.target.name === "property_type") update();
+        if (event.target.name === "special_items") updateNotes();
+    });
+    update();
+    updateNotes();
 })();
 
 /* ---------- Services carousel ---------- */
@@ -504,8 +574,12 @@
             zipResult.textContent = `Yes, ${zip} is outside the metro, so we will send a custom quote.`;
             zipResult.classList.add("is-maybe");
             selectRegion("outside");
+        } else if (/^(7[5-9]|885)/.test(zip)) {
+            // Elsewhere in Texas: a move between cities, quoted separately
+            zipResult.textContent = `${zip} is outside the Houston area, but we move between Texas cities. Get a free quote above or call (979) 888-8887.`;
+            zipResult.classList.add("is-maybe");
         } else {
-            zipResult.textContent = `${zip} is outside our local area. Call (979) 888-8887 and we will let you know.`;
+            zipResult.textContent = `${zip} is outside Texas. We only move within Texas, so we can't take this one.`;
             zipResult.classList.add("is-no");
         }
     });
@@ -595,7 +669,7 @@
             iconAnchor: [19, 19],
         });
         L.marker(OFFICE, { icon: officeIcon, title: "Moe's Movers", zIndexOffset: 1000 })
-            .bindPopup("<strong>Moe's Movers</strong><br>Local moves across Houston")
+            .bindPopup("<strong>Moe's Movers</strong><br>Local Houston moves, plus moves across Texas")
             .addTo(map);
 
         // Start framed on the five metro regions
@@ -815,9 +889,9 @@
 })();
 
 
-/* ---------- "Schedule a Consultation" buttons ----------
-   They jump to the booking form with the in-person consultation option
-   already picked, so the visitor lands on the right path. */
+/* ---------- "Book a Free Walkthrough" buttons ----------
+   They jump to the quote form with the free in-person estimate already
+   picked, so the visitor lands on the right path. */
 document.querySelectorAll("[data-consultation]").forEach((link) => {
     link.addEventListener("click", () => {
         const option = document.querySelector(`input[name="consultation"][value="${link.dataset.consultation}"]`);
@@ -886,21 +960,21 @@ document.querySelectorAll("[data-tabs]").forEach((tabsRoot) => {
     });
 })();
 
-/* ---------- Reviews: continuous slow scroll ----------
-   The track holds two identical halves and CSS slides it left by exactly
+/* ---------- Reviews: two rows, continuous scroll ----------
+   Each row ([data-reviews]) runs on its own; the second slides the other
+   way (CSS). Each track holds two identical halves and CSS slides it left by exactly
    one half (-50%), so it loops seamlessly. Each half repeats the review
    cards as many times as needed to be wider than the screen, so the end of
    the track never comes into view, even on very wide monitors. The loop
-   time is set from the half's width so the speed stays the same (about
-   22px a second) at any size. Rebuilt when the window is resized. Copies are
+   time is set from the half's width so the speed stays the same (40px a
+   second) at any size. Rebuilt when the window is resized. Copies are
    hidden from screen readers. Pauses on hover and while a card is pressed.
    Reduced motion: no animation; the row scrolls by hand. */
-(function () {
-    const root = document.querySelector("[data-reviews]");
-    if (!root || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+document.querySelectorAll("[data-reviews]").forEach((root) => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const track = root.querySelector(".reviews-track");
     const originals = [...track.children];
-    const SPEED = 22; // px per second
+    const SPEED = 40; // px per second
 
     const addCopy = (card) => {
         const copy = card.cloneNode(true);
@@ -912,7 +986,12 @@ document.querySelectorAll("[data-tabs]").forEach((tabsRoot) => {
     function build() {
         track.querySelectorAll("[data-copy]").forEach((copy) => copy.remove());
         root.classList.add("is-looping");
-        const setWidth = track.scrollWidth;
+        // Width of one set, measured from the cards themselves (Safari reports
+        // the wrong scrollWidth for this track)
+        const setWidth = originals.reduce((sum, card) => {
+            const style = getComputedStyle(card);
+            return sum + card.getBoundingClientRect().width + parseFloat(style.marginRight);
+        }, 0);
         // Sets per half: enough to cover the screen plus one more card
         const perHalf = Math.max(1, Math.ceil((window.innerWidth + 480) / setWidth));
         for (let i = 1; i < perHalf * 2; i++) originals.forEach(addCopy);
@@ -928,7 +1007,7 @@ document.querySelectorAll("[data-tabs]").forEach((tabsRoot) => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(build, 200);
     });
-})();
+});
 
 /* ---------- Count-up numbers ([data-count-to]) ----------
    The final value is in the HTML; this counts up from 0 over ~1.2s the
@@ -956,3 +1035,15 @@ document.querySelectorAll("[data-tabs]").forEach((tabsRoot) => {
     }, { threshold: 0.6 });
     counters.forEach((el) => observer.observe(el));
 })();
+
+
+/* ---------- "Plan a Storage Move" opens the quote form with Storage unit picked ---------- */
+document.querySelectorAll("[data-property]").forEach((link) => {
+    link.addEventListener("click", () => {
+        const option = document.querySelector(`input[name="property_type"][value="${link.dataset.property}"]`);
+        if (option) {
+            option.checked = true;
+            option.dispatchEvent(new Event("change", { bubbles: true }));
+        }
+    });
+});

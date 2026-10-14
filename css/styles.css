@@ -3610,3 +3610,350 @@
 .contact-road {
     background-image: linear-gradient(90deg, rgba(11, 31, 36, 0.3) 55%, transparent 55%);
 }
+
+/* ==========================================================================
+   Round 2 updates (Moe's notes, Oct 2026)
+   ========================================================================== */
+
+/* Quote form: 8 property types and 5 bedroom options */
+.option-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.option-grid-5 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media (min-width: 40rem) {
+    .hero-form .option-grid-4 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .hero-form .option-grid-5 {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+.option-grid-4 .option-card,
+.option-grid-5 .option-card {
+    min-height: 3.25rem;
+    padding: 0.75rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.25;
+}
+
+/* Details that appear for the property type picked */
+.quote-detail {
+    margin-top: 1.5rem;
+}
+
+.quote-detail[hidden] {
+    display: none;
+}
+
+.form-label-sub {
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+/* TXDMV / USDOT numbers under "Fully insured, licensed, and accredited" */
+.about-license {
+    display: block;
+    margin-top: 0.15rem;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: var(--color-gray);
+}
+
+.footer-license {
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+/* His "M" logo in the About photo corner */
+.about-badge {
+    padding: 0.85rem;
+    object-fit: contain;
+    background-color: var(--color-white);
+}
+
+
+/* Compact "How would you like to plan it?" choices on the route step */
+.option-list-compact .option-card-detail {
+    padding: 0.75rem 1rem;
+    min-height: 0;
+}
+
+.option-list-compact .option-card-detail span {
+    font-size: 0.8125rem;
+    line-height: 1.4;
+}
+
+.quote-special-notes[hidden] {
+    display: none;
+}
+
+.quote-steps li[hidden] {
+    display: none;
+}
+
+/* The "Step 2 of 5: Details" line and bar already show progress, so the row
+   of step labels is dropped to keep the card short */
+.quote-steps {
+    display: none;
+}
+
+/* Desktop: route, ZIPs and date in one row, and the three ways to plan it
+   side by side, so this step stays about the height of the others */
+@media (min-width: 64rem) {
+    .hero-form .quote-step-route .quote-fields {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+}
+
+/* Keep each step short: the plan choices show their description only when
+   picked, and on phones the intro line hides once past step 1. */
+.option-list-compact .option-card-detail:not(:has(input:checked)) .option-desc {
+    display: none;
+}
+
+@media (max-width: 39.99rem) {
+    .quote-card.is-started .quote-subtitle {
+        display: none;
+    }
+
+    .option-list-compact .option-card-detail span {
+        font-size: 0.875rem;
+    }
+}
+
+.option-desc {
+    font-size: inherit;
+}
+
+/* Safari can let the zooming hero photos paint past the hero's bottom edge
+   for a moment, showing a strip of photo under the divider. A hard clip on
+   the slides and hero stops it, and About sits above the hero just in case. */
+.hero {
+    contain: paint;
+}
+
+.hero-slides {
+    overflow: hidden;
+    clip-path: inset(0);
+}
+
+.hero + .about {
+    z-index: 1;
+}
+
+/* ==========================================================================
+   Hero breathing room: clear space under the header (which sits over the
+   hero) and more air between the headline, text, buttons and badges.
+   ========================================================================== */
+.hero {
+    padding-top: 12rem;
+    padding-bottom: 6.5rem;
+}
+
+.hero-title {
+    margin-top: 1.75rem;
+}
+
+.hero-text {
+    margin-top: 1.5rem;
+}
+
+.hero-actions {
+    margin-top: 2.5rem;
+}
+
+.hero-badges {
+    margin-top: 3rem;
+    padding-top: 2rem;
+}
+
+.hero-controls {
+    margin-top: 2.5rem;
+}
+
+.hero-form {
+    margin-top: 3.5rem;
+}
+
+@media (min-width: 64rem) {
+    .hero {
+        padding-top: 14rem;
+        padding-bottom: 12.5rem; /* clears the peaked divider along the foot */
+    }
+
+    .hero-content {
+        gap: 5rem;
+    }
+
+    .hero-form {
+        margin-top: 0;
+    }
+}
+
+/* TXDMV / USDOT numbers under the hero's "Fully insured" badge (required
+   by the Texas DMV; also shown in About and the footer) */
+.hero-badges li:has(.hero-license) {
+    align-items: flex-start;
+}
+
+.hero-license {
+    display: block;
+    margin-top: 0.2rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.03em;
+    color: rgba(255, 255, 255, 0.72);
+}
+
+/* ==========================================================================
+   Storage spotlight (Services): photo + copy card, side by side on desktop
+   ========================================================================== */
+.storage-spotlight {
+    display: grid;
+    margin-top: 4rem;
+    overflow: hidden;
+    background-color: var(--color-white);
+    border-radius: 1.25rem;
+    border-left: 4px solid var(--color-red-bright);
+    box-shadow: var(--shadow-md);
+}
+
+.storage-spotlight-media img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+}
+
+.storage-spotlight-content {
+    display: grid;
+    gap: 1rem;
+    align-content: center;
+    justify-items: start;
+    padding: 2rem 1.5rem;
+}
+
+.storage-spotlight-title {
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    line-height: 1;
+    color: var(--color-black);
+}
+
+.storage-spotlight-list {
+    display: grid;
+    gap: 0.6rem;
+    margin: 0.25rem 0 0.5rem;
+    padding: 0;
+    list-style: none;
+}
+
+.storage-spotlight-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-weight: 500;
+    color: var(--color-black);
+}
+
+.storage-spotlight-list .icon {
+    flex: none;
+    width: 1.35rem;
+    height: 1.35rem;
+    padding: 0.2rem;
+    color: var(--color-black);
+    background-color: var(--color-red-bright);
+    border-radius: 50%;
+}
+
+@media (min-width: 48rem) {
+    .storage-spotlight {
+        grid-template-columns: 0.9fr 1.1fr;
+    }
+
+    .storage-spotlight-media img {
+        aspect-ratio: auto;
+    }
+
+    .storage-spotlight-content {
+        padding: 2.75rem 3rem;
+    }
+}
+
+/* Badges: one per line on desktop's narrow copy column, so the license line
+   under the first doesn't push the others into odd wraps */
+@media (min-width: 64rem) {
+    .hero-badges {
+        grid-template-columns: 1fr;
+        gap: 0.7rem;
+    }
+}
+
+
+/* ==========================================================================
+   Reviews: two compact rows sliding in opposite directions
+   ========================================================================== */
+.reviews-rows {
+    display: grid;
+    gap: 1.25rem;
+}
+
+.reviews-carousel--reverse.is-looping .reviews-track {
+    animation-direction: reverse;
+}
+
+/* Smaller cards so more reviews fit without the section growing much */
+/* A fixed width (not just flex-basis): Safari otherwise sizes the sliding
+   track as if every review sat on one line, and the loop overshoots */
+.reviews-rows .review-card {
+    flex: 0 0 auto;
+    width: min(80vw, 21rem);
+    max-width: min(80vw, 21rem);
+    padding: 1.4rem 1.5rem;
+}
+
+.reviews-rows .review-top {
+    margin-bottom: 0.25rem;
+}
+
+.reviews-rows .review-avatar {
+    width: 2.75rem;
+    height: 2.75rem;
+}
+
+.reviews-rows .review-text p {
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.reviews-rows .review-author {
+    margin-top: 1rem;
+    padding-top: 0.85rem;
+}
+
+.reviews-rows .review-text {
+    margin-top: 1rem;
+}
+
+/* Initials in place of a reviewer photo */
+.review-initials {
+    display: grid;
+    place-items: center;
+    flex: none;
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    letter-spacing: 0.04em;
+    color: var(--color-black);
+    background-color: var(--color-red-bright);
+}
