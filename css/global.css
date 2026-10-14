@@ -581,6 +581,14 @@ h4 {
     transform: scale(0.95);
 }
 
+/* Phones: everything rises in; sideways slides would poke past the screen edge */
+@media (max-width: 47.99rem) {
+    .reveal-ready [data-reveal="left"],
+    .reveal-ready [data-reveal="right"] {
+        transform: translateY(2rem);
+    }
+}
+
 .reveal-ready [data-reveal].is-revealed {
     opacity: 1;
     transform: none;
@@ -1763,14 +1771,10 @@ textarea.form-control {
     margin-inline: auto;
 }
 
-/* The logo gives up width before the menu runs out of room, but never
-   drops below a readable size */
-.brand-logo-wordmark {
-    min-width: 8.5rem;
-}
-
-.brand-logo-wordmark {
-    width: 10.5rem;
+/* Header: the M on its own */
+.brand-logo-m {
+    width: 4.5rem;
+    min-width: 4.5rem;
 }
 
 .footer-logo img.footer-logo-wordmark {
@@ -1778,8 +1782,8 @@ textarea.form-control {
 }
 
 @media (min-width: 64rem) {
-    .brand-logo-wordmark {
-        width: 12rem;
+    .brand-logo-m {
+        width: 5.25rem;
     }
 }
 

@@ -189,24 +189,35 @@
    Off for now: the menu links will go to separate pages (About, Services,
    Our Work, Contact), so Home stays highlighted on the homepage. */
 
-/* ---------- Scroll reveal: fade sections in as they enter the screen ---------- */
+/* ---------- Scroll reveal: fade content in as it enters the screen ----------
+   Plays every time: once something has scrolled fully off screen it resets,
+   so it fades in again when the visitor scrolls back to it. */
 (function () {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     if (!("IntersectionObserver" in window)) return;
 
-    // [selector, direction, stagger in seconds between matches]
+    // [selector, direction, stagger in seconds between matches, restart the stagger every N matches]
     const groups = [
         [".hero-eyebrow, .hero-title, .hero-text, .hero-actions, .hero-badges, .hero-controls", "up", 0.12],
         // Animate the wrapper, not the card: moving the card itself would lift its red glow (::before) on top of it
         [".quote > .container", "up", 0],
-        [".services-intro > *", "left", 0.1],
-        [".services-carousel", "right", 0],
+        [".about-media", "left", 0],
+        [".about-content > *", "right", 0.08],
+        [".projects-header > *", "up", 0.1],
+        [".project-filters", "up", 0],
+        [".project-card", "up", 0.1, 3],
         [".areas-intro > *", "left", 0.08],
         [".map-card", "right", 0],
+        [".map-ticker", "up", 0],
         [".process-header > *", "up", 0.1],
         [".process-details, .process-cta", "left", 0.15],
         [".process-showcase", "zoom", 0],
+        [".storage-spotlight-media", "left", 0],
+        [".storage-spotlight-content", "right", 0.1],
         [".process-stats", "up", 0],
+        [".reviews-header > *", "up", 0.1],
+        [".reviews-carousel", "up", 0.15],
+        [".reviews-footer", "up", 0],
         [".final-cta-visual", "left", 0],
         [".final-cta-content > *", "right", 0.1],
         [".contact-info", "left", 0],
@@ -215,33 +226,46 @@
     ];
 
     const targets = [];
-    groups.forEach(([selector, direction, stagger]) => {
+    groups.forEach(([selector, direction, stagger, every]) => {
         document.querySelectorAll(selector).forEach((element, i) => {
+            if (element.dataset.revealDir) return; // already in an earlier group
+            element.dataset.revealDir = direction;
             element.dataset.reveal = direction;
-            element.style.setProperty("--reveal-delay", `${i * stagger}s`);
+            element.style.setProperty("--reveal-delay", `${(every ? i % every : i) * stagger}s`);
             targets.push(element);
         });
     });
 
     document.documentElement.classList.add("reveal-ready");
 
-    const observer = new IntersectionObserver((entries) => {
+    // Fade in once a little of it is on screen
+    const showObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (!entry.isIntersecting) return;
             const element = entry.target;
-            observer.unobserve(element);
+            if (element.classList.contains("is-revealed") || !element.dataset.reveal) return;
             element.classList.add("is-revealed");
 
             // Once finished, drop the reveal styles so the element's own transitions work normally
             element.addEventListener("transitionend", function cleanup(event) {
                 if (event.target !== element || event.propertyName !== "opacity") return;
                 element.removeEventListener("transitionend", cleanup);
+                if (!element.classList.contains("is-revealed")) return; // reset again before it finished
                 element.removeAttribute("data-reveal");
                 element.classList.remove("is-revealed");
-                element.style.removeProperty("--reveal-delay");
             });
         });
     }, { rootMargin: "0px 0px -10% 0px", threshold: 0.12 });
+
+    // Reset only when completely off screen, so nothing visibly fades out
+    const hideObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) return;
+            const element = entry.target;
+            element.classList.remove("is-revealed");
+            element.dataset.reveal = element.dataset.revealDir;
+        });
+    }, { threshold: 0 });
 
     // Make sure the hidden state is applied before anything reveals
     void document.body.offsetHeight;
@@ -249,7 +273,10 @@
     // Start once the loading screen is gone, so the hero animates in right as the site appears
     const loader = document.getElementById("loader");
     function start() {
-        targets.forEach((element) => observer.observe(element));
+        targets.forEach((element) => {
+            showObserver.observe(element);
+            hideObserver.observe(element);
+        });
     }
     if (loader) {
         document.addEventListener("loader:done", start, { once: true });
