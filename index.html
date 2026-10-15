@@ -771,6 +771,14 @@
                             <li class="community-slide" data-region="texas" hidden><a class="community-btn area-chip" href="#quote" data-zip="78401">Corpus Christi</a></li>
                             <li class="community-slide" data-region="texas" hidden><a class="community-btn area-chip area-chip-statewide" href="#quote">+ Anywhere in Texas</a></li>
                         </ul>
+                        <form class="zip-check" id="zip-check" novalidate>
+                            <label class="zip-check-label" for="zip-input">Not sure? Check your ZIP</label>
+                            <div class="zip-check-row">
+                                <input class="form-control" type="text" id="zip-input" name="zip" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" placeholder="Enter ZIP code" autocomplete="postal-code">
+                                <button class="btn btn-primary" type="submit">Check</button>
+                            </div>
+                            <p class="zip-check-result" id="zip-result" role="status" aria-live="polite"></p>
+                        </form>
                     </div>
 
                     <p class="areas-statewide">
@@ -778,14 +786,6 @@
                         <span><strong>We provide moving services throughout the entire state of Texas.</strong> From Houston to Dallas, Austin, San Antonio and beyond.</span>
                     </p>
 
-                    <form class="zip-check" id="zip-check" novalidate>
-                        <label class="zip-check-label" for="zip-input">Not sure? Check your ZIP</label>
-                        <div class="zip-check-row">
-                            <input class="form-control" type="text" id="zip-input" name="zip" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" placeholder="Enter ZIP code" autocomplete="postal-code">
-                            <button class="btn btn-primary" type="submit">Check</button>
-                        </div>
-                        <p class="zip-check-result" id="zip-result" role="status" aria-live="polite"></p>
-                    </form>
                 </div>
 
                 <div class="map-card">
@@ -802,6 +802,11 @@
                         </div>
                         <p class="map-legend"><span class="map-legend-dot" aria-hidden="true"></span>Where we move</p>
                     </div>
+                    <p class="map-card-cta">
+                        Moving in <span id="map-cta-region">Houston</span>? Click
+                        <a href="#quote" data-consultation="quote">here</a>
+                        to get your free quote.
+                    </p>
                 </div>
             </div>
 

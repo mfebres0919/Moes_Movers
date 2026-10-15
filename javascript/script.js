@@ -446,18 +446,23 @@
     const track = document.getElementById("communities-track");
     const regionLabel = document.getElementById("communities-region");
     const feeLabel = document.getElementById("communities-fee");
+    const mapCtaRegion = document.getElementById("map-cta-region");
+    const mapCard = section.querySelector(".map-card");
+    const isPhone = window.matchMedia("(max-width: 63.99rem)");
 
     // Houston: an approximate outline of the city (roughly Beltway 8).
     // Nearby suburbs and Texas cities are marked as circles on each city.
     const REGIONS = {
         houston: {
             name: "Houston",
+            cta: "Houston",
             fee: "Our home base",
             label: "Houston",
             shape: [[29.96, -95.55], [29.98, -95.4], [29.95, -95.25], [29.86, -95.16], [29.72, -95.15], [29.6, -95.22], [29.58, -95.38], [29.6, -95.52], [29.7, -95.6], [29.86, -95.6]],
         },
         nearby: {
             name: "Nearby suburbs",
+            cta: "the Houston suburbs",
             fee: "Local service",
             radius: 3500,
             // Missouri City and Friendswood are listed as chips but left off the map:
@@ -481,6 +486,7 @@
         },
         texas: {
             name: "All of Texas",
+            cta: "Texas",
             fee: "Statewide · quoted per move",
             radius: 18000,
             spots: [
@@ -519,6 +525,7 @@
         });
         track.scrollLeft = 0;
         regionLabel.textContent = REGIONS[id].name;
+        if (mapCtaRegion) mapCtaRegion.textContent = REGIONS[id].cta;
         feeLabel.textContent = REGIONS[id].fee;
 
         if (map) {
@@ -529,8 +536,25 @@
         }
     }
 
+    // Phones and tablets: the map sits below the tabs, so picking an area
+    // scrolls down to it (just under the sticky menu bar) to show the change
+    function scrollToMap() {
+        if (!isPhone.matches || !mapCard) return;
+        // Same navbar clearance the CSS uses for in-page links (scroll-padding-top)
+        const offset = (parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 96) + 8;
+        if (window.lenis) {
+            window.lenis.scrollTo(mapCard, { offset: -offset });
+            return;
+        }
+        const smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        window.scrollTo({ top: mapCard.getBoundingClientRect().top + window.scrollY - offset, behavior: smooth ? "smooth" : "auto" });
+    }
+
     regionButtons.forEach((button) => {
-        button.addEventListener("click", () => selectRegion(button.dataset.region));
+        button.addEventListener("click", () => {
+            selectRegion(button.dataset.region);
+            scrollToMap();
+        });
     });
 
     // "Service Areas" dropdown links in the nav
@@ -543,13 +567,24 @@
         const button = event.target.closest(".community-btn");
         if (!button) return;
         const zipField = document.getElementById("quote-from");
-        if (zipField) zipField.value = button.dataset.zip;
+        if (zipField && button.dataset.zip) zipField.value = button.dataset.zip;
     });
 
     /* ---------- ZIP checker ---------- */
     const METRO_PREFIXES = ["770", "772", "773", "774", "775"]; // Houston, Sugar Land, Katy, Spring
     const zipForm = document.getElementById("zip-check");
     const zipInput = document.getElementById("zip-input");
+
+    // A "yes" answer ends with a link to the quote form, prefilled with the ZIP
+    // (the .community-btn click handler above fills it in)
+    function showResult(message, zip) {
+        const link = document.createElement("a");
+        link.className = "community-btn zip-check-link";
+        link.href = "#quote";
+        link.dataset.zip = zip;
+        link.innerHTML = 'Get your free quote <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+        zipResult.replaceChildren(message, link);
+    }
     const zipResult = document.getElementById("zip-result");
 
     zipInput.addEventListener("input", () => {
@@ -569,11 +604,11 @@
 
         const prefix = zip.slice(0, 3);
         if (METRO_PREFIXES.includes(prefix)) {
-            zipResult.textContent = `Yes! We serve ${zip}. Get your free quote above.`;
+            showResult(`Yes! We serve ${zip}. `, zip);
             zipResult.classList.add("is-yes");
         } else if (/^(7[5-9]|885)/.test(zip)) {
             // Elsewhere in Texas: a move between cities, quoted separately
-            zipResult.textContent = `Yes! We move anywhere in Texas, including ${zip}. Moves outside the Houston area are quoted per move. Get a free quote above or call (979) 888-8887.`;
+            showResult(`Yes! We move anywhere in Texas, including ${zip}. Moves outside the Houston area are quoted per move. `, zip);
             zipResult.classList.add("is-yes");
             selectRegion("texas");
         } else {

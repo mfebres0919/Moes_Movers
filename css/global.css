@@ -170,6 +170,13 @@ h4 {
     padding-inline: var(--gutter);
 }
 
+/* Big screens: the whole site spreads wider so sections line up with the hero */
+@media (min-width: 90rem) {
+    :root {
+        --container-max: 96rem;
+    }
+}
+
 .visually-hidden {
     position: absolute;
     width: 1px;

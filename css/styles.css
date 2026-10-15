@@ -836,6 +836,7 @@
     position: relative;
     padding: calc(clamp(2.5rem, 7vw, 6.5rem) + 3.5rem) 0 calc(clamp(2.5rem, 7vw, 6.5rem) + 4rem);
     overflow: hidden;
+    overflow: clip; /* clips like hidden but keeps the sticky map working (hidden is the fallback) */
     color: var(--color-white);
     background-color: var(--color-black);
 }
@@ -913,6 +914,41 @@
 
 .zip-check-result.is-yes {
     color: #6EE7A0;
+}
+
+/* Reuses .community-btn for the ZIP prefill, so its card-button look is reset */
+.zip-check-result .zip-check-link {
+    display: inline-flex;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
+    align-items: center;
+    gap: 0.3rem;
+    font-weight: 700;
+    color: var(--color-white);
+    text-decoration: underline;
+    text-decoration-color: var(--color-yellow);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.25em;
+    white-space: nowrap;
+}
+
+.zip-check-result .zip-check-link .icon {
+    width: 1rem;
+    height: 1rem;
+    transition: transform var(--transition);
+}
+
+.zip-check-result .zip-check-link:hover {
+    color: var(--color-yellow);
+    background: none;
+}
+
+.zip-check-result .zip-check-link:hover .icon {
+    transform: translateX(3px);
 }
 
 .zip-check-result.is-maybe {
@@ -3091,8 +3127,8 @@
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-    padding: 0.5rem max(var(--gutter), calc((100vw - 80rem) / 2 + var(--gutter)));
-    scroll-padding-inline: max(var(--gutter), calc((100vw - 80rem) / 2 + var(--gutter)));
+    padding: 0.5rem max(var(--gutter), calc((100vw - var(--container-max)) / 2 + var(--gutter)));
+    scroll-padding-inline: max(var(--gutter), calc((100vw - var(--container-max)) / 2 + var(--gutter)));
     scrollbar-width: none;
 }
 
@@ -4205,9 +4241,12 @@
 }
 
 /* ==========================================================================
-   Service areas, desktop: a header row (title | intro + statewide callout),
-   a full-width row of area tabs, then the places + ZIP check beside the map
-   so the controls sit right next to what they change.
+   Service areas, desktop: the title across the top, the intro and statewide
+   callout under it, a full-width row of area tabs, then the places + ZIP
+   check beside the map. The map is sticky (like the About photo): if the
+   left column runs taller it stays pinned while that column scrolls past,
+   and if the map is taller the places panel stretches to meet it, so there
+   is never empty space beside it.
    .areas-intro uses display: contents so its children join this grid.
    ========================================================================== */
 @media (min-width: 64rem) {
@@ -4215,12 +4254,11 @@
         grid-template-columns: minmax(0, 23rem) minmax(0, 1fr);
         grid-template-areas:
             "eyebrow eyebrow"
-            "title   text"
-            "title   state"
+            "title   title"
+            "text    text"
+            "state   state"
             "tabs    tabs"
-            "places  map"
-            "zip     map";
-        grid-template-rows: auto auto auto auto auto 1fr; /* only the row beside the map absorbs its extra height */
+            "places  map";
         column-gap: 3.5rem;
         row-gap: 0;
         align-items: start;
@@ -4230,24 +4268,32 @@
         display: contents;
     }
 
-    #areas .section-eyebrow { grid-area: eyebrow; }
+    /* Heading block centered over the tabs and map */
+    #areas .section-eyebrow {
+        grid-area: eyebrow;
+        justify-self: center;
+    }
 
     #areas .section-title {
         grid-area: title;
+        max-width: none;
         margin: 0;
+        text-align: center;
     }
 
     #areas .section-text {
         grid-area: text;
-        max-width: 40rem;
-        margin: 0.35rem 0 0;
+        justify-self: center;
+        max-width: 46rem;
+        margin: 1.25rem 0 0;
         font-size: 1.0625rem;
+        text-align: center;
     }
 
     #areas .areas-statewide {
         grid-area: state;
-        align-self: start;
-        max-width: 40rem;
+        justify-self: center;
+        max-width: 46rem;
         margin-top: 1.25rem;
     }
 
@@ -4270,32 +4316,31 @@
         font-size: 1rem;
     }
 
+    /* Places panel grows to the map's height when the map is taller,
+       with the ZIP check pinned to its bottom to use that space */
     #areas .area-places {
         grid-area: places;
-        margin-top: 1.25rem;
-    }
-
-    #areas .zip-check {
-        grid-area: zip;
-        margin-top: 1.25rem;
-    }
-
-    /* Map fills the height of the places + ZIP column beside it */
-    #areas .map-card {
-        grid-area: map;
         align-self: stretch;
         display: flex;
         flex-direction: column;
         margin-top: 1.25rem;
     }
 
-    #areas .map-frame {
-        flex: 1;
-        min-height: 30rem;
+    #areas .area-places .zip-check {
+        margin-top: auto;
+    }
+
+    #areas .map-card {
+        grid-area: map;
+        position: sticky;
+        top: 7rem;
+        display: flex;
+        flex-direction: column;
+        margin-top: 1.25rem;
     }
 
     #areas .areas-map {
-        height: 100%;
+        height: clamp(26rem, calc(100vh - 16rem), 34rem);
     }
 }
 
@@ -4327,4 +4372,96 @@
 
 #areas .region-btn.is-active .region-swatch::after {
     transform: rotate(45deg) scale(1);
+}
+
+/* Statewide callout "pokes" to the right twice, rests about 3s, repeats */
+.areas-statewide {
+    animation: statewide-poke 4s ease-in-out 1s infinite;
+}
+
+.areas-statewide:hover {
+    animation-play-state: paused;
+}
+
+@keyframes statewide-poke {
+    0%, 25%, 100% { transform: translateX(0); }
+    6%  { transform: translateX(0.6rem); }
+    12% { transform: translateX(0); }
+    18% { transform: translateX(0.35rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .areas-statewide {
+        animation: none;
+    }
+}
+
+/* ZIP check lives inside the places panel, divided from the chips */
+#areas .area-places .zip-check {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+@media (min-width: 64rem) {
+    #areas .area-places .zip-check {
+        margin-top: auto;
+    }
+
+    #areas .area-chips {
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* ==========================================================================
+   Hero, desktop: more room for the headline. The hero spreads wider than the
+   rest of the page on big screens, the copy column gets the larger share,
+   and the title gets more line spacing so its lines don't run together.
+   ========================================================================== */
+@media (min-width: 64rem) {
+    .hero-content {
+        grid-template-columns: minmax(0, 1.3fr) minmax(24rem, 1fr);
+        gap: 4rem;
+    }
+
+    .hero-title {
+        line-height: 1.05;
+        letter-spacing: 0.01em;
+    }
+
+    .hero-title-accent {
+        margin-top: 0.15em;
+    }
+
+    .hero-text {
+        max-width: 40rem;
+    }
+}
+
+@media (min-width: 90rem) {
+    .hero .hero-content {
+        gap: 5rem;
+    }
+}
+
+/* Line under the map: "Moving in Houston? Click here to get your free quote." */
+.map-card-cta {
+    padding: 0.9rem 1.15rem;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--color-white);
+    background-color: var(--color-maroon-dark);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.map-card-cta a {
+    font-weight: 700;
+    color: var(--color-yellow);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.2em;
+}
+
+.map-card-cta a:hover {
+    color: var(--color-white);
 }
