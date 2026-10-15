@@ -448,7 +448,7 @@
     const feeLabel = document.getElementById("communities-fee");
 
     // Houston: an approximate outline of the city (roughly Beltway 8).
-    // Nearby and Texas cities are marked as circles on each city.
+    // Nearby suburbs and Texas cities are marked as circles on each city.
     const REGIONS = {
         houston: {
             name: "Houston",
@@ -457,23 +457,42 @@
             shape: [[29.96, -95.55], [29.98, -95.4], [29.95, -95.25], [29.86, -95.16], [29.72, -95.15], [29.6, -95.22], [29.58, -95.38], [29.6, -95.52], [29.7, -95.6], [29.86, -95.6]],
         },
         nearby: {
-            name: "Sugar Land, Spring & Katy",
+            name: "Nearby suburbs",
             fee: "Local service",
-            radius: 7000,
+            radius: 3500,
+            // Missouri City and Friendswood are listed as chips but left off the map:
+            // their labels collide with Sugar Land and Pearland
             spots: [
                 ["Sugar Land", 29.6197, -95.6349],
                 ["Katy", 29.7858, -95.8245],
+                ["The Woodlands", 30.1658, -95.4613],
                 ["Spring", 30.0799, -95.4172],
+                ["Cypress", 29.9691, -95.6972],
+                ["Pearland", 29.5636, -95.286],
+                ["Pasadena", 29.6911, -95.2091],
+                ["League City", 29.5075, -95.095],
+                ["Humble", 29.9988, -95.2622],
+                ["Kingwood", 30.05, -95.185],
+                ["Tomball", 30.0972, -95.6161],
+                ["Conroe", 30.3119, -95.4561],
+                ["Richmond", 29.5822, -95.7608],
+                ["Baytown", 29.7355, -94.9774],
             ],
         },
         texas: {
-            name: "Texas cities",
-            fee: "Quoted per move",
-            radius: 22000,
+            name: "All of Texas",
+            fee: "Statewide · quoted per move",
+            radius: 18000,
             spots: [
                 ["Austin", 30.2672, -97.7431],
                 ["San Antonio", 29.4241, -98.4936],
                 ["Dallas", 32.7767, -96.797],
+                ["Fort Worth", 32.7555, -97.3308],
+                ["College Station", 30.628, -96.3344],
+                ["Waco", 31.5493, -97.1467],
+                ["Beaumont", 30.0802, -94.1266],
+                ["Galveston", 29.3013, -94.7977],
+                ["Corpus Christi", 27.8006, -97.3964],
             ],
         },
     };
@@ -554,8 +573,8 @@
             zipResult.classList.add("is-yes");
         } else if (/^(7[5-9]|885)/.test(zip)) {
             // Elsewhere in Texas: a move between cities, quoted separately
-            zipResult.textContent = `${zip} is outside the Houston area, but we move between Texas cities. Get a free quote above or call (979) 888-8887.`;
-            zipResult.classList.add("is-maybe");
+            zipResult.textContent = `Yes! We move anywhere in Texas, including ${zip}. Moves outside the Houston area are quoted per move. Get a free quote above or call (979) 888-8887.`;
+            zipResult.classList.add("is-yes");
             selectRegion("texas");
         } else {
             zipResult.textContent = `${zip} is outside Texas. We only move within Texas, so we can't take this one.`;
@@ -576,6 +595,8 @@
             });
             if (active) layer.bringToFront();
         });
+        // Suburb names crowd Houston when the map zooms out to all of Texas
+        mapEl.classList.toggle("is-statewide", activeRegion === "texas");
     }
 
     /* Chaikin corner cutting: rounds a polygon's sharp corners into smooth curves */
@@ -623,7 +644,7 @@
                     L.circle([lat, lng], { radius: region.radius, className: "region-shape" }).bindTooltip(name, {
                         permanent: true,
                         direction: "center",
-                        className: "region-label",
+                        className: `region-label region-label-${id}`,
                     })
                 ));
             }

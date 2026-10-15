@@ -2805,6 +2805,7 @@
 
 .about-aside img {
     width: 100%;
+    height: auto; /* the HTML height attribute would otherwise force 360px and crop the truck */
     border-radius: 0;
     aspect-ratio: 16 / 9;
     object-fit: cover;
@@ -3974,6 +3975,13 @@
     color: inherit;
 }
 
+/* Highlighted words inside a plan description stay inline with the sentence
+   (the option title rule above makes every <strong> a block) */
+.option-card-detail .option-desc strong {
+    display: inline;
+    font-size: inherit;
+}
+
 /* About, desktop: the photo is sticky. It stays pinned below the menu bar
    while the taller text column scrolls past, so there's never empty space
    above or below it. The truck photo on the right is kept small. */
@@ -3993,8 +4001,9 @@
         justify-self: end;
     }
 
+    /* Keep the photo's own 16:9 shape so the whole truck and logo show */
     .about-aside img {
-        aspect-ratio: 4 / 3;
+        aspect-ratio: 16 / 9;
     }
 
     .about-aside p {
@@ -4153,4 +4162,169 @@
     width: auto;
     max-width: none;
     scroll-snap-align: none;
+}
+
+/* Areas: statewide coverage callout, made prominent so it can't be missed */
+.areas-statewide {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+    padding: 1rem 1.15rem;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--color-black);
+    background-color: var(--color-yellow);
+}
+
+.areas-statewide strong {
+    display: block;
+    font-size: 1.0625rem;
+    font-weight: 800;
+    line-height: 1.35;
+}
+
+.areas-statewide .icon {
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-top: 0.1rem;
+}
+
+.section-text-light strong {
+    font-weight: 700;
+    color: var(--color-yellow);
+}
+
+.area-chip-statewide {
+    font-weight: 700;
+}
+
+.areas-map.is-statewide .region-label-nearby {
+    display: none;
+}
+
+/* ==========================================================================
+   Service areas, desktop: a header row (title | intro + statewide callout),
+   a full-width row of area tabs, then the places + ZIP check beside the map
+   so the controls sit right next to what they change.
+   .areas-intro uses display: contents so its children join this grid.
+   ========================================================================== */
+@media (min-width: 64rem) {
+    #areas .areas-layout {
+        grid-template-columns: minmax(0, 23rem) minmax(0, 1fr);
+        grid-template-areas:
+            "eyebrow eyebrow"
+            "title   text"
+            "title   state"
+            "tabs    tabs"
+            "places  map"
+            "zip     map";
+        grid-template-rows: auto auto auto auto auto 1fr; /* only the row beside the map absorbs its extra height */
+        column-gap: 3.5rem;
+        row-gap: 0;
+        align-items: start;
+    }
+
+    #areas .areas-intro {
+        display: contents;
+    }
+
+    #areas .section-eyebrow { grid-area: eyebrow; }
+
+    #areas .section-title {
+        grid-area: title;
+        margin: 0;
+    }
+
+    #areas .section-text {
+        grid-area: text;
+        max-width: 40rem;
+        margin: 0.35rem 0 0;
+        font-size: 1.0625rem;
+    }
+
+    #areas .areas-statewide {
+        grid-area: state;
+        align-self: start;
+        max-width: 40rem;
+        margin-top: 1.25rem;
+    }
+
+    /* Area tabs: one even row across the full width */
+    #areas .region-list {
+        grid-area: tabs;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.75rem;
+        margin: 2.5rem 0 0;
+    }
+
+    #areas .region-btn {
+        justify-content: center;
+        width: 100%;
+        padding: 1rem 1.25rem;
+    }
+
+    #areas .region-name {
+        font-size: 1rem;
+    }
+
+    #areas .area-places {
+        grid-area: places;
+        margin-top: 1.25rem;
+    }
+
+    #areas .zip-check {
+        grid-area: zip;
+        margin-top: 1.25rem;
+    }
+
+    /* Map fills the height of the places + ZIP column beside it */
+    #areas .map-card {
+        grid-area: map;
+        align-self: stretch;
+        display: flex;
+        flex-direction: column;
+        margin-top: 1.25rem;
+    }
+
+    #areas .map-frame {
+        flex: 1;
+        min-height: 30rem;
+    }
+
+    #areas .areas-map {
+        height: 100%;
+    }
+}
+
+/* Area tabs: the box fills yellow and shows a checkmark on the picked area */
+#areas .region-swatch {
+    position: relative;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 1.15rem;
+    height: 1.15rem;
+    transition: background-color var(--transition);
+}
+
+#areas .region-swatch::after {
+    content: "";
+    width: 0.32rem;
+    height: 0.6rem;
+    margin-top: -0.12rem;
+    border: solid var(--color-black);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg) scale(0);
+    transition: transform 0.25s ease;
+}
+
+#areas .region-btn.is-active .region-swatch {
+    background-color: var(--color-red-bright);
+}
+
+#areas .region-btn.is-active .region-swatch::after {
+    transform: rotate(45deg) scale(1);
 }
