@@ -1,0 +1,282 @@
+/* ==========================================================================
+   Moe's Movers — Services page
+   The homepage's service cards (same look, colours, and content) laid out
+   in a regular grid instead of the 3D carousel.
+   ========================================================================== */
+.services-list {
+    --texture-opacity: 0.6;
+    padding: 3rem 0 calc(clamp(3rem, 8vw, 7rem) + 4rem);
+    background-color: var(--color-mist);
+}
+
+.services-list-header {
+    max-width: 46rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.services-list-header .section-eyebrow {
+    justify-content: center;
+}
+
+.services-list-header .section-text {
+    margin: 1rem auto 0; /* the paragraph is narrower than the header, so centre the box too */
+}
+
+.services-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin: 3rem 0 0;
+    list-style: none;
+}
+
+/* ---------- Card (matches .process-card on the homepage) ---------- */
+.service-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.75rem;
+    color: var(--color-white);
+    box-shadow: 0 2rem 3.5rem rgba(11, 31, 36, 0.28);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 2.5rem 4rem rgba(11, 31, 36, 0.34);
+}
+
+.service-card--red {
+    background-image: linear-gradient(160deg, var(--color-red-bright), var(--color-maroon));
+}
+
+.service-card--charcoal {
+    background-image: linear-gradient(160deg, #2E2E2E, #0B1F24);
+}
+
+.service-card--maroon {
+    background-image: linear-gradient(160deg, var(--color-maroon), #2A050C);
+}
+
+.service-card--light {
+    color: var(--color-black);
+    background-image: linear-gradient(160deg, #FFFFFF, #ECECEC);
+    border: 1px solid #E2E2E2;
+}
+
+.service-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.service-card-number {
+    font-family: var(--font-heading);
+    font-size: 5rem;
+    line-height: 0.85;
+    color: rgba(255, 255, 255, 0.92);
+}
+
+.service-card--light .service-card-number {
+    color: var(--color-red);
+}
+
+.service-card-icon {
+    display: grid;
+    place-items: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+}
+
+.service-card-icon .icon {
+    width: 1.6rem;
+    height: 1.6rem;
+    stroke-width: 1.75;
+}
+
+.service-card--light .service-card-icon {
+    color: var(--color-white);
+    background-color: var(--color-red);
+    border-color: var(--color-red);
+}
+
+.service-card-media {
+    display: block;
+    margin-top: 1rem;
+    overflow: hidden;
+    aspect-ratio: 840 / 740;
+}
+
+.service-card-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+}
+
+.service-card:hover .service-card-media img {
+    transform: scale(1.05);
+}
+
+.service-card-title {
+    margin-top: 1rem;
+    font-size: 2rem;
+}
+
+.service-card-text {
+    margin-top: 0.6rem;
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.service-card--light .service-card-text {
+    color: var(--color-gray);
+}
+
+.service-card-link {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 0.4rem;
+    margin-top: auto;
+    padding-top: 0.9rem;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    white-space: nowrap;
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+}
+
+.service-card--light .service-card-link {
+    color: var(--color-red);
+}
+
+.service-card-link .icon {
+    width: 1rem;
+    height: 1rem;
+    transition: transform var(--transition);
+}
+
+.service-card-link:hover .icon {
+    transform: translateX(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .service-card,
+    .service-card-media img {
+        transition: none;
+    }
+}
+
+/* ---------- Horizontal carousel ----------
+   services.js moves it one card every 4 seconds; visitors can also swipe,
+   scroll, or use the arrows and dots. Shows ~1 card on phones, 2 on
+   tablets, 3 on desktop. */
+.services-grid {
+    display: flex;
+    gap: 1.25rem;
+    margin-inline: calc(var(--gutter) * -1);
+    padding: 0.75rem var(--gutter) 2.5rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--gutter);
+    scrollbar-width: none;
+}
+
+.services-grid::-webkit-scrollbar {
+    display: none;
+}
+
+.service-card {
+    flex: 0 0 85%;
+    scroll-snap-align: start;
+}
+
+.services-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.services-dots {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.services-dot {
+    width: 0.65rem;
+    height: 0.65rem;
+    padding: 0;
+    background-color: rgba(11, 31, 36, 0.2);
+    border: 0;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: width var(--transition), background-color var(--transition);
+}
+
+.services-dot.is-active {
+    width: 1.75rem;
+    background-color: var(--color-maroon);
+}
+
+.services-pause {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    margin-left: 0.25rem;
+    color: var(--color-maroon);
+    background: none;
+    border: 1px solid rgba(11, 31, 36, 0.25);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.services-pause .icon {
+    width: 1rem;
+    height: 1rem;
+}
+
+.services-play-icon,
+.services-list.is-paused .services-pause-icon {
+    display: none;
+}
+
+.services-list.is-paused .services-play-icon {
+    display: block;
+}
+
+@media (min-width: 40rem) {
+    .service-card {
+        flex-basis: calc((100% - 1.25rem) / 2);
+    }
+}
+
+@media (min-width: 64rem) {
+    .services-list {
+        padding-top: 4rem;
+    }
+
+    .services-grid {
+        gap: 1.75rem;
+        margin-top: 3.5rem;
+        margin-inline: 0;
+        padding-inline: 0;
+        scroll-padding-inline: 0;
+    }
+
+    .service-card {
+        flex-basis: calc((100% - 3.5rem) / 3);
+    }
+}
+
+/* Final CTA: its curved top is painted in this section's colour */
+.final-cta .divider-arc {
+    --divider-color: var(--color-mist);
+}

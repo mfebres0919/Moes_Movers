@@ -530,6 +530,10 @@ h4 {
     --texture-image: url("../images/svg-backgrounds/wobbling-particles.svg");
 }
 
+.has-texture--constellation {
+    --texture-image: url("../images/svg-backgrounds/endless-constellation-teal.svg");
+}
+
 .has-texture::before {
     content: "";
     position: absolute;
@@ -1365,9 +1369,20 @@ textarea.form-control {
    Footer
    ========================================================================== */
 .site-footer {
+    position: relative;
     padding-top: 3rem;
     color: var(--color-gray);
     background-color: var(--color-white);
+}
+
+/* Same curved divider as the final CTA, hanging into the top of the footer
+   in the dark colour of the section above it */
+.site-footer:has(.divider-arc-footer) {
+    padding-top: calc(clamp(3rem, 8vw, 7rem) + 3rem);
+}
+
+.divider-arc-footer {
+    --divider-color: var(--color-black);
 }
 
 .footer-grid {
@@ -1809,3 +1824,1143 @@ textarea.form-control {
     border-top: 1px solid var(--color-cream);
 }
 
+/* ==========================================================================
+   Contact section (shared: homepage and contact page)
+   Dark streak background; a panel with the photo info card on the left and
+   the general-questions form on the right. The panel itself is white with
+   dark form text; the info card keeps its dark photo as a feature card.
+   ========================================================================== */
+.contact {
+    position: relative;
+    overflow-x: clip;
+    padding: calc(clamp(2.5rem, 7vw, 6.5rem) + 2.5rem) 0 calc(clamp(2.5rem, 7vw, 6.5rem) + 3rem);
+    /* Animated rain streaks, recoloured to the brand palette */
+    background: var(--color-black) url("../images/svg-backgrounds/raining-streaks.svg") center / cover no-repeat;
+}
+
+.contact-panel {
+    display: grid;
+    gap: 1.25rem;
+    padding: 0.75rem;
+    color: var(--color-white);
+    background-color: rgba(27, 27, 27, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0;
+    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(6px);
+}
+
+.contact-info {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    border-radius: 0;
+}
+
+.contact-info-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+}
+
+.contact-info-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.contact-info::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: linear-gradient(160deg, rgba(11, 31, 36, 0.88) 15%, rgba(6, 47, 55, 0.86) 60%, rgba(10, 70, 81, 0.8));
+}
+
+.contact-info-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 2.25rem 1.75rem;
+}
+
+.contact-info-title {
+    font-size: clamp(2.5rem, 3vw + 1.5rem, 3.75rem);
+}
+
+.contact-info-text {
+    max-width: 24rem;
+    margin-top: 0.75rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.contact-list {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+}
+
+.contact-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    line-height: 1.5;
+}
+
+.contact-list .icon {
+    width: 1.6rem;
+    height: 1.6rem;
+    margin-top: 0.1rem;
+    stroke-width: 1.6;
+    color: var(--color-white);
+}
+
+.contact-list a {
+    transition: color var(--transition);
+}
+
+.contact-list a:hover {
+    color: #E2E41D;
+}
+
+.contact-info :focus-visible {
+    outline-color: var(--color-white);
+}
+
+.contact-social {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: auto;
+    padding-top: 2.5rem;
+}
+
+.contact-social a {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1.5px solid rgba(255, 255, 255, 0.85);
+    border-radius: 50%;
+    transition: background-color var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.contact-social a:hover {
+    color: var(--color-white);
+    background-color: var(--color-red);
+    border-color: var(--color-red);
+}
+
+.contact-social .icon {
+    width: 1.15rem;
+    height: 1.15rem;
+}
+
+.contact-circle {
+    position: absolute;
+    z-index: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: circle-float 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .contact-circle {
+        animation: none;
+    }
+}
+
+.contact-circle-small {
+    right: 4.5rem;
+    bottom: 5.5rem;
+    width: 7rem;
+    height: 7rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    animation-duration: 4.5s;
+}
+
+.contact-circle-large {
+    right: -4rem;
+    bottom: -4.5rem;
+    width: 13rem;
+    height: 13rem;
+    background-color: rgba(226, 228, 29, 0.18);
+    animation-duration: 7s;
+    animation-delay: -2.5s; /* starts mid-float so the two never move in step */
+}
+
+.contact-form-wrap {
+    position: relative;
+    padding: 1.5rem 1rem 2rem;
+}
+
+.contact-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem 1.1rem;
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.85);
+    background-color: rgba(14, 96, 112, 0.12);
+    border-left: 3px solid var(--color-red);
+}
+
+.contact-note .icon {
+    margin-top: 0.15rem;
+    color: var(--color-red-bright);
+}
+
+.contact-note a {
+    font-weight: 600;
+    color: var(--color-white);
+    text-decoration: underline;
+    text-decoration-color: var(--color-red-bright);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}
+
+.contact-note a:hover {
+    color: #E2E41D;
+}
+
+.contact-form {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 1.75rem;
+    margin-top: 2rem;
+}
+
+.contact-form[hidden] {
+    display: none;
+}
+
+.contact-field {
+    display: grid;
+    gap: 0.4rem;
+}
+
+.contact-field label {
+    font-weight: 600;
+}
+
+.contact-field .form-optional {
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.contact-field input,
+.contact-field select,
+.contact-field textarea {
+    width: 100%;
+    padding: 0.6rem 0;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-white);
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 0;
+    transition: border-color var(--transition);
+}
+
+.contact-field input::placeholder,
+.contact-field textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.contact-field input:focus,
+.contact-field select:focus,
+.contact-field textarea:focus {
+    outline: none;
+    border-bottom-color: var(--color-red-bright);
+    box-shadow: 0 1px 0 0 var(--color-red-bright);
+}
+
+.contact-field :user-invalid {
+    border-bottom-color: #E2E41D;
+}
+
+.contact-field select {
+    appearance: none;
+    padding-right: 2rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.25rem center;
+    background-size: 1.1rem;
+    cursor: pointer;
+}
+
+.contact-field select:invalid {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.contact-field option {
+    color: var(--color-black);
+    background-color: var(--color-white);
+}
+
+.contact-field textarea {
+    min-height: 7rem;
+    resize: vertical;
+}
+
+.contact-submit .btn {
+    width: 100%;
+}
+
+.contact-success {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    justify-items: center;
+    gap: 0.5rem;
+    padding: 3rem 1rem;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.contact-success[hidden] {
+    display: none;
+}
+
+.contact-success:focus {
+    outline: none;
+}
+
+.contact-success .icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    color: var(--color-red-bright);
+}
+
+.contact-success-title {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 2.5rem;
+    color: var(--color-white);
+}
+
+.contact-truck {
+    display: none;
+    position: absolute;
+    right: 2.5rem;
+    bottom: 2rem;
+    width: 15rem;
+    pointer-events: none;
+}
+
+.contact-truck picture {
+    display: block;
+    animation: truck-bob 0.6s ease-in-out infinite alternate;
+}
+
+.contact-truck img {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 0.6rem 0.6rem rgba(0, 0, 0, 0.45));
+}
+
+.contact-road {
+    display: block;
+    height: 3px;
+    margin-top: 0.35rem;
+    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.3) 55%, transparent 55%);
+    background-size: 1.75rem 3px;
+    mask-image: linear-gradient(90deg, transparent, #000 20%, #000 80%, transparent);
+    animation: road-scroll 0.8s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .contact-truck picture,
+    .contact-road {
+        animation: none;
+    }
+}
+
+@media (min-width: 40rem) {
+    .contact-form {
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 2rem;
+    }
+
+    .contact-field-full,
+    .contact-submit {
+        grid-column: 1 / -1;
+    }
+
+    .contact-submit .btn {
+        width: auto;
+    }
+
+    .contact-form-wrap {
+        padding: 2rem 1.75rem 2.5rem;
+    }
+}
+
+@media (min-width: 64rem) {
+    .contact {
+        padding: calc(clamp(2.5rem, 7vw, 6.5rem) + 3.5rem) 0 calc(clamp(2.5rem, 7vw, 6.5rem) + 4rem);
+    }
+
+    .contact-panel {
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+        gap: 2rem;
+        padding: 1.25rem;
+    }
+
+    .contact-info-content {
+        min-height: 40rem;
+        padding: 3.5rem 3rem;
+    }
+
+    .contact-form-wrap {
+        padding: 3rem 2.5rem 9rem 1.5rem;
+    }
+
+    .contact-truck {
+        display: block;
+    }
+}
+
+.contact-panel {
+    color: var(--color-black);
+    background-color: var(--color-white);
+    border-color: rgba(11, 31, 36, 0.08);
+    box-shadow: 0 1.5rem 3.5rem rgba(0, 0, 0, 0.35);
+}
+
+.contact-info {
+    color: var(--color-white);
+}
+
+.contact-note {
+    color: var(--color-gray);
+    background-color: var(--color-mist);
+}
+
+.contact-note .icon {
+    color: var(--color-red);
+}
+
+.contact-note a {
+    color: var(--color-maroon);
+    text-decoration-color: var(--color-yellow);
+}
+
+.contact-note a:hover {
+    color: var(--color-red);
+}
+
+.contact-field label {
+    color: var(--color-black);
+}
+
+.contact-field .form-optional {
+    color: var(--color-gray);
+}
+
+.contact-field input,
+.contact-field select,
+.contact-field textarea {
+    color: var(--color-black);
+    border-bottom-color: rgba(11, 31, 36, 0.2);
+}
+
+.contact-field input::placeholder,
+.contact-field textarea::placeholder,
+.contact-field select:invalid {
+    color: rgba(11, 31, 36, 0.45);
+}
+
+.contact-field input:focus,
+.contact-field select:focus,
+.contact-field textarea:focus {
+    border-bottom-color: var(--color-red);
+    box-shadow: 0 1px 0 0 var(--color-red);
+}
+
+.contact-field select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230B1F24' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+.contact-success {
+    color: var(--color-gray);
+}
+
+.contact-success .icon {
+    color: var(--color-red);
+}
+
+.contact-success-title {
+    color: var(--color-maroon);
+}
+
+.contact-road {
+    background-image: linear-gradient(90deg, rgba(11, 31, 36, 0.3) 55%, transparent 55%);
+}
+
+/* ==========================================================================
+   Page hero (inner pages: Contact, About, Gallery, Services)
+   A shorter, centered version of the homepage hero: one photo under a dark
+   teal overlay, a breadcrumb, the page title, and a peaked divider into
+   the first section. The header sits on top of it, so the top padding
+   clears the top bar and menu.
+   ========================================================================== */
+.page-hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding: 10.5rem 0 calc(clamp(2.5rem, 7vw, 6.5rem) + 3.5rem);
+    color: var(--color-white);
+    background-color: var(--color-black);
+}
+
+.page-hero-bg,
+.page-hero-bg img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.page-hero-bg {
+    z-index: -1;
+}
+
+.page-hero-bg img {
+    object-fit: cover;
+    object-position: center 40%;
+}
+
+.page-hero-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 60% 70% at 50% 50%, rgba(11, 31, 36, 0.85) 0%, rgba(11, 31, 36, 0.6) 100%),
+        linear-gradient(180deg, rgba(11, 31, 36, 0.55) 0%, rgba(11, 31, 36, 0) 35%, rgba(11, 31, 36, 0.7) 100%);
+}
+
+.page-hero-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Breadcrumb: Home / Current page (centered with the rest of the page hero) */
+.breadcrumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.breadcrumb li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-yellow);
+}
+
+.breadcrumb li + li::before {
+    content: "";
+    width: 1.25rem;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.45);
+}
+
+.breadcrumb a {
+    color: rgba(255, 255, 255, 0.8);
+    transition: color var(--transition);
+}
+
+.breadcrumb a:hover {
+    color: var(--color-white);
+}
+
+.page-hero-title {
+    max-width: 20ch;
+    margin-top: 1.25rem;
+    font-size: clamp(3rem, 6vw + 1rem, 6rem);
+    line-height: 1.02;
+    letter-spacing: 0.01em;
+    text-shadow: 0 0.25rem 1.5rem rgba(0, 0, 0, 0.3);
+}
+
+.page-hero-accent {
+    display: block;
+    color: var(--color-yellow);
+}
+
+.page-hero-text {
+    max-width: 38rem;
+    margin-top: 1.25rem;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.page-hero-actions {
+    display: grid;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 24rem;
+    margin-top: 2rem;
+}
+
+@media (min-width: 40rem) {
+    .page-hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: auto;
+        max-width: none;
+    }
+}
+
+@media (min-width: 64rem) {
+    .page-hero {
+        padding-top: 13rem;
+    }
+
+    .page-hero-text {
+        font-size: 1.125rem;
+    }
+}
+
+/* Contact page: the hero's divider leads straight into the section */
+.contact-page {
+    padding-top: 3rem;
+}
+
+@media (min-width: 64rem) {
+    .contact-page {
+        padding-top: 4rem;
+    }
+}
+
+/* ==========================================================================
+   Final call to action (shared: homepage and inner pages)
+   Curved divider on top, the truck on the left with two angled stripes,
+   and the closing pitch with Get a Free Quote / Book a Free Walkthrough.
+   ========================================================================== */
+.final-cta {
+    position: relative;
+    padding-top: clamp(3rem, 8vw, 7rem);
+    overflow: hidden;
+    color: var(--color-white);
+    background-color: var(--color-black);
+    background-image: radial-gradient(ellipse 45% 70% at 25% 50%, rgba(14, 96, 112, 0.18), transparent 70%);
+}
+
+.final-cta-panel {
+    position: relative;
+    display: grid;
+    gap: 2rem;
+    padding-block: 4rem;
+}
+
+.final-cta-visual {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: 15rem;
+}
+
+.final-cta-stripe {
+    position: absolute;
+    top: -1.5rem;
+    bottom: -1.5rem;
+    width: 26%;
+    transform: skewX(-18deg);
+}
+
+.final-cta-stripe-maroon {
+    left: 16%;
+    background-image: linear-gradient(180deg, var(--color-maroon), var(--color-maroon-dark));
+}
+
+.final-cta-stripe-red {
+    left: 52%;
+    background-image: linear-gradient(180deg, var(--color-red-bright), var(--color-red));
+}
+
+.final-cta-truck {
+    position: relative;
+    z-index: 1;
+    width: 90%; /* leaves room for the drift so it never clips */
+    max-width: 34rem;
+    animation: truck-drift 7s ease-in-out infinite;
+}
+
+.final-cta-truck img {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 1.5rem 1.5rem rgba(0, 0, 0, 0.5));
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .final-cta-truck {
+        animation: none;
+    }
+}
+
+.final-cta-content .section-title {
+    font-size: clamp(2.5rem, 4vw + 1rem, 4rem);
+}
+
+.final-cta-actions {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 2rem;
+}
+
+@media (min-width: 40rem) {
+    .final-cta-actions {
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+@media (min-width: 64rem) {
+    .final-cta-panel {
+        grid-template-columns: 1.1fr 1fr;
+        align-items: center;
+        gap: 3.5rem;
+        padding-block: 6rem;
+    }
+
+    .final-cta-visual {
+        min-height: 28rem;
+    }
+
+    .final-cta-visual {
+        justify-items: end;
+    }
+
+    .final-cta-truck {
+        width: 118%;
+        max-width: 46rem;
+        margin-right: 1.5rem;
+    }
+
+    .final-cta-stripe {
+        top: -6rem;
+        bottom: -6rem;
+    }
+}
+
+/* ==========================================================================
+   Reviews (shared: homepage and About)
+   Two rows of review cards drifting in opposite directions on a loop
+   (global.js duplicates the cards), with the Google reviews link below.
+   ========================================================================== */
+.reviews {
+    position: relative;
+    padding: calc(clamp(2.5rem, 7vw, 6.5rem) + 2.5rem) 0 5rem;
+    background-color: var(--color-white);
+    overflow: hidden;
+}
+
+.reviews-header {
+    max-width: 46rem;
+    margin: 0 auto 3rem;
+    text-align: center;
+}
+
+.reviews-header .section-eyebrow {
+    justify-content: center;
+}
+
+.reviews-header .section-text {
+    margin-top: 1rem;
+}
+
+.reviews-track {
+    display: flex;
+    gap: 1.25rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 0.5rem max(var(--gutter), calc((100vw - var(--container-max)) / 2 + var(--gutter)));
+    scroll-padding-inline: max(var(--gutter), calc((100vw - var(--container-max)) / 2 + var(--gutter)));
+    scrollbar-width: none;
+}
+
+.reviews-track::-webkit-scrollbar {
+    display: none;
+}
+
+.reviews-track:focus-visible {
+    outline: 2px solid var(--color-red);
+    outline-offset: 4px;
+}
+
+.review-card {
+    flex: 0 0 min(86vw, 26rem);
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    border: 1px solid rgba(11, 31, 36, 0.1);
+    border-radius: 0;
+    background-color: var(--color-offwhite);
+    scroll-snap-align: start;
+    transition: border-color var(--transition), transform var(--transition);
+}
+
+.review-card:hover {
+    border-color: var(--color-red);
+    transform: translateY(-4px);
+}
+
+.review-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.review-avatar {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.review-stars {
+    display: flex;
+    gap: 0.2rem;
+}
+
+.review-stars .icon {
+    width: 1.15rem;
+    height: 1.15rem;
+    fill: var(--color-red);
+}
+
+.review-text {
+    flex: 1;
+    margin: 1.5rem 0 0;
+    color: var(--color-gray);
+    font-size: 1rem;
+    line-height: 1.75;
+}
+
+.review-text p {
+    margin: 0;
+}
+
+.review-author {
+    margin-top: 1.75rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(11, 31, 36, 0.12);
+}
+
+.review-name {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    letter-spacing: 0.03em;
+    color: var(--color-black);
+}
+
+.review-place {
+    font-size: 0.875rem;
+    color: var(--color-gray);
+}
+
+.reviews-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+    margin-top: 2rem;
+}
+
+.reviews-controls {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.google-reviews {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.75rem 1.25rem 0.75rem 0.9rem;
+    border: 1px solid rgba(11, 31, 36, 0.14);
+    border-radius: 0;
+    background-color: var(--color-white);
+    color: var(--color-black);
+    font-size: 0.9375rem;
+    box-shadow: 0 0.5rem 1.5rem rgba(11, 31, 36, 0.08);
+    transition: border-color var(--transition), transform var(--transition);
+}
+
+.google-reviews:hover {
+    border-color: var(--color-red);
+    transform: translateY(-2px);
+}
+
+.google-g {
+    width: 1.75rem;
+    height: 1.75rem;
+    flex: none;
+}
+
+.google-reviews > span {
+    display: grid;
+    line-height: 1.3;
+}
+
+.google-stars {
+    color: #FBBC04;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+}
+
+.google-reviews .icon {
+    width: 1rem;
+    height: 1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reviews-track { scroll-behavior: auto; }
+}
+
+.reviews-carousel.is-looping {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.reviews-carousel.is-looping .reviews-track {
+    width: max-content;
+    overflow: visible;
+    scroll-snap-type: none;
+    padding-inline: 0;
+    animation: reviews-drift 120s linear infinite;
+}
+
+.reviews-carousel.is-looping .review-card {
+    margin-right: 1.25rem;
+}
+
+.reviews-carousel.is-looping .reviews-track {
+    gap: 0;
+}
+
+.reviews-carousel.is-looping:hover .reviews-track,
+.reviews-carousel.is-looping:active .reviews-track {
+    animation-play-state: paused;
+}
+
+.reviews-footer {
+    justify-content: center;
+}
+
+.reviews-track {
+    padding-block: 1.5rem 2rem;
+}
+
+.review-card {
+    position: relative;
+    overflow: hidden;
+    border: 0;
+    border-radius: 0;
+    background-color: var(--color-white);
+    box-shadow: 0 1rem 2.5rem rgba(11, 31, 36, 0.1), 0 0 0 1px rgba(11, 31, 36, 0.06);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.review-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--color-red), var(--color-yellow));
+}
+
+.review-card::after {
+    content: "\201C";
+    position: absolute;
+    top: 0.5rem;
+    right: 1.5rem;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 8rem;
+    line-height: 1;
+    color: var(--color-yellow);
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+.review-card:hover {
+    border-color: transparent;
+    transform: translateY(-6px);
+    box-shadow: 0 1.5rem 3rem rgba(11, 31, 36, 0.16), 0 0 0 1px rgba(11, 31, 36, 0.06);
+}
+
+.review-top {
+    position: relative;
+    z-index: 1;
+    justify-content: flex-start;
+    gap: 1rem;
+}
+
+.review-avatar {
+    width: 3.75rem;
+    height: 3.75rem;
+    border: 3px solid var(--color-white);
+    box-shadow: 0 0 0 3px var(--color-yellow);
+}
+
+.review-stars .icon {
+    fill: #F2B705;
+}
+
+.review-text {
+    position: relative;
+    z-index: 1;
+    color: var(--color-black);
+    font-size: 1.0625rem;
+}
+
+.review-author {
+    border-top-color: rgba(11, 31, 36, 0.1);
+}
+
+.review-name {
+    color: var(--color-maroon);
+}
+
+.review-place {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.15rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-red);
+}
+
+.review-place .icon {
+    width: 1rem;
+    height: 1rem;
+}
+
+.review-card:nth-child(even) {
+    background: linear-gradient(160deg, var(--color-red), var(--color-maroon-dark));
+    box-shadow: 0 1rem 2.5rem rgba(6, 47, 55, 0.3);
+}
+
+.review-card:nth-child(even)::before {
+    background: var(--color-yellow);
+}
+
+.review-card:nth-child(even)::after {
+    opacity: 0.25;
+}
+
+.review-card:nth-child(even) .review-avatar {
+    border-color: var(--color-maroon);
+}
+
+.review-card:nth-child(even) .review-text {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.review-card:nth-child(even) .review-author {
+    border-top-color: rgba(255, 255, 255, 0.15);
+}
+
+.review-card:nth-child(even) .review-name {
+    color: var(--color-white);
+}
+
+.review-card:nth-child(even) .review-place {
+    color: var(--color-yellow);
+}
+
+.reviews-rows {
+    display: grid;
+    gap: 1.25rem;
+}
+
+.reviews-carousel--reverse.is-looping .reviews-track {
+    animation-direction: reverse;
+}
+
+.reviews-rows .review-card {
+    flex: 0 0 auto;
+    width: min(80vw, 21rem);
+    max-width: min(80vw, 21rem);
+    padding: 1.4rem 1.5rem;
+}
+
+.reviews-rows .review-top {
+    margin-bottom: 0.25rem;
+}
+
+.reviews-rows .review-avatar {
+    width: 2.75rem;
+    height: 2.75rem;
+}
+
+.reviews-rows .review-text p {
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.reviews-rows .review-author {
+    margin-top: 1rem;
+    padding-top: 0.85rem;
+}
+
+.reviews-rows .review-text {
+    margin-top: 1rem;
+}
+
+.review-initials {
+    display: grid;
+    place-items: center;
+    flex: none;
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    letter-spacing: 0.04em;
+    color: var(--color-black);
+    background-color: var(--color-red-bright);
+}
+
+@keyframes reviews-drift {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+/* Current service inside the Services dropdown (set by global.js) */
+.dropdown a.is-current {
+    font-weight: 600;
+    color: var(--color-red);
+    box-shadow: inset 3px 0 0 var(--color-yellow);
+}
+
+@media (min-width: 80rem) {
+    .dropdown a.is-current {
+        background-color: var(--color-offwhite);
+    }
+}

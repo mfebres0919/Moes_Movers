@@ -199,6 +199,21 @@
     // [selector, direction, stagger in seconds between matches, restart the stagger every N matches]
     const groups = [
         [".hero-eyebrow, .hero-title, .hero-text, .hero-actions, .hero-badges, .hero-controls", "up", 0.12],
+        [".page-hero-content > *", "up", 0.12],
+        [".about-story-content > *", "left", 0.08],
+        [".about-story-photo", "right", 0],
+        [".about-accordion-item", "up", 0.1],
+        [".about-features", "up", 0],
+        [".services-list-header > *", "up", 0.1],
+        [".services-grid", "up", 0],
+        [".sd-main > *", "up", 0.05, 4],
+        [".sd-card", "left", 0.08],
+        [".sd-benefit", "up", 0.1],
+        [".services-controls", "up", 0],
+        [".about-process-header > *", "up", 0.1],
+        [".process-step", "up", 0.15],
+        [".about-crew-intro > *", "left", 0.08],
+        [".crew-photo", "zoom", 0.08],
         // Animate the wrapper, not the card: moving the card itself would lift its red glow (::before) on top of it
         [".quote > .container", "up", 0],
         [".about-media", "left", 0],
@@ -283,4 +298,110 @@
     } else {
         start();
     }
+})();
+
+/* ---------- Contact form (general questions; homepage and contact page) ---------- */
+(function () {
+    const form = document.getElementById("contact-form");
+    if (!form) return;
+
+    const success = document.getElementById("contact-success");
+    const successName = document.getElementById("contact-success-name");
+
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        // Show the browser's message on the first field that needs attention
+        const invalid = [...form.elements].find((field) => field.willValidate && !field.checkValidity());
+        if (invalid) {
+            invalid.reportValidity();
+            return;
+        }
+
+        successName.textContent = document.getElementById("contact-first").value.trim() || "neighbor";
+        form.hidden = true;
+        success.hidden = false;
+        success.focus();
+    });
+})();
+
+/* ---------- Reviews: two rows, continuous scroll ----------
+   Each row ([data-reviews]) runs on its own; the second slides the other
+   way (CSS). Each track holds two identical halves and CSS slides it left by exactly
+   one half (-50%), so it loops seamlessly. Each half repeats the review
+   cards as many times as needed to be wider than the screen, so the end of
+   the track never comes into view, even on very wide monitors. The loop
+   time is set from the half's width so the speed stays the same (40px a
+   second) at any size. Rebuilt when the window is resized. Copies are
+   hidden from screen readers. Pauses on hover and while a card is pressed.
+   Reduced motion: no animation; the row scrolls by hand. */
+document.querySelectorAll("[data-reviews]").forEach((root) => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const track = root.querySelector(".reviews-track");
+    const originals = [...track.children];
+    const SPEED = 40; // px per second
+
+    const addCopy = (card) => {
+        const copy = card.cloneNode(true);
+        copy.setAttribute("aria-hidden", "true");
+        copy.dataset.copy = "";
+        track.appendChild(copy);
+    };
+
+    function build() {
+        track.querySelectorAll("[data-copy]").forEach((copy) => copy.remove());
+        root.classList.add("is-looping");
+        // Width of one set, measured from the cards themselves (Safari reports
+        // the wrong scrollWidth for this track)
+        const setWidth = originals.reduce((sum, card) => {
+            const style = getComputedStyle(card);
+            return sum + card.getBoundingClientRect().width + parseFloat(style.marginRight);
+        }, 0);
+        // Sets per half: enough to cover the screen plus one more card
+        const perHalf = Math.max(1, Math.ceil((window.innerWidth + 480) / setWidth));
+        for (let i = 1; i < perHalf * 2; i++) originals.forEach(addCopy);
+        track.style.animationDuration = `${(setWidth * perHalf) / SPEED}s`;
+    }
+
+    build();
+    let lastWidth = window.innerWidth;
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        if (window.innerWidth === lastWidth) return; // ignore phone toolbar show/hide
+        lastWidth = window.innerWidth;
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(build, 200);
+    });
+});
+
+/* ---------- Current page in the menu ----------
+   Highlights the menu link for the page being viewed, so every page (and any
+   new one) marks itself automatically. On a service detail page, "Services"
+   is highlighted and the matching service is marked in the dropdown. */
+(function () {
+    const menu = document.getElementById("site-menu");
+    if (!menu) return;
+
+    const file = (url) => new URL(url, location.href).pathname.split("/").pop() || "index.html";
+    const here = file(location.href);
+    if (here === "index.html") return; // the homepage marks Home in its HTML
+
+    const navLinks = [...menu.querySelectorAll(".nav-link")];
+    const isServicePage = here.startsWith("service-");
+    const target = navLinks.find((link) => file(link.href) === (isServicePage ? "services.html" : here) && !link.hash);
+    if (!target) return;
+
+    navLinks.forEach((link) => {
+        link.classList.toggle("is-active", link === target);
+        if (link !== target) link.removeAttribute("aria-current");
+    });
+    if (!isServicePage) target.setAttribute("aria-current", "page");
+    else target.removeAttribute("aria-current");
+
+    menu.querySelectorAll(".dropdown a").forEach((link) => {
+        if (file(link.href) === here && !link.hash) {
+            link.classList.add("is-current");
+            link.setAttribute("aria-current", "page");
+        }
+    });
 })();

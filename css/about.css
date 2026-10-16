@@ -1,0 +1,849 @@
+/* ==========================================================================
+   Moe's Movers — About page
+   Shared header, page hero, and footer live in global.css.
+   ========================================================================== */
+
+/* ---------- Who we are: story (left), photo + Mission / Vision / Values (right) ---------- */
+.about-story {
+    padding: 3rem 0 5rem;
+    overflow-x: clip; /* the photo slides in from the right; keep it from widening the page */
+    background-color: var(--color-mist);
+}
+
+.about-story-grid {
+    display: grid;
+    gap: 2.5rem;
+}
+
+.about-story-content .section-title {
+    position: relative;
+    z-index: 0; /* keeps the underline behind the words but above the background */
+    margin-top: 0.75rem;
+}
+
+.about-story-content .section-text {
+    margin-top: 1.25rem;
+}
+
+/* Brush-stroke underline under "like our own": wipes in left to right
+   while fading in, once the heading scrolls into view (about.js) */
+.ink-mark {
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.ink-mark-line {
+    position: absolute;
+    left: -2%;
+    bottom: -0.12em;
+    z-index: -1;
+    width: 104%;
+    height: 0.32em;
+    overflow: visible;
+    fill: var(--color-yellow);
+    pointer-events: none;
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 1.1s cubic-bezier(0.4, 0, 0.2, 1) 0.35s, opacity 0.6s ease 0.35s;
+}
+
+.ink-mark.is-drawn .ink-mark-line {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ink-mark-line {
+        opacity: 1;
+        clip-path: none;
+        transition: none;
+    }
+}
+
+/* Founder sign-off: Moe's photo, name and title, a divider, then his rating */
+.about-signature {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.25rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(11, 31, 36, 0.12);
+}
+
+.about-signature-photo {
+    flex-shrink: 0;
+    width: 4rem;
+    height: 4rem;
+    padding: 3px;
+    background-color: var(--color-yellow);
+    border-radius: 50%;
+    box-shadow: 0 0.5rem 1.25rem rgba(11, 31, 36, 0.15);
+}
+
+.about-signature-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 2px solid var(--color-white);
+    border-radius: 50%;
+}
+
+.about-signature-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    font-size: 0.875rem;
+    color: var(--color-gray);
+}
+
+.about-signature-name {
+    font-family: var(--font-heading);
+    font-size: 2.25rem;
+    line-height: 1;
+    color: var(--color-maroon);
+}
+
+/* Vertical rule, then five stars */
+.about-signature-rating {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding-left: 1.25rem;
+    border-left: 2px solid rgba(11, 31, 36, 0.15);
+}
+
+.about-signature-stars {
+    display: flex;
+    gap: 0.15rem;
+    color: #F5B400;
+}
+
+.about-signature-stars .icon {
+    width: 1.15rem;
+    height: 1.15rem;
+}
+
+.about-signature-score {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-gray);
+}
+
+/* Photo of Moe with a yellow "543+ moves" tag */
+.about-story-photo {
+    position: relative;
+    margin: 0;
+}
+
+.about-story-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    box-shadow: var(--shadow-md);
+}
+
+.about-story-stat {
+    position: absolute;
+    left: 1rem;
+    bottom: -1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-black);
+    background-color: var(--color-yellow);
+    box-shadow: var(--shadow-md);
+}
+
+.about-story-stat strong {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0;
+}
+
+/* ---------- Mission / Vision / Values accordion ----------
+   Native <details>; about.js animates the height open and closed and
+   keeps one open at a time (.is-closing is set while one glides shut). */
+.about-accordion {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 2.75rem;
+}
+
+.about-accordion-item {
+    background-color: var(--color-white);
+    border: 1px solid rgba(11, 31, 36, 0.08);
+    border-left: 3px solid transparent;
+    box-shadow: 0 0.5rem 1.5rem rgba(11, 31, 36, 0.06);
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.about-accordion-item[open]:not(.is-closing) {
+    border-left-color: var(--color-yellow);
+    box-shadow: var(--shadow-md);
+}
+
+.about-accordion-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem 1.25rem;
+    cursor: pointer;
+    list-style: none;
+}
+
+.about-accordion-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.about-accordion-item summary:focus-visible {
+    outline: 2px solid var(--color-red);
+    outline-offset: -2px;
+}
+
+.about-accordion-lead {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+/* Icon tile beside each title: teal, turning yellow when the item is open */
+.about-accordion-badge {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    color: var(--color-maroon);
+    background-color: rgba(14, 96, 112, 0.1);
+    transition: background-color var(--transition), color var(--transition);
+}
+
+.about-accordion-badge .icon {
+    width: 1.35rem;
+    height: 1.35rem;
+}
+
+.about-accordion-item[open]:not(.is-closing) .about-accordion-badge {
+    color: var(--color-black);
+    background-color: rgba(226, 228, 29, 0.6);
+}
+
+.about-accordion-title {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    color: var(--color-black);
+}
+
+.about-accordion-icon {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    color: var(--color-white);
+    background-color: var(--color-maroon);
+    transition: background-color var(--transition), color var(--transition);
+}
+
+.about-accordion-icon .icon {
+    width: 1.1rem;
+    height: 1.1rem;
+    transition: transform var(--transition);
+}
+
+.about-accordion-item[open]:not(.is-closing) .about-accordion-icon {
+    color: var(--color-black);
+    background-color: var(--color-yellow);
+}
+
+.about-accordion-item[open]:not(.is-closing) .about-accordion-icon .icon {
+    transform: rotate(180deg);
+}
+
+.about-accordion-body {
+    padding: 0 1.25rem 1.35rem;
+    color: var(--color-gray);
+    line-height: 1.7;
+}
+
+.about-accordion-points {
+    display: grid;
+    gap: 0.6rem;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.about-accordion-points li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.9375rem;
+    color: var(--color-black);
+}
+
+.about-accordion-points .icon {
+    flex-shrink: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+    padding: 0.2rem;
+    color: var(--color-black);
+    background-color: var(--color-yellow);
+}
+
+.about-license {
+    display: block;
+    margin-top: 0.15rem;
+    font-size: 0.75rem;
+    color: var(--color-gray);
+}
+
+/* ---------- Highlights strip under the story ----------
+   A slow, continuous marquee: two identical lists each slide one full
+   width left, so the loop never shows a gap. Pauses on hover; with
+   reduced motion it becomes a strip you swipe or scroll by hand. */
+.about-features {
+    display: flex;
+    margin-top: 4rem;
+    padding-top: 2.5rem;
+    overflow: hidden;
+    border-top: 1px solid rgba(11, 31, 36, 0.12);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.about-features-list {
+    display: flex;
+    flex-shrink: 0;
+    gap: 3rem;
+    margin: 0;
+    padding: 0 3rem 0 0;
+    list-style: none;
+    animation: about-features-scroll 55s linear infinite;
+}
+
+.about-features:hover .about-features-list {
+    animation-play-state: paused;
+}
+
+@keyframes about-features-scroll {
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .about-features {
+        overflow-x: auto;
+        -webkit-mask-image: none;
+        mask-image: none;
+    }
+
+    .about-features-list {
+        animation: none;
+    }
+
+    .about-features-list[aria-hidden] {
+        display: none;
+    }
+}
+
+.about-feature {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: flex-start;
+    gap: 1.1rem;
+    width: min(78vw, 22rem);
+}
+
+/* Yellow blob behind each icon, like a highlighter swipe */
+.about-feature-icon {
+    position: relative;
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 4rem;
+    height: 4rem;
+    color: var(--color-maroon);
+}
+
+.about-feature-icon::before {
+    content: "";
+    position: absolute;
+    inset: 0.2rem 0.6rem 0.6rem 0.2rem;
+    z-index: 0;
+    background-color: rgba(226, 228, 29, 0.55);
+    border-radius: 45% 55% 50% 50% / 55% 45% 55% 45%;
+}
+
+.about-feature-icon .icon {
+    position: relative;
+    width: 2.1rem;
+    height: 2.1rem;
+    stroke-width: 1.6;
+}
+
+.about-feature-title {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+    color: var(--color-black);
+}
+
+.about-feature-text {
+    margin-top: 0.35rem;
+    color: var(--color-gray);
+    line-height: 1.6;
+}
+
+@media (min-width: 48rem) {
+    .about-story {
+        padding: 4rem 0 6.5rem;
+    }
+
+}
+
+@media (min-width: 64rem) {
+    .about-story {
+        padding: 5rem 0 8rem;
+    }
+
+    .about-story-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        align-items: start;
+        gap: 5rem;
+    }
+
+    .about-story-content {
+        position: sticky;
+        top: 8rem;
+    }
+}
+
+/* ==========================================================================
+   Our process: dark band with a constellation texture. Four steps joined
+   by a dashed route; a small truck drives along it on a loop.
+   ========================================================================== */
+.about-process {
+    --texture-opacity: 0.35;
+    padding: calc(clamp(2.5rem, 7vw, 6.5rem) + 3rem) 0 5rem;
+    color: var(--color-white);
+    background-color: var(--color-black);
+    overflow: hidden;
+}
+
+.about-process-header {
+    max-width: 40rem;
+    margin-inline: auto;
+    text-align: center;
+}
+
+.about-process-header .section-eyebrow {
+    justify-content: center;
+}
+
+.about-process-header .section-text {
+    margin: 1rem auto 0;
+}
+
+/* Dashed road with the truck (desktop only; the steps stack on phones) */
+.process-route {
+    display: none;
+}
+
+.process-steps {
+    position: relative;
+    display: grid;
+    gap: 1.25rem;
+    margin: 3rem 0 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
+}
+
+.process-step {
+    position: relative;
+    padding: 1.75rem 1.5rem 1.5rem;
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: transform var(--transition), border-color var(--transition), background-color var(--transition);
+}
+
+.process-step:hover {
+    border-color: var(--color-yellow);
+    background-color: rgba(255, 255, 255, 0.07);
+    transform: translateY(-4px);
+}
+
+/* Big outlined step number in the corner */
+.process-step-num {
+    position: absolute;
+    top: 0.75rem;
+    right: 1rem;
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.28);
+}
+
+.process-step-icon {
+    display: grid;
+    place-items: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    color: var(--color-black);
+    background-color: var(--color-yellow);
+}
+
+.process-step-icon .icon {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.process-step-title {
+    margin-top: 1.25rem;
+    font-family: var(--font-heading);
+    font-size: 1.65rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+}
+
+.process-step-text {
+    margin-top: 0.6rem;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.65;
+}
+
+.process-step-tag {
+    display: inline-block;
+    margin-top: 1.1rem;
+    padding: 0.3rem 0.7rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-yellow);
+    border: 1px solid rgba(226, 228, 29, 0.45);
+}
+
+@media (min-width: 48rem) {
+    .process-steps {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 64rem) {
+    .about-process {
+        padding: calc(clamp(2.5rem, 7vw, 6.5rem) + 4.5rem) 0 7rem;
+    }
+
+    .process-route {
+        position: relative;
+        display: block;
+        height: 3.5rem;
+        margin-top: 3rem;
+    }
+
+    .process-route-line {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0.4rem;
+        height: 2px;
+        background-image: linear-gradient(90deg, rgba(226, 228, 29, 0.7) 55%, transparent 55%);
+        background-size: 1.25rem 2px;
+    }
+
+    .process-route-truck {
+        position: absolute;
+        left: 0;
+        bottom: 0.3rem;
+        width: 6rem;
+        animation: process-truck 14s linear infinite;
+    }
+
+    .process-route-truck img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .process-steps {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        margin-top: 1.5rem;
+    }
+
+    /* Steps sit lower one by one, like stops along the route */
+    .process-step:nth-child(2) { margin-top: 1.5rem; }
+    .process-step:nth-child(3) { margin-top: 3rem; }
+    .process-step:nth-child(4) { margin-top: 4.5rem; }
+}
+
+@keyframes process-truck {
+    from { transform: translateX(-7rem); }
+    to   { transform: translateX(calc(var(--route-width, 80rem) + 1rem)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .process-route-truck {
+        animation: none;
+    }
+}
+
+/* ==========================================================================
+   Meet the crew: white section, intro + spinning badge on the left,
+   a photo mosaic on the right with captions that slide up on hover.
+   ========================================================================== */
+.about-crew {
+    position: relative;
+    padding: calc(clamp(2.5rem, 7vw, 6.5rem) + 3rem) 0 5rem;
+    background-color: var(--color-mist);
+    overflow: hidden;
+}
+
+/* Faint diagonal yellow stripes in the corner, echoing the truck graphic */
+.about-crew::before {
+    content: "";
+    position: absolute;
+    top: -6rem;
+    right: -6rem;
+    width: 22rem;
+    height: 22rem;
+    background: repeating-linear-gradient(135deg, rgba(226, 228, 29, 0.35) 0 1.25rem, transparent 1.25rem 2.75rem);
+    -webkit-mask-image: radial-gradient(circle at 70% 30%, #000, transparent 70%);
+    mask-image: radial-gradient(circle at 70% 30%, #000, transparent 70%);
+    pointer-events: none;
+}
+
+.about-crew-layout {
+    position: relative;
+    display: grid;
+    gap: 3rem;
+}
+
+.about-crew-intro {
+    position: relative;
+}
+
+.about-crew-intro .section-title {
+    margin-top: 0.75rem;
+}
+
+.about-crew-intro .section-text {
+    margin-top: 1.25rem;
+}
+
+.about-crew-actions {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 2rem;
+}
+
+@media (min-width: 40rem) {
+    .about-crew-actions {
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+/* Photo grid with the badge sitting over the corner where the four photos meet */
+.crew-gallery {
+    position: relative;
+}
+
+/* Rotating seal: yellow ring with dark lettering around a teal core,
+   like a sticker on the truck door */
+.crew-badge {
+    display: grid;
+    place-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    width: 8.5rem;
+    height: 8.5rem;
+    background-color: var(--color-yellow);
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    box-shadow: 0 0 0 0.4rem var(--color-mist), 0 1.25rem 2.5rem rgba(11, 31, 36, 0.3);
+}
+
+/* Thin dashed track between the lettering and the core */
+.crew-badge::before {
+    content: "";
+    position: absolute;
+    inset: 1.55rem;
+    border: 1.5px dashed rgba(11, 31, 36, 0.45);
+    border-radius: 50%;
+}
+
+.crew-badge-ring {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    animation: crew-badge-spin 22s linear infinite;
+}
+
+.crew-badge-ring text {
+    fill: var(--color-black);
+    font-family: var(--font-heading);
+    font-size: 15px;
+    letter-spacing: 0.06em;
+}
+
+.crew-badge-core {
+    position: relative;
+    display: grid;
+    place-items: center;
+    align-content: center;
+    gap: 0.15rem;
+    width: 4.4rem;
+    height: 4.4rem;
+    color: var(--color-yellow);
+    background-color: var(--color-maroon);
+    border-radius: 50%;
+    transition: transform 0.4s ease;
+}
+
+.crew-badge:hover .crew-badge-core {
+    transform: scale(1.06);
+}
+
+.crew-badge-icon {
+    width: 1.9rem;
+    height: 1.9rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.crew-badge-label {
+    font-size: 0.5625rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-white);
+}
+
+@keyframes crew-badge-spin {
+    to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .crew-badge-ring {
+        animation: none;
+    }
+}
+
+/* Even 2 x 2 grid; each tile has the photos' own 840 x 740 shape, so nothing is cropped */
+.crew-mosaic {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+}
+
+.crew-photo {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    aspect-ratio: 840 / 740;
+    background-color: var(--color-maroon);
+}
+
+.crew-photo picture,
+.crew-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.crew-photo img {
+    object-fit: cover;
+    transition: transform 0.7s ease;
+}
+
+.crew-photo:hover img {
+    transform: scale(1.06);
+}
+
+.crew-photo figcaption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 2rem 0.9rem 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-white);
+    background: linear-gradient(transparent, rgba(11, 31, 36, 0.85));
+    transform: translateY(100%);
+    transition: transform var(--transition);
+}
+
+.crew-photo:hover figcaption,
+.crew-photo:focus-within figcaption {
+    transform: none;
+}
+
+/* Touch screens can't hover, so captions always show */
+@media (hover: none) {
+    .crew-photo figcaption {
+        transform: none;
+    }
+}
+
+@media (min-width: 64rem) {
+    .about-crew {
+        padding: calc(clamp(2.5rem, 7vw, 6.5rem) + 4rem) 0 7rem;
+    }
+
+    .about-crew-layout {
+        grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+        align-items: center;
+        gap: 4.5rem;
+    }
+
+    .crew-mosaic {
+        gap: 1rem;
+    }
+}
+
+@media (min-width: 64rem) {
+    .crew-badge {
+        width: 10rem;
+        height: 10rem;
+    }
+
+    .crew-badge::before {
+        inset: 1.85rem;
+    }
+
+    .crew-badge-core {
+        width: 5.25rem;
+        height: 5.25rem;
+    }
+}

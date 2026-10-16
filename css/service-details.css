@@ -1,0 +1,663 @@
+/* ==========================================================================
+   Moe's Movers — Service detail pages (html/service-*.html)
+   Main content on the right, a sidebar on the left (desktop) that stays
+   pinned while the content scrolls, so there is never empty space beside it.
+   On phones the content comes first and the sidebar follows.
+   ========================================================================== */
+.sd {
+    padding: 3rem 0 calc(clamp(3rem, 8vw, 7rem) + 4rem);
+    background-color: var(--color-mist);
+}
+
+.sd-layout {
+    display: grid;
+    gap: 2.5rem;
+}
+
+/* ---------- Main column ---------- */
+.sd-main {
+    padding: 1.75rem 1.25rem;
+    background-color: var(--color-white);
+    box-shadow: 0 1rem 2.5rem rgba(11, 31, 36, 0.06);
+}
+
+.sd-title {
+    margin-top: 0.75rem;
+    font-size: clamp(2.25rem, 4vw, 3.25rem);
+    line-height: 1.05;
+}
+
+.sd-lead,
+.sd-text,
+.sd-feature p,
+.sd-benefit p {
+    color: var(--color-gray);
+    line-height: 1.75;
+}
+
+.sd-lead {
+    margin-top: 1rem;
+    font-size: 1.0625rem;
+}
+
+.sd-photo {
+    margin: 2rem 0 0;
+    overflow: hidden;
+}
+
+.sd-photo img,
+.sd-spotlight-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sd-photo img {
+    aspect-ratio: 16 / 9;
+    transition: transform 0.8s ease;
+}
+
+.sd-photo:hover img {
+    transform: scale(1.03);
+}
+
+/* Two short features side by side */
+.sd-features {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.sd-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+/* Yellow icon tile beside each feature */
+.sd-feature-icon {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    color: var(--color-black);
+    background-color: var(--color-yellow);
+    box-shadow: 0.3rem 0.3rem 0 rgba(14, 96, 112, 0.18);
+}
+
+.sd-feature-icon .icon,
+.sd-heading-icon .icon,
+.sd-card-icon .icon,
+.sd-spotlight-icon .icon {
+    width: 1.35rem;
+    height: 1.35rem;
+}
+
+.sd-feature-title {
+    font-size: 1.6rem;
+    line-height: 1.1;
+}
+
+.sd-feature p {
+    margin-top: 0.5rem;
+}
+
+/* Photo with a card laid over its corner */
+.sd-spotlight {
+    position: relative;
+    display: grid;
+    margin-top: 2.5rem;
+}
+
+.sd-spotlight-photo {
+    display: block;
+    overflow: hidden;
+}
+
+.sd-spotlight-photo img {
+    aspect-ratio: 16 / 10;
+}
+
+.sd-spotlight-card {
+    position: relative;
+    margin: -3rem 1rem 0;
+    padding: 1.5rem 1.5rem 0;
+    background-color: var(--color-white);
+    box-shadow: var(--shadow-md);
+}
+
+.sd-spotlight-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.85rem;
+    line-height: 1.05;
+}
+
+.sd-spotlight-card p {
+    margin-top: 0.6rem;
+    font-size: 0.9375rem;
+    color: var(--color-gray);
+    line-height: 1.65;
+}
+
+.sd-spotlight-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1.25rem -1.5rem 0;
+    padding: 0.9rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-white);
+    background-color: var(--color-black);
+    transition: background-color var(--transition), color var(--transition);
+}
+
+.sd-spotlight-link:hover {
+    color: var(--color-black);
+    background-color: var(--color-yellow);
+}
+
+.sd-spotlight-link .icon {
+    width: 1rem;
+    height: 1rem;
+}
+
+.sd-heading {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin-top: 3rem;
+    font-size: clamp(2rem, 3.5vw, 2.6rem);
+    line-height: 1.05;
+}
+
+.sd-text {
+    margin-top: 0.75rem;
+}
+
+/* ---------- FAQ accordion (service-details.js animates it) ---------- */
+.sd-faq {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.sd-faq-item {
+    background-color: var(--color-white);
+    border: 1px solid rgba(11, 31, 36, 0.1);
+    border-left: 3px solid transparent;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.sd-faq-item[open]:not(.is-closing) {
+    border-left-color: var(--color-yellow);
+    box-shadow: 0 0.75rem 2rem rgba(11, 31, 36, 0.08);
+}
+
+.sd-faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.15rem;
+    font-weight: 600;
+    color: var(--color-black);
+    cursor: pointer;
+    list-style: none;
+}
+
+.sd-faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.sd-faq-item summary:focus-visible {
+    outline: 2px solid var(--color-red);
+    outline-offset: -2px;
+}
+
+.sd-faq-q {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+.sd-faq-icon {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    color: var(--color-maroon);
+    background-color: rgba(226, 228, 29, 0.45);
+}
+
+.sd-faq-icon .icon {
+    width: 1.15rem;
+    height: 1.15rem;
+}
+
+.sd-faq-chevron .icon {
+    width: 1.1rem;
+    height: 1.1rem;
+    color: var(--color-maroon);
+    transition: transform var(--transition);
+}
+
+.sd-faq-item[open]:not(.is-closing) .sd-faq-chevron .icon {
+    transform: rotate(180deg);
+}
+
+.sd-faq-a {
+    padding: 0 1.15rem 1.25rem 4.25rem;
+    color: var(--color-gray);
+    line-height: 1.7;
+}
+
+.sd-faq-a .btn {
+    margin-top: 1rem;
+}
+
+/* ---------- Benefits grid ---------- */
+.sd-benefits {
+    display: grid;
+    gap: 1rem;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sd-benefit {
+    padding: 1.75rem 1.5rem;
+    background-color: var(--color-white);
+    border: 1px solid rgba(11, 31, 36, 0.08);
+    box-shadow: 0 0.75rem 2rem rgba(11, 31, 36, 0.05);
+    transition: transform var(--transition), border-color var(--transition);
+}
+
+.sd-benefit:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-yellow);
+}
+
+/* Icon on a soft yellow circle */
+.sd-benefit-icon {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 3.75rem;
+    height: 3.75rem;
+    color: var(--color-maroon);
+    background-color: rgba(226, 228, 29, 0.35);
+    border-radius: 50%;
+    box-shadow: 0 0 0 0.5rem rgba(226, 228, 29, 0.15);
+}
+
+.sd-benefit-icon .icon {
+    width: 1.6rem;
+    height: 1.6rem;
+}
+
+.sd-benefit-head {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.sd-benefit-title {
+    font-size: 1.5rem;
+    line-height: 1.1;
+}
+
+.sd-benefit p {
+    margin-top: 0.9rem;
+    font-size: 0.9375rem;
+}
+
+/* ---------- Sidebar ---------- */
+.sd-sidebar-inner {
+    display: grid;
+    gap: 1.25rem;
+}
+
+.sd-card {
+    display: block;
+    padding: 1.5rem;
+    background-color: var(--color-white);
+    box-shadow: 0 1rem 2.5rem rgba(11, 31, 36, 0.06);
+}
+
+.sd-card-title {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 1.75rem;
+    line-height: 1.05;
+}
+
+/* Small icon tiles before section headings and sidebar titles */
+.sd-heading-icon,
+.sd-card-icon {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    color: var(--color-white);
+    background-color: var(--color-maroon);
+}
+
+.sd-card-icon {
+    width: 2.25rem;
+    height: 2.25rem;
+}
+
+.sd-card-icon .icon {
+    width: 1.15rem;
+    height: 1.15rem;
+}
+
+/* Icon tile beside the spotlight card's title */
+.sd-spotlight-icon {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    color: var(--color-black);
+    background-color: var(--color-yellow);
+}
+
+.sd-service-list {
+    display: grid;
+    gap: 0.6rem;
+    margin: 1.1rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sd-service-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.8rem 1rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-black);
+    background-color: var(--color-mist);
+    border-left: 3px solid transparent;
+    transition: background-color var(--transition), border-color var(--transition), color var(--transition);
+}
+
+.sd-service-link .icon {
+    flex-shrink: 0;
+    width: 1rem;
+    height: 1rem;
+    transition: transform var(--transition);
+}
+
+.sd-service-link:hover {
+    border-left-color: var(--color-yellow);
+}
+
+.sd-service-link:hover .icon {
+    transform: translate(2px, -2px);
+}
+
+.sd-service-link.is-active {
+    color: var(--color-white);
+    background-color: var(--color-maroon);
+    border-left-color: var(--color-yellow);
+}
+
+/* Call card */
+.sd-help {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--color-white);
+    background-color: var(--color-black);
+    transition: transform var(--transition);
+}
+
+.sd-help:hover {
+    transform: translateY(-3px);
+}
+
+.sd-help-icon {
+    position: relative;
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    color: var(--color-black);
+    background-color: var(--color-yellow);
+    border-radius: 50%;
+}
+
+/* Soft ring pulsing out from the phone icon */
+.sd-help-icon::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 2px solid var(--color-yellow);
+    border-radius: 50%;
+    animation: sd-ring 2.4s ease-out infinite;
+}
+
+.sd-help-icon .icon {
+    width: 1.35rem;
+    height: 1.35rem;
+}
+
+.sd-help-label {
+    display: block;
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.sd-help-number {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+    color: var(--color-yellow);
+}
+
+@keyframes sd-ring {
+    from { transform: scale(1); opacity: 0.8; }
+    to   { transform: scale(1.6); opacity: 0; }
+}
+
+/* Quick consultation form */
+.sd-quick-form {
+    display: grid;
+    gap: 0.65rem;
+    margin-top: 1.1rem;
+}
+
+.sd-quick-form input,
+.sd-quick-form textarea {
+    width: 100%;
+    padding: 0.75rem 0.9rem;
+    font: inherit;
+    font-size: 0.9375rem;
+    color: var(--color-black);
+    background-color: var(--color-mist);
+    border: 1px solid transparent;
+    border-radius: 0;
+    transition: border-color var(--transition), background-color var(--transition);
+}
+
+.sd-quick-form textarea {
+    resize: vertical;
+}
+
+.sd-quick-form input:focus,
+.sd-quick-form textarea:focus {
+    outline: none;
+    background-color: var(--color-white);
+    border-color: var(--color-red);
+}
+
+.sd-quick-form :user-invalid {
+    border-color: #C0392B;
+}
+
+.sd-quick-form .btn {
+    justify-content: center;
+    margin-top: 0.25rem;
+}
+
+.sd-quick-success {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    margin-top: 1.1rem;
+    padding: 1rem;
+    color: var(--color-black);
+    background-color: rgba(226, 228, 29, 0.45);
+}
+
+.sd-quick-success[hidden] {
+    display: none;
+}
+
+.sd-quick-success .icon {
+    flex-shrink: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+/* Brand card */
+.sd-brand {
+    padding: 0;
+    overflow: hidden;
+}
+
+.sd-brand-logo {
+    width: 10rem;
+    height: auto;
+    margin: 1.5rem 1.5rem 1.25rem;
+}
+
+.sd-brand-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.sd-brand-title {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin: 1.25rem 1.5rem 0;
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    line-height: 1.1;
+}
+
+.sd-brand-title .icon {
+    flex-shrink: 0;
+    width: 1.3rem;
+    height: 1.3rem;
+    color: var(--color-red);
+}
+
+.sd-brand-text {
+    margin: 0.4rem 1.5rem 1.5rem;
+    font-size: 0.8125rem;
+    color: var(--color-gray);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sd-help-icon::after {
+        animation: none;
+    }
+}
+
+@media (min-width: 40rem) {
+    .sd-main {
+        padding: 2.5rem 2.25rem;
+    }
+
+    .sd-features,
+    .sd-benefits {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .sd-spotlight {
+        display: block;
+    }
+
+    .sd-spotlight-card {
+        position: absolute;
+        right: 1.5rem;
+        bottom: 1.5rem;
+        width: min(22rem, 55%);
+        margin: 0;
+    }
+}
+
+@media (min-width: 64rem) {
+    .sd {
+        padding-top: 4rem;
+    }
+
+    .sd-layout {
+        grid-template-columns: minmax(0, 20rem) minmax(0, 1fr);
+        align-items: start;
+        gap: 2.5rem;
+    }
+
+    .sd-sidebar {
+        grid-column: 1;
+        grid-row: 1;
+        align-self: stretch;
+    }
+
+    .sd-main {
+        grid-column: 2;
+        grid-row: 1;
+        padding: 3rem;
+    }
+
+    /* Wider, shorter photos on big screens so they don't take over the page */
+    .sd-photo img {
+        aspect-ratio: 21 / 9;
+        max-height: 22rem;
+    }
+
+    .sd-spotlight-photo img {
+        aspect-ratio: 2 / 1;
+        max-height: 20rem;
+    }
+
+    /* Pinned while the content scrolls. service-details.js sets --sd-top so a
+       sidebar taller than the screen pins by its bottom instead of being cut off. */
+    .sd-sidebar-inner {
+        position: sticky;
+        top: var(--sd-top, 7.5rem);
+    }
+}
+
+/* Final CTA: its curved top is painted in this section's colour */
+.final-cta .divider-arc {
+    --divider-color: var(--color-mist);
+}
+
+/* Smaller button inside the open FAQ answer */
+.btn-sm {
+    min-height: 0;
+    padding: 0.6rem 1rem;
+    font-size: 0.875rem;
+}
