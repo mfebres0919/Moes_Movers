@@ -197,50 +197,138 @@
     scroll-snap-align: start;
 }
 
+/* ---------- Control bar ---------- */
 .services-controls {
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+        "status buttons"
+        "dots   dots";
     align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
+    gap: 1rem 1.5rem;
+    padding: 1rem 1.25rem;
+    background-color: var(--color-white);
+    border-top: 3px solid var(--color-yellow);
+    box-shadow: 0 1.25rem 2.5rem -1.5rem rgba(11, 31, 36, 0.35);
 }
 
+.services-status {
+    grid-area: status;
+    display: flex;
+    align-items: baseline;
+    gap: 0.9rem;
+    min-width: 0;
+}
+
+.services-count {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.3rem;
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    line-height: 1;
+    color: var(--color-gray);
+}
+
+.services-count strong {
+    font-size: 2.25rem;
+    font-weight: 400;
+    color: var(--color-maroon);
+}
+
+.services-name {
+    overflow: hidden;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--color-black);
+}
+
+/* Progress segments: the active one fills over each slide */
 .services-dots {
+    grid-area: dots;
     display: flex;
     gap: 0.4rem;
 }
 
 .services-dot {
-    width: 0.65rem;
-    height: 0.65rem;
+    position: relative;
+    flex: 1;
+    height: 0.35rem;
     padding: 0;
-    background-color: rgba(11, 31, 36, 0.2);
+    overflow: hidden;
+    background-color: rgba(11, 31, 36, 0.12);
     border: 0;
-    border-radius: 999px;
     cursor: pointer;
-    transition: width var(--transition), background-color var(--transition);
 }
 
-.services-dot.is-active {
-    width: 1.75rem;
+.services-dot::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--color-maroon);
+    transform: scaleX(0);
+    transform-origin: left;
+}
+
+.services-dot:hover::after {
+    background-color: var(--color-red);
+    transform: scaleX(0.15);
+}
+
+.services-dot.is-active::after {
+    transform: scaleX(1);
+}
+
+/* While autoplay runs, the active segment fills from empty over the 4 seconds */
+.services-list.is-running .services-dot.is-active::after {
+    animation: services-progress 4s linear forwards;
+}
+
+@keyframes services-progress {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+}
+
+.services-buttons {
+    grid-area: buttons;
+    display: flex;
+    gap: 0.4rem;
+}
+
+.services-btn {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    color: var(--color-maroon);
+    background-color: var(--color-mist);
+    border: 0;
+    cursor: pointer;
+    transition: background-color var(--transition), color var(--transition), transform var(--transition);
+}
+
+.services-btn:hover {
+    color: var(--color-black);
+    background-color: var(--color-yellow);
+}
+
+.services-btn-next {
+    color: var(--color-white);
     background-color: var(--color-maroon);
 }
 
-.services-pause {
-    display: grid;
-    place-items: center;
-    width: 2.25rem;
-    height: 2.25rem;
-    margin-left: 0.25rem;
-    color: var(--color-maroon);
-    background: none;
-    border: 1px solid rgba(11, 31, 36, 0.25);
-    border-radius: 50%;
-    cursor: pointer;
+.services-btn .icon {
+    width: 1.1rem;
+    height: 1.1rem;
 }
 
-.services-pause .icon {
-    width: 1rem;
-    height: 1rem;
+.services-btn:active {
+    transform: scale(0.94);
 }
 
 .services-play-icon,
@@ -250,6 +338,21 @@
 
 .services-list.is-paused .services-play-icon {
     display: block;
+}
+
+@media (min-width: 48rem) {
+    .services-controls {
+        grid-template-columns: minmax(12rem, auto) minmax(0, 1fr) auto;
+        grid-template-areas: "status dots buttons";
+        gap: 2rem;
+        padding: 1.1rem 1.5rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .services-list.is-running .services-dot.is-active::after {
+        animation: none;
+    }
 }
 
 @media (min-width: 40rem) {

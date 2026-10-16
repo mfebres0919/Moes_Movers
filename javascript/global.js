@@ -213,7 +213,8 @@
         [".about-process-header > *", "up", 0.1],
         [".process-step", "up", 0.15],
         [".about-crew-intro > *", "left", 0.08],
-        [".crew-photo", "zoom", 0.08],
+        [".crew-marquee", "up", 0],
+        [".crew-badge", "zoom", 0],
         // Animate the wrapper, not the card: moving the card itself would lift its red glow (::before) on top of it
         [".quote > .container", "up", 0],
         [".about-media", "left", 0],
@@ -430,7 +431,7 @@ document.querySelectorAll("[data-reviews]").forEach((root) => {
    photos that are currently showing, and the X, Esc, or a click on the
    dark backdrop closes it. Focus returns to the photo that was opened. */
 (function () {
-    const cards = [...document.querySelectorAll(".project-card")];
+    const cards = [...document.querySelectorAll(".project-card, .crew-slide")];
     if (!cards.length || typeof HTMLDialogElement === "undefined") return;
 
     const svg = (path) => `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">${path}</svg>`;
@@ -465,7 +466,7 @@ document.querySelectorAll("[data-reviews]").forEach((root) => {
         const source = card.querySelector("img");
         img.src = source.currentSrc || source.src;
         img.alt = source.alt;
-        title.textContent = card.querySelector(".project-title")?.textContent || "";
+        title.textContent = (card.querySelector(".project-title, figcaption")?.textContent || "").trim();
         place.textContent = card.querySelector(".project-place")?.textContent || "";
         count.textContent = `${index + 1} / ${list.length}`;
         img.style.animation = "none";
@@ -474,7 +475,10 @@ document.querySelectorAll("[data-reviews]").forEach((root) => {
     }
 
     function open(card) {
-        list = cards.filter((c) => !c.hidden); // only photos in the current filter
+        // Only photos in the current filter, and never the hidden marquee copies
+        list = cards.filter((c) => !c.hidden && !c.closest('[aria-hidden="true"]') && c.matches(card.matches(".crew-slide") ? ".crew-slide" : ".project-card"));
+        // A click on a marquee copy opens its original
+        if (!list.includes(card)) card = list.find((c) => c.querySelector("img").src === card.querySelector("img").src) || list[0];
         opener = card.querySelector(".project-zoom");
         show(list.indexOf(card));
         dialog.showModal();
@@ -489,12 +493,13 @@ document.querySelectorAll("[data-reviews]").forEach((root) => {
     });
 
     cards.forEach((card) => {
-        const name = card.querySelector(".project-title")?.textContent || "project";
+        const name = (card.querySelector(".project-title, figcaption")?.textContent || "project").trim();
         const button = document.createElement("button");
         button.type = "button";
         button.className = "project-zoom";
         button.setAttribute("aria-label", `View larger photo: ${name}`);
         button.innerHTML = `<span class="project-zoom-icon">${svg('<circle cx="11" cy="11" r="7"/><path d="m20 20-4-4M11 8v6M8 11h6"/>')}</span>`;
+        if (card.closest('[aria-hidden="true"]')) button.tabIndex = -1; // marquee copies stay out of the tab order
         button.addEventListener("click", () => open(card));
         card.appendChild(button);
     });

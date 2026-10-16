@@ -53,12 +53,12 @@ SERVICES = [
         "hero": "hero-truck-house",
         "title": "Local home moves, handled from the first box to the last.",
         "intro": "Moving a house means moving a life. Our crew plans every home move around your schedule, protects your furniture and floors, and gives you clear, upfront pricing before moving day, whether you are moving across Houston or to another Texas city.",
-        "image": ("gallery-two-story", "The Move with Moe truck parked at a two-story Houston home"),
+        "image": ("crew/truck-home-driveway", "The Move with Moe truck parked outside a large brick home"),
         "features": [
             ("Planned around your home", "We note stairs, tight hallways, and parking before moving day, so the right crew and truck show up ready."),
             ("Protected every step", "Furniture is padded and wrapped, and doorways and floors are protected while we carry everything out."),
         ],
-        "spotlight": ("gallery-wrapped-furniture", "Two movers rolling a wrapped piece of furniture out of a home", "Treated like our own home", "Every piece is wrapped before it leaves the room and placed where you want it in your new home."),
+        "spotlight": ("crew/crew-wrapped-sofa", "A mover with a fully wrapped sofa outside a home", "Treated like our own home", "Every piece is wrapped before it leaves the room and placed where you want it in your new home."),
         "faq_intro": "Here is what customers usually ask before booking a home move with us.",
         "faqs": [
             ("What is included in a home move?", "Your crew, the truck, moving blankets, dollies, and furniture wrapping. We load, transport, unload, and place furniture in the rooms you choose."),
@@ -79,12 +79,12 @@ SERVICES = [
         "hero": "hero-moe-truck",
         "title": "Apartment and condo moves that follow the building's rules.",
         "intro": "High-rises and apartment complexes come with loading docks, elevator reservations, and move-in windows. We coordinate with your building ahead of time so your move stays on schedule and your neighbors stay happy.",
-        "image": ("gallery-downtown", "The Move with Moe truck outside a downtown Houston tower"),
+        "image": ("crew/truck-highrise", "The Move with Moe truck outside a downtown high-rise"),
         "features": [
             ("Building rules, handled", "We plan around loading docks, elevator bookings, and certificate of insurance requests."),
             ("Tight spaces, no problem", "Narrow halls, stairwells, and small elevators are part of the plan, not a surprise."),
         ],
-        "spotlight": ("gallery-elevator", "A mover bringing a stack of boxes up in a building elevator", "Up, in, and settled", "Boxes and furniture move quickly through elevators and hallways without scuffs or delays."),
+        "spotlight": ("crew/crew-apartment-stairs", "Movers carrying furniture down a narrow apartment stairwell", "Up, in, and settled", "Boxes and furniture move quickly through elevators and hallways without scuffs or delays."),
         "faq_intro": "Common questions about apartment, condo, and high-rise moves.",
         "faqs": [
             ("Can you provide a certificate of insurance?", "Yes. Send us your building's requirements and we will provide the certificate before moving day."),
@@ -105,12 +105,12 @@ SERVICES = [
         "hero": "hero-truck-home",
         "title": "Packing and unpacking, so you can skip the boxes.",
         "intro": "Packing is the most time-consuming part of any move. Our crew packs room by room with our own supplies, labels everything, and unpacks at your new place, so you can settle in faster.",
-        "image": ("gallery-padded", "Moving blankets and a hand truck ready inside the truck"),
+        "image": ("crew/crew-wrapped-furniture", "A mover beside fully wrapped furniture ready to load"),
         "features": [
             ("Full or partial packing", "Let us pack the whole home, or just the kitchen and fragile items you would rather not handle."),
             ("Our supplies, our care", "Boxes, paper, tape, and padding are included, with extra care for glass, art, and electronics."),
         ],
-        "spotlight": ("gallery-loading", "Moe loading a wrapped rug into the truck", "Labeled for easy unpacking", "Every box is labeled by room, so the unpacking goes fast and nothing gets lost."),
+        "spotlight": ("crew/crew-wrapping-table", "Movers wrapping a table in plastic before loading", "Labeled for easy unpacking", "Every box is labeled by room, so the unpacking goes fast and nothing gets lost."),
         "faq_intro": "What to know before you book packing or unpacking.",
         "faqs": [
             ("Do you bring the packing supplies?", "Yes. Boxes, tape, paper, and padding are included in packing services."),
@@ -131,12 +131,12 @@ SERVICES = [
         "hero": "hero-moe-truck-side",
         "title": "Office moves planned around your business hours.",
         "intro": "Every hour your office is closed costs you. We plan commercial and office moves around your schedule, including evenings and weekends, so your team is back to work quickly in the new space.",
-        "image": ("gallery-office", "The Move with Moe truck outside an office building"),
+        "image": ("crew/crew-team-truck", "The Move with Moe crew standing in front of the truck"),
         "features": [
             ("Minimal downtime", "Evening and weekend moves keep your business running while we work."),
             ("Organized by workspace", "Desks, files, and equipment are labeled so every station is set up in the right place."),
         ],
-        "spotlight": ("gallery-crew-team", "Two movers working together inside the loaded truck", "A crew that works as a team", "Coordinated crews move furniture, files, and equipment safely and on schedule."),
+        "spotlight": ("crew/crew-equipment-assembly", "Movers taking apart a piece of gym equipment", "A crew that works as a team", "Coordinated crews move furniture, files, and equipment safely and on schedule."),
         "faq_intro": "Questions businesses ask before planning an office move.",
         "faqs": [
             ("Can you move us after hours?", "Yes. Evening and weekend moves are available so your business does not lose a working day."),
@@ -157,12 +157,12 @@ SERVICES = [
         "hero": "hero-moe-truck",
         "title": "Storage moves, stacked to save space.",
         "intro": "Moving into, out of, or between storage units takes planning. We wrap every piece, stack it to fit more, and keep the things you need easy to reach.",
-        "image": ("storage-stacked", "A mover stacking boxes neatly in the truck"),
+        "image": ("crew/truck-storage-facility", "The Move with Moe truck outside an Extra Space Storage facility"),
         "features": [
             ("Home to storage, and back", "Storage unit to home, home to storage, or unit to unit, all in one move."),
             ("Stacked to fit more", "Smart stacking helps you fit more in a smaller unit and save on monthly costs."),
         ],
-        "spotlight": ("gallery-dolly-load", "A mover loading a dolly and moving blankets onto the truck", "Wrapped before it goes in", "Furniture is padded and wrapped so it stays protected for as long as it is in storage."),
+        "spotlight": ("crew/crew-truck-stacking", "Movers stacking items tightly inside the truck", "Wrapped before it goes in", "Furniture is padded and wrapped so it stays protected for as long as it is in storage."),
         "faq_intro": "Everything you need to know before a storage move.",
         "faqs": [
             ("Do you provide the storage unit?", "No, you choose the unit. We can recommend a size based on what you are storing."),
@@ -226,10 +226,10 @@ def sidebar(active):
                         </div>
 
                         <div class="sd-card sd-brand">
-                            <img class="sd-brand-logo" src="../images/logo-teal.png" alt="Move with Moe" width="900" height="103" loading="lazy" decoding="async">
+                            <img class="sd-brand-logo" src="../images/brand/logo-teal.png" alt="Move with Moe" width="900" height="103" loading="lazy" decoding="async">
                             <picture class="sd-brand-photo">
-                                <source type="image/webp" srcset="../images/about-truck.webp">
-                                <img src="../images/about-truck.jpg" alt="The Move with Moe box truck" width="640" height="360" loading="lazy" decoding="async">
+                                <source type="image/webp" srcset="../images/about/about-truck.webp">
+                                <img src="../images/about/about-truck.jpg" alt="The Move with Moe box truck" width="640" height="360" loading="lazy" decoding="async">
                             </picture>
                             <p class="sd-brand-title">{icon("shield")}Fully insured, licensed &amp; accredited</p>
                             <p class="sd-brand-text">TXDMV # 010005908C &middot; USDOT # 4288855</p>
@@ -277,20 +277,26 @@ def main_column(s):
                     <h2 class="sd-title">{s["title"]}</h2>
                     <p class="sd-lead">{s["intro"]}</p>
 
-                    <figure class="sd-photo">
-                        {picture(img, alt)}
-                    </figure>
+                    <!-- Two full photos side by side (both are tall crew photos, so nothing is cropped) -->
+                    <div class="sd-photos">
+                        <figure class="sd-photo">
+                            {picture(img, alt, 900, 1200)}
+                        </figure>
+                        <figure class="sd-photo">
+                            {picture(simg, salt, 900, 1200)}
+                        </figure>
+                    </div>
 
                     <div class="sd-features">{feats}
                     </div>
 
                     <div class="sd-spotlight">
-                        {picture(simg, salt, cls="sd-spotlight-photo")}
-                        <div class="sd-spotlight-card">
-                            <h3 class="sd-spotlight-title"><span class="sd-spotlight-icon">{icon("shield")}</span>{stitle}</h3>
+                        <span class="sd-spotlight-icon">{icon("shield")}</span>
+                        <div class="sd-spotlight-copy">
+                            <h3 class="sd-spotlight-title">{stitle}</h3>
                             <p>{stext}</p>
-                            <a class="sd-spotlight-link" href="tel:+19798888887"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true">{PHONE}</svg>Talk with our team</a>
                         </div>
+                        <a class="sd-spotlight-link" href="tel:+19798888887"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true">{PHONE}</svg>Talk with our team</a>
                     </div>
 
                     <h2 class="sd-heading"><span class="sd-heading-icon">{icon("question")}</span>Questions about {s["name"].lower()}</h2>

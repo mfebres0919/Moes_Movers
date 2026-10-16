@@ -62,19 +62,47 @@
         updateDots();
     }
 
+    const currentLabel = section.querySelector("#services-current");
+    const totalLabel = section.querySelector("#services-total");
+    const nameLabel = section.querySelector("#services-name");
+    const pad = (n) => String(n).padStart(2, "0");
+    let lastActive = -1;
+
     function updateDots() {
         const active = Math.min(current(), maxIndex());
         dots.forEach((dot, i) => {
             dot.classList.toggle("is-active", i === active);
             dot.setAttribute("aria-current", String(i === active));
         });
+        // Counter shows the first service in view, out of all five
+        const first = current();
+        if (totalLabel) totalLabel.textContent = pad(cards.length);
+        if (currentLabel) currentLabel.textContent = pad(first + 1);
+        if (nameLabel) nameLabel.textContent = cards[first].querySelector(".service-card-title")?.textContent.trim() || "";
+        if (active !== lastActive) {
+            lastActive = active;
+            restartProgress();
+        }
+    }
+
+    // Restart the active segment's fill so it lines up with the next 4-second step
+    function restartProgress() {
+        if (!section.classList.contains("is-running")) return;
+        section.classList.remove("is-running");
+        void section.offsetWidth;
+        section.classList.add("is-running");
     }
 
     /* Autoplay */
-    const stop = () => clearInterval(timer);
+    const stop = () => {
+        clearInterval(timer);
+        section.classList.remove("is-running");
+    };
     function start() {
         stop();
         if (paused || hovering || !onScreen || document.hidden) return;
+        section.classList.add("is-running");
+        restartProgress();
         timer = setInterval(() => goTo(current() + 1), INTERVAL);
     }
 

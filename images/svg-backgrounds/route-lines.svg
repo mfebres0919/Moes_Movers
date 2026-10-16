@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" fill="none">
+  <!-- Dashed "routes" winding across the section, with a few map pins: a nod to moving across Houston -->
+  <g stroke="#0E6070" stroke-width="2" stroke-dasharray="10 12" stroke-linecap="round" opacity=".35">
+    <path d="M-40 160C220 120 300 300 520 260S860 60 1080 140s300 260 560 180"/>
+    <path d="M-40 520c240-60 380 120 600 80s300-220 560-160 240 220 520 160"/>
+    <path d="M120 940C200 760 420 760 520 640s60-300 260-360 380 40 520-80 160-260 340-280"/>
+  </g>
+  <g stroke="#E2E41D" stroke-width="3" stroke-dasharray="2 14" stroke-linecap="round" opacity=".7">
+    <path d="M-40 700c300-40 420-200 700-180s440 200 980 120"/>
+  </g>
+  <g fill="#0E6070" opacity=".5">
+    <path d="M520 236a18 18 0 0 0-18 18c0 14 18 34 18 34s18-20 18-34a18 18 0 0 0-18-18zm0 25a7 7 0 1 1 0-14 7 7 0 0 1 0 14z"/>
+    <path d="M1160 568a18 18 0 0 0-18 18c0 14 18 34 18 34s18-20 18-34a18 18 0 0 0-18-18zm0 25a7 7 0 1 1 0-14 7 7 0 0 1 0 14z"/>
+    <path d="M300 590a18 18 0 0 0-18 18c0 14 18 34 18 34s18-20 18-34a18 18 0 0 0-18-18zm0 25a7 7 0 1 1 0-14 7 7 0 0 1 0 14z"/>
+  </g>
+  <g fill="#E2E41D">
+    <circle cx="1080" cy="140" r="7"/>
+    <circle cx="780" cy="280" r="6"/>
+    <circle cx="660" cy="520" r="6"/>
+    <circle cx="1440" cy="250" r="7"/>
+  </g>
+</svg>

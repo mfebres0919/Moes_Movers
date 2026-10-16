@@ -7,13 +7,13 @@
     <meta name="description" content="High-rises and apartment complexes come with loading docks, elevator reservations, and move-in windows. We coordinate with your building ahead of time so.">
     <!-- Demo page prepared by MigsFlow for Moe's Movers. Not indexed. -->
     <meta name="robots" content="noindex, nofollow">
-    <link rel="icon" href="../images/favicon.png" type="image/png">
-    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+    <link rel="icon" href="../images/brand/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="../images/brand/apple-touch-icon.png">
 
     <link rel="preload" href="../fonts/bebas-neue-latin-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="../fonts/poppins-latin-500.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" as="image" type="image/webp" href="../images/hero-moe-truck.webp" media="(min-width: 48rem)">
-    <link rel="preload" as="image" type="image/webp" href="../images/hero-moe-truck-m.webp" media="(max-width: 47.99rem)">
+    <link rel="preload" as="image" type="image/webp" href="../images/hero/hero-moe-truck.webp" media="(min-width: 48rem)">
+    <link rel="preload" as="image" type="image/webp" href="../images/hero/hero-moe-truck-m.webp" media="(max-width: 47.99rem)">
 
     <link rel="stylesheet" href="../css/vendor/lenis.css">
     <link rel="stylesheet" href="../css/global.css">
@@ -74,7 +74,7 @@
         <div class="navbar" id="navbar">
             <div class="container navbar-inner">
                 <a class="brand" href="../index.html" aria-label="Move with Moe, home">
-                    <img class="brand-logo brand-logo-m" src="../images/logo-m-header.png" alt="" width="480" height="255" decoding="async">
+                    <img class="brand-logo brand-logo-m" src="../images/brand/logo-m-header.png" alt="" width="480" height="255" decoding="async">
                 </a>
 
                 <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
@@ -129,10 +129,10 @@
         <!-- ===== Page hero ===== -->
         <section class="page-hero" aria-labelledby="page-title">
             <picture class="page-hero-bg" aria-hidden="true">
-                <source media="(min-width: 48rem)" type="image/webp" srcset="../images/hero-moe-truck.webp">
-                <source media="(min-width: 48rem)" type="image/jpeg" srcset="../images/hero-moe-truck.jpg">
-                <source type="image/webp" srcset="../images/hero-moe-truck-m.webp">
-                <img src="../images/hero-moe-truck-m.jpg" alt="" width="560" height="941" decoding="async" fetchpriority="high">
+                <source media="(min-width: 48rem)" type="image/webp" srcset="../images/hero/hero-moe-truck.webp">
+                <source media="(min-width: 48rem)" type="image/jpeg" srcset="../images/hero/hero-moe-truck.jpg">
+                <source type="image/webp" srcset="../images/hero/hero-moe-truck-m.webp">
+                <img src="../images/hero/hero-moe-truck-m.jpg" alt="" width="560" height="941" decoding="async" fetchpriority="high">
             </picture>
 
             <div class="container page-hero-content">
@@ -171,12 +171,21 @@
                     <h2 class="sd-title">Apartment and condo moves that follow the building's rules.</h2>
                     <p class="sd-lead">High-rises and apartment complexes come with loading docks, elevator reservations, and move-in windows. We coordinate with your building ahead of time so your move stays on schedule and your neighbors stay happy.</p>
 
-                    <figure class="sd-photo">
-                        <picture>
-                            <source type="image/webp" srcset="../images/gallery-downtown.webp">
-                            <img src="../images/gallery-downtown.jpg" alt="The Move with Moe truck outside a downtown Houston tower" width="840" height="740" loading="lazy" decoding="async">
+                    <!-- Two full photos side by side (both are tall crew photos, so nothing is cropped) -->
+                    <div class="sd-photos">
+                        <figure class="sd-photo">
+                            <picture>
+                            <source type="image/webp" srcset="../images/crew/truck-highrise.webp">
+                            <img src="../images/crew/truck-highrise.jpg" alt="The Move with Moe truck outside a downtown high-rise" width="900" height="1200" loading="lazy" decoding="async">
                         </picture>
-                    </figure>
+                        </figure>
+                        <figure class="sd-photo">
+                            <picture>
+                            <source type="image/webp" srcset="../images/crew/crew-apartment-stairs.webp">
+                            <img src="../images/crew/crew-apartment-stairs.jpg" alt="Movers carrying furniture down a narrow apartment stairwell" width="900" height="1200" loading="lazy" decoding="async">
+                        </picture>
+                        </figure>
+                    </div>
 
                     <div class="sd-features">
                         <div class="sd-feature">
@@ -196,15 +205,12 @@
                     </div>
 
                     <div class="sd-spotlight">
-                        <picture class="sd-spotlight-photo">
-                            <source type="image/webp" srcset="../images/gallery-elevator.webp">
-                            <img src="../images/gallery-elevator.jpg" alt="A mover bringing a stack of boxes up in a building elevator" width="840" height="740" loading="lazy" decoding="async">
-                        </picture>
-                        <div class="sd-spotlight-card">
-                            <h3 class="sd-spotlight-title"><span class="sd-spotlight-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span>Up, in, and settled</h3>
+                        <span class="sd-spotlight-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span>
+                        <div class="sd-spotlight-copy">
+                            <h3 class="sd-spotlight-title">Up, in, and settled</h3>
                             <p>Boxes and furniture move quickly through elevators and hallways without scuffs or delays.</p>
-                            <a class="sd-spotlight-link" href="tel:+19798888887"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Talk with our team</a>
                         </div>
+                        <a class="sd-spotlight-link" href="tel:+19798888887"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Talk with our team</a>
                     </div>
 
                     <h2 class="sd-heading"><span class="sd-heading-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 0 1 4.9.7c0 1.7-2.4 2.1-2.4 3.8M12 17h.01"/></svg></span>Questions about apartment and condo moves</h2>
@@ -313,10 +319,10 @@
                         </div>
 
                         <div class="sd-card sd-brand">
-                            <img class="sd-brand-logo" src="../images/logo-teal.png" alt="Move with Moe" width="900" height="103" loading="lazy" decoding="async">
+                            <img class="sd-brand-logo" src="../images/brand/logo-teal.png" alt="Move with Moe" width="900" height="103" loading="lazy" decoding="async">
                             <picture class="sd-brand-photo">
-                                <source type="image/webp" srcset="../images/about-truck.webp">
-                                <img src="../images/about-truck.jpg" alt="The Move with Moe box truck" width="640" height="360" loading="lazy" decoding="async">
+                                <source type="image/webp" srcset="../images/about/about-truck.webp">
+                                <img src="../images/about/about-truck.jpg" alt="The Move with Moe box truck" width="640" height="360" loading="lazy" decoding="async">
                             </picture>
                             <p class="sd-brand-title"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>Fully insured, licensed &amp; accredited</p>
                             <p class="sd-brand-text">TXDMV # 010005908C &middot; USDOT # 4288855</p>
@@ -338,10 +344,10 @@
                     <span class="final-cta-stripe final-cta-stripe-maroon"></span>
                     <span class="final-cta-stripe final-cta-stripe-red"></span>
                     <picture class="final-cta-truck">
-                        <source media="(min-width: 40rem)" type="image/webp" srcset="../images/cta-truck.webp" width="1300" height="655">
-                        <source media="(min-width: 40rem)" type="image/png" srcset="../images/cta-truck.png" width="1300" height="655">
-                        <source type="image/webp" srcset="../images/cta-truck-m.webp">
-                        <img src="../images/cta-truck-m.png" alt="" width="560" height="282" loading="lazy" decoding="async">
+                        <source media="(min-width: 40rem)" type="image/webp" srcset="../images/brand/cta-truck.webp" width="1300" height="655">
+                        <source media="(min-width: 40rem)" type="image/png" srcset="../images/brand/cta-truck.png" width="1300" height="655">
+                        <source type="image/webp" srcset="../images/brand/cta-truck-m.webp">
+                        <img src="../images/brand/cta-truck-m.png" alt="" width="560" height="282" loading="lazy" decoding="async">
                     </picture>
                 </div>
 
@@ -376,7 +382,7 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <a class="footer-logo" href="../index.html" aria-label="Move with Moe, home">
-                        <img class="footer-logo-wordmark" src="../images/logo-teal.png" alt="" width="900" height="103" loading="lazy" decoding="async">
+                        <img class="footer-logo-wordmark" src="../images/brand/logo-teal.png" alt="" width="900" height="103" loading="lazy" decoding="async">
                     </a>
                     <p class="footer-blurb">A fully insured, local Houston moving company. <strong class="price-highlight">Clear, upfront pricing based on the details of each move</strong>, and a crew that treats your home like our own.</p>
                     <ul class="footer-social" aria-label="Social media">

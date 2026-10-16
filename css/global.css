@@ -534,6 +534,14 @@ h4 {
     --texture-image: url("../images/svg-backgrounds/endless-constellation-teal.svg");
 }
 
+.has-texture--routes {
+    --texture-image: url("../images/svg-backgrounds/route-lines.svg");
+}
+
+.has-texture--glow {
+    --texture-image: url("../images/svg-backgrounds/wobbling-particles-glow.svg");
+}
+
 .has-texture::before {
     content: "";
     position: absolute;
@@ -2573,7 +2581,7 @@ textarea.form-control {
 }
 
 .reviews-header .section-text {
-    margin-top: 1rem;
+    margin: 1rem auto 0; /* the paragraph is narrower than the header, so centre the box too */
 }
 
 .reviews-track {
@@ -3029,7 +3037,7 @@ textarea.form-control {
     position: relative;
     overflow: hidden;
     border-radius: 0;
-    aspect-ratio: 8 / 7;
+    break-inside: avoid; /* masonry columns on wider screens */
     background-color: var(--color-maroon);
     animation: project-in 0.45s ease;
 }
@@ -3042,7 +3050,7 @@ textarea.form-control {
 .project-card img {
     display: block;
     width: 100%;
-    height: 100%;
+    height: auto; /* each photo at its own shape, nothing cropped */
     object-fit: cover;
     transition: transform 0.7s ease;
 }
@@ -3083,9 +3091,17 @@ textarea.form-control {
     color: rgba(255, 255, 255, 0.82);
 }
 
+/* Masonry columns: tall crew photos and wide truck photos sit together
+   without cropping either */
 @media (min-width: 40rem) {
     .project-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        display: block;
+        columns: 2;
+        column-gap: 1.25rem;
+    }
+
+    .project-card {
+        margin-bottom: 1.25rem;
     }
 }
 
@@ -3101,8 +3117,12 @@ textarea.form-control {
     }
 
     .project-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 1.5rem;
+        columns: 3;
+        column-gap: 1.5rem;
+    }
+
+    .project-card {
+        margin-bottom: 1.5rem;
     }
 }
 
@@ -3151,10 +3171,13 @@ textarea.form-control {
         display: none;
     }
 
+    .project-grid {
+        align-items: flex-start;
+    }
+
     .project-card {
         flex: 0 0 82%;
         scroll-snap-align: start;
-        aspect-ratio: 4 / 5;
     }
 }
 

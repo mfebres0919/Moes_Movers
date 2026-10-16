@@ -1326,7 +1326,7 @@
 .process {
     background-color: var(--color-mist);
     --card-w: min(78vw, 20rem);
-    --card-ratio: 0.68; /* width / height */
+    --card-ratio: 0.6; /* width / height; taller so each photo shows in full */
 
     position: relative;
     padding: 5rem 0 4.5rem;
@@ -1469,8 +1469,8 @@
 
 .process-media {
     display: block;
-    flex: 1 1 auto;
-    min-height: 0;
+    flex: none;
+    aspect-ratio: 840 / 740; /* the photos' own shape, so nothing is cropped */
     margin-top: 1rem;
     overflow: hidden;
     border-radius: 0;
@@ -2460,9 +2460,37 @@
 }
 
 /* Phones: filter tabs stay on one line and swipe sideways */
-/* Stat under the Book Your Move button */
+/* Read More button with the 543+ stat beside it (divided by a thin rule) */
+.about-cta-row {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 1.25rem;
+    margin-top: 2rem;
+}
+
+.about-cta-row .about-cta {
+    margin-top: 0;
+}
+
 .about-stat-cta {
-    margin-top: 1.75rem;
+    flex-shrink: 0;
+    gap: 0.6rem;
+    margin-top: 0;
+    padding-left: 1.25rem;
+    border-left: 2px solid rgba(11, 31, 36, 0.15);
+}
+
+.about-stat-cta strong {
+    font-size: 2.75rem;
+}
+
+.about-stat-cta span {
+    font-size: 1.05rem;
+}
+
+.about-cta-row .about-cta {
+    flex-shrink: 0;
 }
 
 .about-stat strong {
@@ -3259,5 +3287,23 @@
 @media (min-width: 64rem) {
     .hero .hero-content {
         padding-inline: clamp(2rem, 5vw, 6rem);
+    }
+}
+
+/* Storage spotlight photo: keep its natural shape on every screen */
+.storage-spotlight-media img {
+    height: auto;
+    aspect-ratio: 840 / 740;
+}
+
+/* Small phones: let the 543+ stat drop below Read More instead of running off screen */
+@media (max-width: 26rem) {
+    .about-cta-row {
+        flex-wrap: wrap;
+    }
+
+    .about-stat-cta {
+        padding-left: 0;
+        border-left: 0;
     }
 }
