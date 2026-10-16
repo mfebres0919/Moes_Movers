@@ -900,7 +900,23 @@
         if (!dragged) manual(() => goTo(i));
     }));
 
-    window.addEventListener("resize", () => layout(current));
+    /* All cards share one height: the tallest card's content, so text and
+       "Learn more" never spill out on narrow phones or with larger fonts */
+    function fitCards() {
+        section.style.removeProperty("--card-h");
+        const tallest = Math.max(...cards.map((card) => {
+            const saved = card.style.height;
+            card.style.height = "auto";
+            const h = card.offsetHeight;
+            card.style.height = saved;
+            return h;
+        }));
+        section.style.setProperty("--card-h", `${Math.ceil(tallest)}px`);
+    }
+
+    window.addEventListener("resize", () => { fitCards(); layout(current); });
+    document.fonts?.ready.then(fitCards);
+    fitCards();
     setToggleState();
     showActive();
     layout(0);
