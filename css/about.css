@@ -612,8 +612,8 @@
 }
 
 /* ==========================================================================
-   Meet the crew: white section, intro + spinning badge on the left,
-   a photo mosaic on the right with captions that slide up on hover.
+   Meet the crew: white section, intro on the left,
+   a drifting photo carousel beside it with captions on each photo.
    ========================================================================== */
 .about-crew {
     --texture-opacity: 0.35; /* low, so the route lines stay in the background */
@@ -641,120 +641,42 @@
     margin-top: 1.25rem;
 }
 
+/* The two buttons always sit side by side, splitting the row evenly */
 .about-crew-actions {
     display: grid;
+    grid-template-columns: repeat(2, minmax(0, max-content));
     gap: 0.75rem;
     margin-top: 2rem;
 }
 
-@media (min-width: 40rem) {
+.about-crew-actions .btn {
+    white-space: nowrap;
+}
+
+/* Phones: equal halves, with tighter padding so both labels fit */
+@media (max-width: 39.99rem) {
     .about-crew-actions {
-        display: flex;
-        flex-wrap: wrap;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.5rem;
+    }
+
+    .about-crew-actions .btn {
+        padding-inline: 0.75rem;
+        font-size: 0.9375rem;
     }
 }
 
-/* Rotating seal: yellow ring with dark lettering around a teal core,
-   like a sticker on the truck door */
-.crew-badge {
-    position: absolute;
-    top: 0;
-    right: clamp(1rem, 6vw, 5rem);
-    z-index: 3;
-    display: grid;
-    place-items: center;
-    width: 8rem;
-    height: 8rem;
-    transform: translateY(-55%); /* half on the section, half on the photos, like a sticker */
-    background-color: var(--color-yellow);
-    border-radius: 50%;
-    box-shadow: 0 0 0 0.4rem var(--color-white), 0 1.25rem 2.5rem rgba(11, 31, 36, 0.3);
-}
-
-/* Thin dashed track between the lettering and the core */
-.crew-badge::before {
-    content: "";
-    position: absolute;
-    inset: 1.55rem;
-    border: 1.5px dashed rgba(11, 31, 36, 0.45);
-    border-radius: 50%;
-}
-
-.crew-badge-ring {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    animation: crew-badge-spin 22s linear infinite;
-}
-
-.crew-badge-ring text {
-    fill: var(--color-black);
-    font-family: var(--font-heading);
-    font-size: 17px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-}
-
-.crew-badge-ring .crew-badge-star {
-    font-family: var(--font-body);
-    font-size: 11px;
-    letter-spacing: 0;
-}
-
-.crew-badge-core {
-    position: relative;
-    display: grid;
-    place-items: center;
-    align-content: center;
-    gap: 0.15rem;
-    width: 4.4rem;
-    height: 4.4rem;
-    color: var(--color-yellow);
-    background-color: var(--color-maroon);
-    border-radius: 50%;
-    transition: transform 0.4s ease;
-}
-
-.crew-badge:hover .crew-badge-core {
-    transform: scale(1.06);
-}
-
-.crew-badge-icon {
-    width: 1.9rem;
-    height: 1.9rem;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.7;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
-.crew-badge-label {
-    max-width: 3.6rem;
-    font-size: 0.5rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    line-height: 1.25;
-    text-align: center;
-    text-transform: uppercase;
-    color: var(--color-white);
-}
-
-@keyframes crew-badge-spin {
-    to { transform: rotate(360deg); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .crew-badge-ring {
-        animation: none;
+/* Smallest phones: drop the arrows so the labels still fit on one line */
+@media (max-width: 22.5rem) {
+    .about-crew-actions .btn .icon {
+        display: none;
     }
 }
 
-/* Carousel wrapper: anchors the sticker badge to the top edge of the photos */
+/* Carousel column: stacks under the intro on phones, sits beside it on desktop */
 .crew-marquee-wrap {
     position: relative;
-    margin-top: 5rem;
+    min-width: 0;
 }
 
 .crew-marquee-wrap .crew-marquee {
@@ -860,28 +782,15 @@ html.lightbox-open .crew-marquee-list {
         padding: calc(clamp(2.5rem, 7vw, 6.5rem) + 4rem) 0 7rem;
     }
 
-    .about-crew-intro {
-        max-width: 44rem;
+    /* Intro on the left, the drifting photo carousel beside it */
+    .about-crew-layout {
+        grid-template-columns: minmax(0, 26rem) minmax(0, 1fr);
+        align-items: center;
+        gap: 3.5rem;
     }
 
-    .crew-marquee-wrap {
-        margin-top: 6rem;
-    }
-}
-
-@media (min-width: 64rem) {
-    .crew-badge {
-        width: 10rem;
-        height: 10rem;
-    }
-
-    .crew-badge::before {
-        inset: 1.85rem;
-    }
-
-    .crew-badge-core {
-        width: 5.25rem;
-        height: 5.25rem;
+    .crew-slide {
+        width: clamp(13rem, 17vw, 16rem);
     }
 }
 

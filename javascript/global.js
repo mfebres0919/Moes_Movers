@@ -214,7 +214,6 @@
         [".process-step", "up", 0.15],
         [".about-crew-intro > *", "left", 0.08],
         [".crew-marquee", "up", 0],
-        [".crew-badge", "zoom", 0],
         // Animate the wrapper, not the card: moving the card itself would lift its red glow (::before) on top of it
         [".quote > .container", "up", 0],
         [".about-media", "left", 0],
