@@ -217,24 +217,12 @@ def sidebar(active):
                         </a>
 
                         <div class="sd-card sd-quick">
-                            <h2 class="sd-card-title"><span class="sd-card-icon">{icon("chat")}</span>Get a free consultation</h2>
-                            <form class="sd-quick-form" id="sd-quick-form" action="#" method="post" novalidate>
-                                <label class="visually-hidden" for="sd-name">Your name</label>
-                                <input id="sd-name" name="name" type="text" autocomplete="name" placeholder="Your name *" required>
-                                <label class="visually-hidden" for="sd-phone">Your phone</label>
-                                <input id="sd-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="Your phone *" required>
-                                <label class="visually-hidden" for="sd-message">Your message</label>
-                                <textarea id="sd-message" name="message" rows="3" placeholder="Tell us about your move"></textarea>
-                                <input type="hidden" name="service" value="{active}">
-                                <button class="btn btn-primary" type="submit">
-                                    Send Message
-                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg>
-                                </button>
-                            </form>
-                            <p class="sd-quick-success" id="sd-quick-success" role="status" tabindex="-1" hidden>
-                                {icon("shield")}
-                                <span><strong>Thanks!</strong> Moe&rsquo;s team will call you shortly.</span>
-                            </p>
+                            <h2 class="sd-card-title"><span class="sd-card-icon">{icon("chat")}</span>Get a free quote</h2>
+                            <p class="sd-quick-text">Tell us about your move in about a minute, and Moe&rsquo;s team will reach out with clear, upfront pricing.</p>
+                            <a class="btn btn-primary sd-quick-btn" href="../index.html#quote">
+                                Start My Free Quote
+                                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+                            </a>
                         </div>
 
                         <div class="sd-card sd-brand">

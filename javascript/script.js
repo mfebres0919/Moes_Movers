@@ -961,24 +961,6 @@ document.querySelectorAll("[data-tabs]").forEach((tabsRoot) => {
     });
 })();
 
-/* ---------- Projects: filter by service ---------- */
-(function () {
-    const filters = document.querySelectorAll(".project-filter");
-    const cards = document.querySelectorAll(".project-card");
-    filters.forEach((button) => {
-        button.addEventListener("click", () => {
-            const type = button.dataset.filter;
-            filters.forEach((b) => {
-                b.classList.toggle("is-active", b === button);
-                b.setAttribute("aria-pressed", String(b === button));
-            });
-            cards.forEach((card) => {
-                card.hidden = type !== "all" && card.dataset.category !== type;
-            });
-        });
-    });
-})();
-
 /* ---------- Count-up numbers ([data-count-to]) ----------
    The final value is in the HTML; this counts up from 0 over ~1.2s the
    first time the number scrolls into view. Reduced motion: left as is. */

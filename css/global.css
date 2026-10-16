@@ -1369,20 +1369,9 @@ textarea.form-control {
    Footer
    ========================================================================== */
 .site-footer {
-    position: relative;
     padding-top: 3rem;
     color: var(--color-gray);
     background-color: var(--color-white);
-}
-
-/* Same curved divider as the final CTA, hanging into the top of the footer
-   in the dark colour of the section above it */
-.site-footer:has(.divider-arc-footer) {
-    padding-top: calc(clamp(3rem, 8vw, 7rem) + 3rem);
-}
-
-.divider-arc-footer {
-    --divider-color: var(--color-black);
 }
 
 .footer-grid {
@@ -2963,4 +2952,419 @@ textarea.form-control {
     .dropdown a.is-current {
         background-color: var(--color-offwhite);
     }
+}
+
+/* ==========================================================================
+   Projects / Our Work (shared: homepage and Gallery page)
+   Header row, filter tabs, and tall photo cards with a teal fade; on phones
+   the cards become one swipeable row with the next card peeking in.
+   ========================================================================== */
+.projects {
+    padding-block: 4.5rem 5rem;
+    background-color: var(--color-white);
+}
+
+.projects-header {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.projects-intro .btn {
+    margin-top: 1.5rem;
+}
+
+.project-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 0;
+    margin: 2.5rem 0 2rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid rgba(11, 31, 36, 0.1);
+}
+
+.project-filter {
+    position: relative;
+    padding: 0.35rem 1.1rem;
+    border: 0;
+    background: none;
+    font: inherit;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-black);
+    cursor: pointer;
+    transition: color var(--transition);
+}
+
+.project-filter + .project-filter::before {
+    content: "";
+    position: absolute;
+    left: -0.2rem;
+    top: 50%;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background-color: rgba(11, 31, 36, 0.2);
+    transform: translateY(-50%);
+}
+
+.project-filter:hover,
+.project-filter.is-active {
+    color: var(--color-red);
+}
+
+.project-filter.is-active {
+    text-decoration: underline;
+    text-decoration-color: var(--color-yellow);
+    text-decoration-thickness: 3px;
+    text-underline-offset: 0.45em;
+}
+
+.project-grid {
+    display: grid;
+    gap: 1.25rem;
+}
+
+.project-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0;
+    aspect-ratio: 8 / 7;
+    background-color: var(--color-maroon);
+    animation: project-in 0.45s ease;
+}
+
+.project-card[hidden] {
+    display: none;
+}
+
+.project-card picture,
+.project-card img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+}
+
+.project-card:hover img {
+    transform: scale(1.05);
+}
+
+.project-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(10, 70, 81, 0) 45%, rgba(10, 70, 81, 0.92) 100%);
+    pointer-events: none;
+}
+
+.project-info {
+    position: absolute;
+    left: 1.5rem;
+    right: 1.5rem;
+    bottom: 1.4rem;
+    z-index: 1;
+    color: var(--color-white);
+}
+
+.project-title {
+    font-family: var(--font-body);
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--color-white);
+}
+
+.project-place {
+    margin-top: 0.2rem;
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.82);
+}
+
+@media (min-width: 40rem) {
+    .project-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 64rem) {
+    .projects {
+        padding-block: 6rem;
+    }
+
+    .projects-header {
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: start;
+    }
+
+    .project-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .project-card { animation: none; }
+}
+
+@media (max-width: 47.99rem) {
+    .project-filters {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        margin-inline: calc(-1 * var(--gutter));
+        padding-inline: var(--gutter);
+        scrollbar-width: none;
+    }
+
+    .project-filters::-webkit-scrollbar {
+        display: none;
+    }
+
+    .project-filter {
+        flex: none;
+        white-space: nowrap;
+    }
+}
+
+.projects.has-texture::before {
+    opacity: 0.85;
+    filter: drop-shadow(0 0 4px rgba(226, 228, 29, 0.9)) drop-shadow(0 0 10px rgba(226, 228, 29, 0.6));
+}
+
+@media (max-width: 39.99rem) {
+    .project-grid {
+        display: flex;
+        gap: 1rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        margin-inline: calc(-1 * var(--gutter));
+        padding: 0.25rem var(--gutter) 1rem;
+        scroll-padding-inline: var(--gutter);
+        scrollbar-width: none;
+    }
+
+    .project-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .project-card {
+        flex: 0 0 82%;
+        scroll-snap-align: start;
+        aspect-ratio: 4 / 5;
+    }
+}
+
+.projects.has-texture {
+    --texture-image: url("../images/svg-backgrounds/wobbling-particles-glow.svg");
+}
+
+.projects.has-texture::before {
+    opacity: 1;
+    filter: drop-shadow(0 0 6px rgba(226, 228, 29, 1)) drop-shadow(0 0 14px rgba(14, 96, 112, 0.35));
+}
+
+.projects {
+    position: relative;
+    padding-top: calc(clamp(2.5rem, 7vw, 6.5rem) + 3rem);
+}
+
+@media (min-width: 64rem) {
+    .projects {
+        padding-top: calc(clamp(2.5rem, 7vw, 6.5rem) + 4rem);
+    }
+}
+
+@keyframes project-in {
+    from { opacity: 0; transform: scale(0.97); }
+    to   { opacity: 1; transform: none; }
+}
+
+/* ==========================================================================
+   Photo viewer (project photos on the homepage and Gallery page)
+   global.js adds a "view larger" button to each project card and opens the
+   photo full screen in a <dialog>, with an X, arrows, and Esc to close.
+   ========================================================================== */
+.project-zoom {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 1rem;
+    background: none;
+    border: 0;
+    cursor: zoom-in;
+}
+
+.project-zoom-icon {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    color: var(--color-black);
+    background-color: var(--color-yellow);
+    opacity: 0;
+    transform: scale(0.85);
+    transition: opacity var(--transition), transform var(--transition);
+}
+
+.project-zoom-icon .icon {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.project-card:hover .project-zoom-icon,
+.project-zoom:focus-visible .project-zoom-icon {
+    opacity: 1;
+    transform: none;
+}
+
+.project-zoom:focus-visible {
+    outline: 3px solid var(--color-yellow);
+    outline-offset: -3px;
+}
+
+/* Touch screens: always show the magnifier so people know they can tap */
+@media (hover: none) {
+    .project-zoom-icon {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.lightbox {
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    color: var(--color-white);
+    background: transparent;
+    border: 0;
+}
+
+.lightbox::backdrop {
+    background-color: rgba(6, 20, 24, 0.92);
+    backdrop-filter: blur(4px);
+}
+
+.lightbox[open] {
+    display: grid;
+    place-items: center;
+    animation: lightbox-in 0.3s ease;
+}
+
+.lightbox-figure {
+    display: grid;
+    gap: 0.9rem;
+    max-width: min(92vw, 70rem);
+    margin: 0;
+    padding: 2.5rem 1.5rem;
+}
+
+.lightbox-img {
+    display: block;
+    max-width: 100%;
+    max-height: calc(100vh - 11rem);
+    margin: 0 auto;
+    object-fit: contain;
+    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.5);
+    animation: lightbox-zoom 0.35s ease;
+}
+
+.lightbox-caption {
+    text-align: center;
+}
+
+.lightbox-title {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    letter-spacing: 0.02em;
+}
+
+.lightbox-place,
+.lightbox-count {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.lightbox-count {
+    margin-top: 0.25rem;
+    color: var(--color-yellow);
+}
+
+.lightbox-close,
+.lightbox-nav {
+    position: fixed;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    color: var(--color-black);
+    background-color: var(--color-yellow);
+    border: 0;
+    cursor: pointer;
+    transition: background-color var(--transition), transform var(--transition);
+}
+
+.lightbox-close:hover,
+.lightbox-nav:hover {
+    background-color: var(--color-white);
+}
+
+.lightbox-close:focus-visible,
+.lightbox-nav:focus-visible {
+    outline: 3px solid var(--color-white);
+    outline-offset: 3px;
+}
+
+.lightbox-close {
+    top: 1rem;
+    right: 1rem;
+}
+
+.lightbox-nav {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.lightbox-prev { left: 0.75rem; }
+.lightbox-next { right: 0.75rem; }
+
+.lightbox-close .icon,
+.lightbox-nav .icon {
+    width: 1.35rem;
+    height: 1.35rem;
+}
+
+@media (min-width: 64rem) {
+    .lightbox-prev { left: 2rem; }
+    .lightbox-next { right: 2rem; }
+    .lightbox-close { top: 1.5rem; right: 2rem; }
+}
+
+@keyframes lightbox-in {
+    from { opacity: 0; }
+}
+
+@keyframes lightbox-zoom {
+    from { opacity: 0; transform: scale(0.96); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .lightbox[open],
+    .lightbox-img {
+        animation: none;
+    }
+}
+
+html.lightbox-open {
+    overflow: hidden;
 }

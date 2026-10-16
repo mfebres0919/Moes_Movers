@@ -66,22 +66,3 @@
         });
     });
 })();
-
-/* ---------- Sidebar "Get a free consultation" form ----------
-   TODO: connect to Moe's form handler; for now it validates and thanks the visitor. */
-(function () {
-    const form = document.getElementById("sd-quick-form");
-    const success = document.getElementById("sd-quick-success");
-    if (!form || !success) return;
-    form.addEventListener("submit", (event) => {
-        event.preventDefault();
-        const invalid = [...form.elements].find((field) => field.willValidate && !field.checkValidity());
-        if (invalid) {
-            invalid.reportValidity();
-            return;
-        }
-        form.hidden = true;
-        success.hidden = false;
-        success.focus();
-    });
-})();

@@ -405,3 +405,108 @@ document.querySelectorAll("[data-reviews]").forEach((root) => {
         }
     });
 })();
+
+/* ---------- Projects: filter by service (homepage and Gallery page) ---------- */
+(function () {
+    const filters = document.querySelectorAll(".project-filter");
+    const cards = document.querySelectorAll(".project-card");
+    filters.forEach((button) => {
+        button.addEventListener("click", () => {
+            const type = button.dataset.filter;
+            filters.forEach((b) => {
+                b.classList.toggle("is-active", b === button);
+                b.setAttribute("aria-pressed", String(b === button));
+            });
+            cards.forEach((card) => {
+                card.hidden = type !== "all" && card.dataset.category !== type;
+            });
+        });
+    });
+})();
+
+/* ---------- Photo viewer for project photos ----------
+   Each project card gets a "view larger" button. The photo opens full
+   screen with its title; arrows (or the arrow keys) step through the
+   photos that are currently showing, and the X, Esc, or a click on the
+   dark backdrop closes it. Focus returns to the photo that was opened. */
+(function () {
+    const cards = [...document.querySelectorAll(".project-card")];
+    if (!cards.length || typeof HTMLDialogElement === "undefined") return;
+
+    const svg = (path) => `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">${path}</svg>`;
+    const dialog = document.createElement("dialog");
+    dialog.className = "lightbox";
+    dialog.setAttribute("aria-label", "Project photo");
+    dialog.innerHTML = `
+        <button class="lightbox-close" type="button" aria-label="Close photo">${svg('<path d="M6 6l12 12M18 6 6 18"/>')}</button>
+        <button class="lightbox-nav lightbox-prev" type="button" aria-label="Previous photo">${svg('<path d="m15 6-6 6 6 6"/>')}</button>
+        <button class="lightbox-nav lightbox-next" type="button" aria-label="Next photo">${svg('<path d="m9 6 6 6-6 6"/>')}</button>
+        <figure class="lightbox-figure">
+            <img class="lightbox-img" alt="">
+            <figcaption class="lightbox-caption">
+                <p class="lightbox-title"></p>
+                <p class="lightbox-place"></p>
+                <p class="lightbox-count"></p>
+            </figcaption>
+        </figure>`;
+    document.body.appendChild(dialog);
+
+    const img = dialog.querySelector(".lightbox-img");
+    const title = dialog.querySelector(".lightbox-title");
+    const place = dialog.querySelector(".lightbox-place");
+    const count = dialog.querySelector(".lightbox-count");
+    let list = [];
+    let index = 0;
+    let opener = null;
+
+    function show(i) {
+        index = (i + list.length) % list.length;
+        const card = list[index];
+        const source = card.querySelector("img");
+        img.src = source.currentSrc || source.src;
+        img.alt = source.alt;
+        title.textContent = card.querySelector(".project-title")?.textContent || "";
+        place.textContent = card.querySelector(".project-place")?.textContent || "";
+        count.textContent = `${index + 1} / ${list.length}`;
+        img.style.animation = "none";
+        void img.offsetWidth; // restart the zoom-in for each photo
+        img.style.animation = "";
+    }
+
+    function open(card) {
+        list = cards.filter((c) => !c.hidden); // only photos in the current filter
+        opener = card.querySelector(".project-zoom");
+        show(list.indexOf(card));
+        dialog.showModal();
+        document.documentElement.classList.add("lightbox-open");
+        window.lenis?.stop();
+    }
+
+    dialog.addEventListener("close", () => {
+        document.documentElement.classList.remove("lightbox-open");
+        window.lenis?.start();
+        opener?.focus({ preventScroll: true });
+    });
+
+    cards.forEach((card) => {
+        const name = card.querySelector(".project-title")?.textContent || "project";
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "project-zoom";
+        button.setAttribute("aria-label", `View larger photo: ${name}`);
+        button.innerHTML = `<span class="project-zoom-icon">${svg('<circle cx="11" cy="11" r="7"/><path d="m20 20-4-4M11 8v6M8 11h6"/>')}</span>`;
+        button.addEventListener("click", () => open(card));
+        card.appendChild(button);
+    });
+
+    dialog.querySelector(".lightbox-close").addEventListener("click", () => dialog.close());
+    dialog.querySelector(".lightbox-prev").addEventListener("click", () => show(index - 1));
+    dialog.querySelector(".lightbox-next").addEventListener("click", () => show(index + 1));
+    dialog.addEventListener("click", (event) => {
+        if (event.target === dialog) dialog.close();
+    });
+    dialog.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") show(index - 1);
+        if (event.key === "ArrowRight") show(index + 1);
+    });
+})();

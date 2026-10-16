@@ -1,0 +1,20 @@
+/* ==========================================================================
+   Moe's Movers — Our Work (gallery) page
+   The projects section itself is shared with the homepage (global.css).
+   ========================================================================== */
+
+/* The page hero's divider leads straight into the projects section */
+.projects-page {
+    padding-top: 3rem;
+}
+
+@media (min-width: 64rem) {
+    .projects-page {
+        padding-top: 4rem;
+    }
+}
+
+/* Final CTA: its curved top is painted in the projects section's colour */
+.final-cta .divider-arc {
+    --divider-color: var(--color-white);
+}

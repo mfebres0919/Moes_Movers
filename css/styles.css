@@ -2443,165 +2443,6 @@
     position: relative;
 }
 
-/* ==========================================================================
-   Projects: header row, filter tabs, tall photo cards with a teal fade
-   ========================================================================== */
-.projects {
-    padding-block: 4.5rem 5rem;
-    background-color: var(--color-white);
-}
-
-.projects-header {
-    display: grid;
-    gap: 1.5rem;
-}
-
-.projects-intro .btn {
-    margin-top: 1.5rem;
-}
-
-.project-filters {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.5rem 0;
-    margin: 2.5rem 0 2rem;
-    padding-bottom: 1.25rem;
-    border-bottom: 1px solid rgba(11, 31, 36, 0.1);
-}
-
-.project-filter {
-    position: relative;
-    padding: 0.35rem 1.1rem;
-    border: 0;
-    background: none;
-    font: inherit;
-    font-size: 0.9375rem;
-    font-weight: 500;
-    color: var(--color-black);
-    cursor: pointer;
-    transition: color var(--transition);
-}
-
-.project-filter + .project-filter::before {
-    content: "";
-    position: absolute;
-    left: -0.2rem;
-    top: 50%;
-    width: 0.4rem;
-    height: 0.4rem;
-    border-radius: 50%;
-    background-color: rgba(11, 31, 36, 0.2);
-    transform: translateY(-50%);
-}
-
-.project-filter:hover,
-.project-filter.is-active {
-    color: var(--color-red);
-}
-
-.project-filter.is-active {
-    text-decoration: underline;
-    text-decoration-color: var(--color-yellow);
-    text-decoration-thickness: 3px;
-    text-underline-offset: 0.45em;
-}
-
-.project-grid {
-    display: grid;
-    gap: 1.25rem;
-}
-
-.project-card {
-    position: relative;
-    overflow: hidden;
-    border-radius: 0;
-    aspect-ratio: 8 / 7;
-    background-color: var(--color-maroon);
-    animation: project-in 0.45s ease;
-}
-
-.project-card[hidden] {
-    display: none;
-}
-
-@keyframes project-in {
-    from { opacity: 0; transform: scale(0.97); }
-    to   { opacity: 1; transform: none; }
-}
-
-.project-card picture,
-.project-card img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.7s ease;
-}
-
-.project-card:hover img {
-    transform: scale(1.05);
-}
-
-/* Teal fade up from the bottom so the title reads on any photo */
-.project-card::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(10, 70, 81, 0) 45%, rgba(10, 70, 81, 0.92) 100%);
-    pointer-events: none;
-}
-
-.project-info {
-    position: absolute;
-    left: 1.5rem;
-    right: 1.5rem;
-    bottom: 1.4rem;
-    z-index: 1;
-    color: var(--color-white);
-}
-
-.project-title {
-    font-family: var(--font-body);
-    font-size: 1.25rem;
-    font-weight: 600;
-    letter-spacing: 0;
-    text-transform: none;
-    color: var(--color-white);
-}
-
-.project-place {
-    margin-top: 0.2rem;
-    font-size: 0.9375rem;
-    color: rgba(255, 255, 255, 0.82);
-}
-
-@media (min-width: 40rem) {
-    .project-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-@media (min-width: 64rem) {
-    .projects {
-        padding-block: 6rem;
-    }
-
-    .projects-header {
-        grid-template-columns: 1fr 1fr;
-        gap: 4rem;
-        align-items: start;
-    }
-
-    .project-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 1.5rem;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .project-card { animation: none; }
-}
 
 /* Hero: form sits centred beside the copy, with room below the header */
 @media (min-width: 64rem) {
@@ -2619,26 +2460,6 @@
 }
 
 /* Phones: filter tabs stay on one line and swipe sideways */
-@media (max-width: 47.99rem) {
-    .project-filters {
-        flex-wrap: nowrap;
-        justify-content: flex-start;
-        overflow-x: auto;
-        margin-inline: calc(-1 * var(--gutter));
-        padding-inline: var(--gutter);
-        scrollbar-width: none;
-    }
-
-    .project-filters::-webkit-scrollbar {
-        display: none;
-    }
-
-    .project-filter {
-        flex: none;
-        white-space: nowrap;
-    }
-}
-
 /* Stat under the Book Your Move button */
 .about-stat-cta {
     margin-top: 1.75rem;
@@ -2660,46 +2481,6 @@
     }
 }
 
-/* Projects: the floating particles behind the cards, with a soft glow */
-.projects.has-texture::before {
-    opacity: 0.85;
-    filter: drop-shadow(0 0 4px rgba(226, 228, 29, 0.9)) drop-shadow(0 0 10px rgba(226, 228, 29, 0.6));
-}
-
-/* Phones: projects become one swipeable row, the next card peeking in */
-@media (max-width: 39.99rem) {
-    .project-grid {
-        display: flex;
-        gap: 1rem;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        margin-inline: calc(-1 * var(--gutter));
-        padding: 0.25rem var(--gutter) 1rem;
-        scroll-padding-inline: var(--gutter);
-        scrollbar-width: none;
-    }
-
-    .project-grid::-webkit-scrollbar {
-        display: none;
-    }
-
-    .project-card {
-        flex: 0 0 82%;
-        scroll-snap-align: start;
-        aspect-ratio: 4 / 5;
-    }
-}
-
-/* Bigger, brighter particles on the white projects background */
-.projects.has-texture {
-    --texture-image: url("../images/svg-backgrounds/wobbling-particles-glow.svg");
-}
-
-.projects.has-texture::before {
-    opacity: 1;
-    filter: drop-shadow(0 0 6px rgba(226, 228, 29, 1)) drop-shadow(0 0 14px rgba(14, 96, 112, 0.35));
-}
-
 
 /* About: very faint constellation pattern behind the content
    (images/svg-backgrounds/endless-constellation-teal.svg, tiled) */
@@ -2715,18 +2496,6 @@
     background: url("../images/svg-backgrounds/endless-constellation-teal.svg") center / 32rem repeat;
     opacity: 0.07;
     pointer-events: none;
-}
-
-/* Room at the top of Projects for the divider from About */
-.projects {
-    position: relative;
-    padding-top: calc(clamp(2.5rem, 7vw, 6.5rem) + 3rem);
-}
-
-@media (min-width: 64rem) {
-    .projects {
-        padding-top: calc(clamp(2.5rem, 7vw, 6.5rem) + 4rem);
-    }
 }
 
 /* ==========================================================================
@@ -3484,4 +3253,11 @@
 
 .map-card-cta a:hover {
     color: var(--color-white);
+}
+
+/* Hero: extra breathing room on the left and right on larger screens */
+@media (min-width: 64rem) {
+    .hero .hero-content {
+        padding-inline: clamp(2rem, 5vw, 6rem);
+    }
 }
