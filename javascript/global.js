@@ -463,7 +463,8 @@ document.querySelectorAll("[data-reviews]").forEach((root) => {
         index = (i + list.length) % list.length;
         const card = list[index];
         const source = card.querySelector("img");
-        img.src = source.currentSrc || source.src;
+        // Always show the full-size photo, not the smaller phone copy (-480 / -640) the page loaded
+        img.src = (source.currentSrc || source.src).replace(/-(?:480|640)(\.\w+)$/, "$1");
         img.alt = source.alt;
         title.textContent = (card.querySelector(".project-title, figcaption")?.textContent || "").trim();
         place.textContent = card.querySelector(".project-place")?.textContent || "";

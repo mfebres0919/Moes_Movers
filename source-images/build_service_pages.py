@@ -49,6 +49,7 @@ FEATURE_ICONS = {
 SERVICES = [
     {
         "slug": "home-moves",
+        "desc": "Houston home moves planned around your schedule, with furniture and floor protection and clear, upfront pricing.",  # meta + link-preview description, 125 characters max
         "name": "Home Moves",
         "hero": "hero-truck-house",
         "title": "Local home moves, handled from the first box to the last.",
@@ -75,6 +76,7 @@ SERVICES = [
     },
     {
         "slug": "apartment-condo-moves",
+        "desc": "Houston apartment and condo moves coordinated with your building: loading docks, elevators and move-in windows.",  # meta + link-preview description, 125 characters max
         "name": "Apartment and Condo Moves",
         "hero": "hero-moe-truck",
         "title": "Apartment and condo moves that follow the building's rules.",
@@ -101,6 +103,7 @@ SERVICES = [
     },
     {
         "slug": "packing-unpacking",
+        "desc": "Room-by-room packing and unpacking in Houston with our own supplies, labeled boxes and a faster settle-in.",  # meta + link-preview description, 125 characters max
         "name": "Packing and Unpacking",
         "hero": "hero-truck-home",
         "title": "Packing and unpacking, so you can skip the boxes.",
@@ -127,6 +130,7 @@ SERVICES = [
     },
     {
         "slug": "commercial-office-moves",
+        "desc": "Houston office and commercial moves planned around your hours, including evenings and weekends, to cut downtime.",  # meta + link-preview description, 125 characters max
         "name": "Commercial and Office Moves",
         "hero": "hero-moe-truck-side",
         "title": "Office moves planned around your business hours.",
@@ -153,6 +157,7 @@ SERVICES = [
     },
     {
         "slug": "storage-moves",
+        "desc": "Houston storage moves: every piece wrapped, stacked to fit more, and the things you need kept easy to reach.",  # meta + link-preview description, 125 characters max
         "name": "Storage Moves",
         "hero": "hero-moe-truck",
         "title": "Storage moves, stacked to save space.",
@@ -184,11 +189,21 @@ def icon(name, cls="icon"):
     return f'<svg class="{cls}" viewBox="0 0 24 24" aria-hidden="true">{ICONS[name]}</svg>'
 
 
-def picture(name, alt, w=840, h=740, cls=""):
+# Displayed width of each side-by-side photo: about 42vw on phones/tablets, 32vw on desktop
+PHOTO_SIZES = "(min-width: 64rem) 32vw, 42vw"
+
+
+def picture(name, alt, w=840, h=740, cls="", sizes=None):
+    """With sizes, phones get the 480px-wide copy (name-480) instead of the full photo."""
     c = f' class="{cls}"' if cls else ""
+    if sizes:
+        webp = f'srcset="../images/{name}-480.webp 480w, ../images/{name}.webp {w}w" sizes="{sizes}"'
+        jpg = f' srcset="../images/{name}-480.jpg 480w, ../images/{name}.jpg {w}w" sizes="{sizes}"'
+    else:
+        webp, jpg = f'srcset="../images/{name}.webp"', ""
     return (f'<picture{c}>\n'
-            f'                            <source type="image/webp" srcset="../images/{name}.webp">\n'
-            f'                            <img src="../images/{name}.jpg" alt="{alt}" width="{w}" height="{h}" loading="lazy" decoding="async">\n'
+            f'                            <source type="image/webp" {webp}>\n'
+            f'                            <img src="../images/{name}.jpg"{jpg} alt="{alt}" width="{w}" height="{h}" loading="lazy" decoding="async">\n'
             f'                        </picture>')
 
 
@@ -226,7 +241,7 @@ def sidebar(active):
                         </div>
 
                         <div class="sd-card sd-brand">
-                            <img class="sd-brand-logo" src="../images/brand/logo-teal.png" alt="Move with Moe" width="900" height="103" loading="lazy" decoding="async">
+                            <img class="sd-brand-logo" src="../images/brand/logo-teal.webp" alt="Move with Moe" width="400" height="46" loading="lazy" decoding="async">
                             <picture class="sd-brand-photo">
                                 <source type="image/webp" srcset="../images/about/about-truck.webp">
                                 <img src="../images/about/about-truck.jpg" alt="The Move with Moe box truck" width="640" height="360" loading="lazy" decoding="async">
@@ -280,10 +295,10 @@ def main_column(s):
                     <!-- Two full photos side by side (both are tall crew photos, so nothing is cropped) -->
                     <div class="sd-photos">
                         <figure class="sd-photo">
-                            {picture(img, alt, 900, 1200)}
+                            {picture(img, alt, 900, 1200, sizes=PHOTO_SIZES)}
                         </figure>
                         <figure class="sd-photo">
-                            {picture(simg, salt, 900, 1200)}
+                            {picture(simg, salt, 900, 1200, sizes=PHOTO_SIZES)}
                         </figure>
                     </div>
 
@@ -315,7 +330,12 @@ def build():
     for s in SERVICES:
         page = base
         page = re.sub(r"<title>.*?</title>", f"<title>{s['name']} in Houston | Moe's Movers | Move with Moe</title>", page, count=1)
-        page = re.sub(r'<meta name="description" content="[^"]*">', f'<meta name="description" content="{s["intro"][:155].rsplit(" ", 1)[0]}.">', page, count=1)
+        # Search + link-preview tags: this page's own title, description and URL
+        url = f"https://mfebres0919.github.io/Moes_Movers/html/service-{s['slug']}.html"
+        og_title = f"{s['name']} in Houston | Moe's Movers"
+        page = re.sub(r'(<meta (?:name|property)="(?:description|og:description|twitter:description)" content=")[^"]*', lambda m: m.group(1) + s["desc"], page)
+        page = re.sub(r'(<meta (?:property|name)="(?:og:title|twitter:title)" content=")[^"]*', lambda m: m.group(1) + og_title, page)
+        page = re.sub(r'(<link rel="canonical" href=")[^"]*|(<meta property="og:url" content=")[^"]*', lambda m: (m.group(1) or m.group(2)) + url, page)
         page = page.replace('href="../css/services.css"', 'href="../css/service-details.css"')
         page = page.replace('src="../javascript/services.js"', 'src="../javascript/service-details.js"')
         page = page.replace("hero-truck-home", s["hero"])
