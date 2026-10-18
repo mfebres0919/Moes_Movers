@@ -38,7 +38,7 @@
     <!-- ===== Loading screen ===== -->
     <div class="loader" id="loader" role="status" aria-live="polite" aria-label="Loading Moe's Movers">
         <div class="loader-inner">
-            <p class="loader-brand"><img class="loader-logo" src="images/brand/logo-yellow.webp" alt="Move with Moe" width="640" height="73" decoding="async"></p>
+            <p class="loader-brand"><img class="loader-logo" src="images/brand/logo-yellow.webp" alt="Move with Moe" width="560" height="64" decoding="async"></p>
             <div class="loader-track" aria-hidden="true">
                 <picture class="loader-truck">
                     <source type="image/webp" srcset="images/brand/loader-truck-right-320.webp">
@@ -165,22 +165,22 @@
                     <img src="images/hero/hero-moe-truck-side-m.jpg" alt="" width="560" height="941" decoding="async" fetchpriority="high">
                 </picture>
                 <picture class="hero-slide">
-                    <source media="(min-width: 48rem)" type="image/webp" srcset="images/hero/hero-truck-house.webp" width="1672" height="941">
-                    <source media="(min-width: 48rem)" type="image/jpeg" srcset="images/hero/hero-truck-house.jpg" width="1672" height="941">
-                    <source type="image/webp" srcset="images/hero/hero-truck-house-m.webp">
-                    <img src="images/hero/hero-truck-house-m.jpg" alt="" width="560" height="941" decoding="async" fetchpriority="low">
+                    <source media="(min-width: 48rem)" type="image/webp" data-srcset="images/hero/hero-truck-house.webp" width="1672" height="941">
+                    <source media="(min-width: 48rem)" type="image/jpeg" data-srcset="images/hero/hero-truck-house.jpg" width="1672" height="941">
+                    <source type="image/webp" data-srcset="images/hero/hero-truck-house-m.webp">
+                    <img data-src="images/hero/hero-truck-house-m.jpg" alt="" width="560" height="941" decoding="async" fetchpriority="low">
                 </picture>
                 <picture class="hero-slide">
-                    <source media="(min-width: 48rem)" type="image/webp" srcset="images/hero/hero-moe-truck.webp" width="1672" height="941">
-                    <source media="(min-width: 48rem)" type="image/jpeg" srcset="images/hero/hero-moe-truck.jpg" width="1672" height="941">
-                    <source type="image/webp" srcset="images/hero/hero-moe-truck-m.webp">
-                    <img src="images/hero/hero-moe-truck-m.jpg" alt="" width="560" height="941" decoding="async" fetchpriority="low">
+                    <source media="(min-width: 48rem)" type="image/webp" data-srcset="images/hero/hero-moe-truck.webp" width="1672" height="941">
+                    <source media="(min-width: 48rem)" type="image/jpeg" data-srcset="images/hero/hero-moe-truck.jpg" width="1672" height="941">
+                    <source type="image/webp" data-srcset="images/hero/hero-moe-truck-m.webp">
+                    <img data-src="images/hero/hero-moe-truck-m.jpg" alt="" width="560" height="941" decoding="async" fetchpriority="low">
                 </picture>
                 <picture class="hero-slide">
-                    <source media="(min-width: 48rem)" type="image/webp" srcset="images/hero/hero-truck-home.webp" width="1672" height="941">
-                    <source media="(min-width: 48rem)" type="image/jpeg" srcset="images/hero/hero-truck-home.jpg" width="1672" height="941">
-                    <source type="image/webp" srcset="images/hero/hero-truck-home-m.webp">
-                    <img src="images/hero/hero-truck-home-m.jpg" alt="" width="560" height="941" decoding="async" fetchpriority="low">
+                    <source media="(min-width: 48rem)" type="image/webp" data-srcset="images/hero/hero-truck-home.webp" width="1672" height="941">
+                    <source media="(min-width: 48rem)" type="image/jpeg" data-srcset="images/hero/hero-truck-home.jpg" width="1672" height="941">
+                    <source type="image/webp" data-srcset="images/hero/hero-truck-home-m.webp">
+                    <img data-src="images/hero/hero-truck-home-m.jpg" alt="" width="560" height="941" decoding="async" fetchpriority="low">
                 </picture>
             </div>
 
@@ -479,8 +479,8 @@
             <div class="container about-layout">
                 <div class="about-media">
                     <picture>
-                        <source type="image/webp" srcset="images/about/about-moe-driving.webp">
-                        <img src="images/about/about-moe-driving.jpg" alt="Moe behind the wheel of the Move with Moe truck" width="840" height="1000" loading="lazy" decoding="async">
+                        <source type="image/webp" srcset="images/about/about-moe-driving-640.webp 640w, images/about/about-moe-driving.webp 840w" sizes="(min-width: 64rem) 30rem, 92vw">
+                        <img src="images/about/about-moe-driving.jpg" srcset="images/about/about-moe-driving-640.jpg 640w, images/about/about-moe-driving.jpg 840w" sizes="(min-width: 64rem) 30rem, 92vw" alt="Moe behind the wheel of the Move with Moe truck" width="840" height="1000" loading="lazy" decoding="async">
                     </picture>
                     <img class="about-badge" src="images/brand/logo-m.webp" alt="" width="120" height="64" loading="lazy" decoding="async">
                 </div>
@@ -583,8 +583,8 @@
                 <ul class="project-grid" aria-live="polite">
                     <li class="project-card" data-category="local">
                         <picture>
-                            <source type="image/webp" srcset="images/projects/gallery-townhome.webp">
-                            <img src="images/projects/gallery-townhome.jpg" alt="A townhome move with the Move with Moe truck" width="840" height="740" loading="lazy" decoding="async">
+                            <source type="image/webp" srcset="images/projects/gallery-townhome-640.webp 640w, images/projects/gallery-townhome.webp 840w" sizes="(min-width: 64rem) 31vw, (min-width: 40rem) 46vw, 76vw">
+                            <img src="images/projects/gallery-townhome.jpg" srcset="images/projects/gallery-townhome-640.jpg 640w, images/projects/gallery-townhome.jpg 840w" sizes="(min-width: 64rem) 31vw, (min-width: 40rem) 46vw, 76vw" alt="A townhome move with the Move with Moe truck" width="840" height="740" loading="lazy" decoding="async">
                         </picture>
                         <div class="project-info">
                             <h3 class="project-title">Townhome Move</h3>
@@ -593,8 +593,8 @@
                     </li>
                     <li class="project-card" data-category="local">
                         <picture>
-                            <source type="image/webp" srcset="images/projects/gallery-two-story.webp">
-                            <img src="images/projects/gallery-two-story.jpg" alt="The Move with Moe truck parked at a two-story home" width="840" height="740" loading="lazy" decoding="async">
+                            <source type="image/webp" srcset="images/projects/gallery-two-story-640.webp 640w, images/projects/gallery-two-story.webp 840w" sizes="(min-width: 64rem) 31vw, (min-width: 40rem) 46vw, 76vw">
+                            <img src="images/projects/gallery-two-story.jpg" srcset="images/projects/gallery-two-story-640.jpg 640w, images/projects/gallery-two-story.jpg 840w" sizes="(min-width: 64rem) 31vw, (min-width: 40rem) 46vw, 76vw" alt="The Move with Moe truck parked at a two-story home" width="840" height="740" loading="lazy" decoding="async">
                         </picture>
                         <div class="project-info">
                             <h3 class="project-title">Two-Story Home Move</h3>
@@ -603,8 +603,8 @@
                     </li>
                     <li class="project-card" data-category="packing">
                         <picture>
-                            <source type="image/webp" srcset="images/projects/gallery-loading.webp">
-                            <img src="images/projects/gallery-loading.jpg" alt="Moe loading a wrapped rug into the truck" width="840" height="740" loading="lazy" decoding="async">
+                            <source type="image/webp" srcset="images/projects/gallery-loading-640.webp 640w, images/projects/gallery-loading.webp 840w" sizes="(min-width: 64rem) 31vw, (min-width: 40rem) 46vw, 76vw">
+                            <img src="images/projects/gallery-loading.jpg" srcset="images/projects/gallery-loading-640.jpg 640w, images/projects/gallery-loading.jpg 840w" sizes="(min-width: 64rem) 31vw, (min-width: 40rem) 46vw, 76vw" alt="Moe loading a wrapped rug into the truck" width="840" height="740" loading="lazy" decoding="async">
                         </picture>
                         <div class="project-info">
                             <h3 class="project-title">Loading with Care</h3>
@@ -613,8 +613,8 @@
                     </li>
                     <li class="project-card" data-category="apartment">
                         <picture>
-                            <source type="image/webp" srcset="images/projects/gallery-downtown.webp">
-                            <img src="images/projects/gallery-downtown.jpg" alt="The Move with Moe truck outside a downtown Houston tower" width="840" height="740" loading="lazy" decoding="async">
+                            <source type="image/webp" srcset="images/projects/gallery-downtown-640.webp 640w, images/projects/gallery-downtown.webp 840w" sizes="(min-width: 64rem) 31vw, (min-width: 40rem) 46vw, 76vw">
+                            <img src="images/projects/gallery-downtown.jpg" srcset="images/projects/gallery-downtown-640.jpg 640w, images/projects/gallery-downtown.jpg 840w" sizes="(min-width: 64rem) 31vw, (min-width: 40rem) 46vw, 76vw" alt="The Move with Moe truck outside a downtown Houston tower" width="840" height="740" loading="lazy" decoding="async">
                         </picture>
                         <div class="project-info">
                             <h3 class="project-title">High-Rise Move</h3>
@@ -623,8 +623,8 @@
                     </li>
                     <li class="project-card" data-category="commercial">
                         <picture>
-                            <source type="image/webp" srcset="images/projects/gallery-office.webp">
-                            <img src="images/projects/gallery-office.jpg" alt="The Move with Moe truck outside an office building" width="840" height="740" loading="lazy" decoding="async">
+                            <source type="image/webp" srcset="images/projects/gallery-office-640.webp 640w, images/projects/gallery-office.webp 840w" sizes="(min-width: 64rem) 31vw, (min-width: 40rem) 46vw, 76vw">
+                            <img src="images/projects/gallery-office.jpg" srcset="images/projects/gallery-office-640.jpg 640w, images/projects/gallery-office.jpg 840w" sizes="(min-width: 64rem) 31vw, (min-width: 40rem) 46vw, 76vw" alt="The Move with Moe truck outside an office building" width="840" height="740" loading="lazy" decoding="async">
                         </picture>
                         <div class="project-info">
                             <h3 class="project-title">Office Move</h3>
@@ -633,8 +633,8 @@
                     </li>
                     <li class="project-card" data-category="packing">
                         <picture>
-                            <source type="image/webp" srcset="images/projects/gallery-securing.webp">
-                            <img src="images/projects/gallery-securing.jpg" alt="Moe strapping a load inside the truck" width="840" height="740" loading="lazy" decoding="async">
+                            <source type="image/webp" srcset="images/projects/gallery-securing-640.webp 640w, images/projects/gallery-securing.webp 840w" sizes="(min-width: 64rem) 31vw, (min-width: 40rem) 46vw, 76vw">
+                            <img src="images/projects/gallery-securing.jpg" srcset="images/projects/gallery-securing-640.jpg 640w, images/projects/gallery-securing.jpg 840w" sizes="(min-width: 64rem) 31vw, (min-width: 40rem) 46vw, 76vw" alt="Moe strapping a load inside the truck" width="840" height="740" loading="lazy" decoding="async">
                         </picture>
                         <div class="project-info">
                             <h3 class="project-title">Every Load Secured</h3>
@@ -643,8 +643,8 @@
                     </li>
                     <li class="project-card" data-category="local">
                         <picture>
-                            <source type="image/webp" srcset="images/projects/gallery-wrapped-furniture.webp">
-                            <img src="images/projects/gallery-wrapped-furniture.jpg" alt="Two Move with Moe movers rolling a wrapped piece of furniture out of a home" width="840" height="740" loading="lazy" decoding="async">
+                            <source type="image/webp" srcset="images/projects/gallery-wrapped-furniture-640.webp 640w, images/projects/gallery-wrapped-furniture.webp 840w" sizes="(min-width: 64rem) 31vw, (min-width: 40rem) 46vw, 76vw">
+                            <img src="images/projects/gallery-wrapped-furniture.jpg" srcset="images/projects/gallery-wrapped-furniture-640.jpg 640w, images/projects/gallery-wrapped-furniture.jpg 840w" sizes="(min-width: 64rem) 31vw, (min-width: 40rem) 46vw, 76vw" alt="Two Move with Moe movers rolling a wrapped piece of furniture out of a home" width="840" height="740" loading="lazy" decoding="async">
                         </picture>
                         <div class="project-info">
                             <h3 class="project-title">Furniture Wrapped &amp; Rolled Out</h3>
@@ -653,8 +653,8 @@
                     </li>
                     <li class="project-card" data-category="storage">
                         <picture>
-                            <source type="image/webp" srcset="images/projects/gallery-stacked.webp">
-                            <img src="images/projects/gallery-stacked.jpg" alt="A mover stacking boxes neatly inside the truck" width="840" height="740" loading="lazy" decoding="async">
+                            <source type="image/webp" srcset="images/projects/gallery-stacked-640.webp 640w, images/projects/gallery-stacked.webp 840w" sizes="(min-width: 64rem) 31vw, (min-width: 40rem) 46vw, 76vw">
+                            <img src="images/projects/gallery-stacked.jpg" srcset="images/projects/gallery-stacked-640.jpg 640w, images/projects/gallery-stacked.jpg 840w" sizes="(min-width: 64rem) 31vw, (min-width: 40rem) 46vw, 76vw" alt="A mover stacking boxes neatly inside the truck" width="840" height="740" loading="lazy" decoding="async">
                         </picture>
                         <div class="project-info">
                             <h3 class="project-title">Packed &amp; Stacked for Storage</h3>
@@ -663,8 +663,8 @@
                     </li>
                     <li class="project-card" data-category="apartment">
                         <picture>
-                            <source type="image/webp" srcset="images/projects/gallery-elevator.webp">
-                            <img src="images/projects/gallery-elevator.jpg" alt="A mover bringing a stack of boxes up in a building elevator" width="840" height="740" loading="lazy" decoding="async">
+                            <source type="image/webp" srcset="images/projects/gallery-elevator-640.webp 640w, images/projects/gallery-elevator.webp 840w" sizes="(min-width: 64rem) 31vw, (min-width: 40rem) 46vw, 76vw">
+                            <img src="images/projects/gallery-elevator.jpg" srcset="images/projects/gallery-elevator-640.jpg 640w, images/projects/gallery-elevator.jpg 840w" sizes="(min-width: 64rem) 31vw, (min-width: 40rem) 46vw, 76vw" alt="A mover bringing a stack of boxes up in a building elevator" width="840" height="740" loading="lazy" decoding="async">
                         </picture>
                         <div class="project-info">
                             <h3 class="project-title">Elevator Move</h3>
@@ -673,8 +673,8 @@
                     </li>
                     <li class="project-card" data-category="local">
                         <picture>
-                            <source type="image/webp" srcset="images/projects/gallery-crew-team.webp">
-                            <img src="images/projects/gallery-crew-team.jpg" alt="Two movers working together inside the loaded truck" width="840" height="740" loading="lazy" decoding="async">
+                            <source type="image/webp" srcset="images/projects/gallery-crew-team-640.webp 640w, images/projects/gallery-crew-team.webp 840w" sizes="(min-width: 64rem) 31vw, (min-width: 40rem) 46vw, 76vw">
+                            <img src="images/projects/gallery-crew-team.jpg" srcset="images/projects/gallery-crew-team-640.jpg 640w, images/projects/gallery-crew-team.jpg 840w" sizes="(min-width: 64rem) 31vw, (min-width: 40rem) 46vw, 76vw" alt="Two movers working together inside the loaded truck" width="840" height="740" loading="lazy" decoding="async">
                         </picture>
                         <div class="project-info">
                             <h3 class="project-title">Two-Person Crew</h3>
@@ -683,8 +683,8 @@
                     </li>
                     <li class="project-card" data-category="packing">
                         <picture>
-                            <source type="image/webp" srcset="images/projects/gallery-padded.webp">
-                            <img src="images/projects/gallery-padded.jpg" alt="Moving blankets and a hand truck ready inside the truck" width="840" height="740" loading="lazy" decoding="async">
+                            <source type="image/webp" srcset="images/projects/gallery-padded-640.webp 640w, images/projects/gallery-padded.webp 840w" sizes="(min-width: 64rem) 31vw, (min-width: 40rem) 46vw, 76vw">
+                            <img src="images/projects/gallery-padded.jpg" srcset="images/projects/gallery-padded-640.jpg 640w, images/projects/gallery-padded.jpg 840w" sizes="(min-width: 64rem) 31vw, (min-width: 40rem) 46vw, 76vw" alt="Moving blankets and a hand truck ready inside the truck" width="840" height="740" loading="lazy" decoding="async">
                         </picture>
                         <div class="project-info">
                             <h3 class="project-title">Padded &amp; Ready</h3>
@@ -693,8 +693,8 @@
                     </li>
                     <li class="project-card" data-category="storage">
                         <picture>
-                            <source type="image/webp" srcset="images/projects/gallery-dolly-load.webp">
-                            <img src="images/projects/gallery-dolly-load.jpg" alt="A mover loading a dolly and moving blankets onto the truck" width="840" height="740" loading="lazy" decoding="async">
+                            <source type="image/webp" srcset="images/projects/gallery-dolly-load-640.webp 640w, images/projects/gallery-dolly-load.webp 840w" sizes="(min-width: 64rem) 31vw, (min-width: 40rem) 46vw, 76vw">
+                            <img src="images/projects/gallery-dolly-load.jpg" srcset="images/projects/gallery-dolly-load-640.jpg 640w, images/projects/gallery-dolly-load.jpg 840w" sizes="(min-width: 64rem) 31vw, (min-width: 40rem) 46vw, 76vw" alt="A mover loading a dolly and moving blankets onto the truck" width="840" height="740" loading="lazy" decoding="async">
                         </picture>
                         <div class="project-info">
                             <h3 class="project-title">Loading for Storage</h3>
@@ -929,8 +929,8 @@
                                     </span>
                                 </div>
                                 <picture class="process-media">
-                                    <source type="image/webp" srcset="images/projects/gallery-two-story.webp">
-                                    <img src="images/projects/gallery-two-story.jpg" alt="The Move with Moe truck at a two-story Houston home" width="840" height="740" loading="lazy" decoding="async">
+                                    <source type="image/webp" srcset="images/projects/gallery-two-story-480.webp 480w, images/projects/gallery-two-story.webp 840w" sizes="17rem">
+                                    <img src="images/projects/gallery-two-story.jpg" srcset="images/projects/gallery-two-story-480.jpg 480w, images/projects/gallery-two-story.jpg 840w" sizes="17rem" alt="The Move with Moe truck at a two-story Houston home" width="840" height="740" loading="lazy" decoding="async">
                                 </picture>
                                 <h3 class="process-title">Home Moves</h3>
                                 <p class="process-text">Local Houston moves are our specialty, and we move families between Texas cities too.</p>
@@ -948,8 +948,8 @@
                                     </span>
                                 </div>
                                 <picture class="process-media">
-                                    <source type="image/webp" srcset="images/projects/gallery-downtown.webp">
-                                    <img src="images/projects/gallery-downtown.jpg" alt="The Move with Moe truck outside a downtown Houston tower" width="840" height="740" loading="lazy" decoding="async">
+                                    <source type="image/webp" srcset="images/projects/gallery-downtown-480.webp 480w, images/projects/gallery-downtown.webp 840w" sizes="17rem">
+                                    <img src="images/projects/gallery-downtown.jpg" srcset="images/projects/gallery-downtown-480.jpg 480w, images/projects/gallery-downtown.jpg 840w" sizes="17rem" alt="The Move with Moe truck outside a downtown Houston tower" width="840" height="740" loading="lazy" decoding="async">
                                 </picture>
                                 <h3 class="process-title">Apartment and Condo Moves</h3>
                                 <p class="process-text">Loading docks, elevators, and move-in times coordinated with your building.</p>
@@ -966,8 +966,8 @@
                                     </span>
                                 </div>
                                 <picture class="process-media">
-                                    <source type="image/webp" srcset="images/projects/gallery-securing.webp">
-                                    <img src="images/projects/gallery-securing.jpg" alt="Moe strapping a load inside the truck" width="840" height="740" loading="lazy" decoding="async">
+                                    <source type="image/webp" srcset="images/projects/gallery-securing-480.webp 480w, images/projects/gallery-securing.webp 840w" sizes="17rem">
+                                    <img src="images/projects/gallery-securing.jpg" srcset="images/projects/gallery-securing-480.jpg 480w, images/projects/gallery-securing.jpg 840w" sizes="17rem" alt="Moe strapping a load inside the truck" width="840" height="740" loading="lazy" decoding="async">
                                 </picture>
                                 <h3 class="process-title">Packing and Unpacking</h3>
                                 <p class="process-text">We pack room by room with our own supplies, then unpack at your new place.</p>
@@ -984,8 +984,8 @@
                                     </span>
                                 </div>
                                 <picture class="process-media">
-                                    <source type="image/webp" srcset="images/projects/gallery-office.webp">
-                                    <img src="images/projects/gallery-office.jpg" alt="The Move with Moe truck outside an office building" width="840" height="740" loading="lazy" decoding="async">
+                                    <source type="image/webp" srcset="images/projects/gallery-office-480.webp 480w, images/projects/gallery-office.webp 840w" sizes="17rem">
+                                    <img src="images/projects/gallery-office.jpg" srcset="images/projects/gallery-office-480.jpg 480w, images/projects/gallery-office.jpg 840w" sizes="17rem" alt="The Move with Moe truck outside an office building" width="840" height="740" loading="lazy" decoding="async">
                                 </picture>
                                 <h3 class="process-title">Commercial and Office Moves</h3>
                                 <p class="process-text">Offices and small businesses moved around your hours with minimal downtime.</p>
@@ -1002,8 +1002,8 @@
                                     </span>
                                 </div>
                                 <picture class="process-media">
-                                    <source type="image/webp" srcset="images/crew/truck-storage-facility-wide.webp">
-                                    <img src="images/crew/truck-storage-facility-wide.jpg" alt="The Move with Moe truck outside an Extra Space Storage facility" width="840" height="740" loading="lazy" decoding="async">
+                                    <source type="image/webp" srcset="images/crew/truck-storage-facility-wide-480.webp 480w, images/crew/truck-storage-facility-wide.webp 840w" sizes="17rem">
+                                    <img src="images/crew/truck-storage-facility-wide.jpg" srcset="images/crew/truck-storage-facility-wide-480.jpg 480w, images/crew/truck-storage-facility-wide.jpg 840w" sizes="17rem" alt="The Move with Moe truck outside an Extra Space Storage facility" width="840" height="740" loading="lazy" decoding="async">
                                 </picture>
                                 <h3 class="process-title">Storage Moves</h3>
                                 <p class="process-text">Into, out of, or between storage units, wrapped and stacked to save space while keeping your things easy to reach.</p>
@@ -1043,8 +1043,8 @@
                 <div class="storage-spotlight">
                     <picture class="storage-spotlight-media">
                         <!-- TODO: swap in a photo of a storage unit Moe has packed -->
-                        <source type="image/webp" srcset="images/projects/gallery-loading.webp">
-                        <img src="images/projects/gallery-loading.jpg" alt="Moe loading wrapped belongings into the truck" width="840" height="740" loading="lazy" decoding="async">
+                        <source type="image/webp" srcset="images/projects/gallery-loading-640.webp 640w, images/projects/gallery-loading.webp 840w" sizes="(min-width: 64rem) 43vw, 92vw">
+                        <img src="images/projects/gallery-loading.jpg" srcset="images/projects/gallery-loading-640.jpg 640w, images/projects/gallery-loading.jpg 840w" sizes="(min-width: 64rem) 43vw, 92vw" alt="Moe loading wrapped belongings into the truck" width="840" height="740" loading="lazy" decoding="async">
                     </picture>
                     <div class="storage-spotlight-content">
                         <p class="section-eyebrow">Storage moves</p>

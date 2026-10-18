@@ -17,6 +17,24 @@
     let current = 0;
     let timer = null;
 
+    // Slides 2-4 wait (data-srcset / data-src) so they don't compete with the first
+    // photo; they load once the page has finished, well before the first slide change
+    function loadRemainingSlides() {
+        hero.querySelectorAll("[data-srcset]").forEach((source) => {
+            source.srcset = source.dataset.srcset;
+            source.removeAttribute("data-srcset");
+        });
+        hero.querySelectorAll("img[data-src]").forEach((img) => {
+            img.src = img.dataset.src;
+            img.removeAttribute("data-src");
+        });
+    }
+    if (document.readyState === "complete") {
+        loadRemainingSlides();
+    } else {
+        window.addEventListener("load", loadRemainingSlides, { once: true });
+    }
+
     function restartBar(bar) {
         bar.classList.remove("is-active");
         void bar.offsetWidth; // force reflow so the progress animation restarts
@@ -24,6 +42,7 @@
     }
 
     function showSlide(index) {
+        loadRemainingSlides(); // in case a slide change comes before the page finished loading
         slides[current].classList.remove("is-active");
         bars[current].classList.remove("is-active");
         current = (index + slides.length) % slides.length;

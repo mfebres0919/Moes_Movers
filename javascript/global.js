@@ -13,12 +13,13 @@
 
     const percentText = document.getElementById("loader-percent");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const MIN_TIME = reduceMotion ? 0 : 1600; // keep it on screen long enough to read
+    const MIN_TIME = reduceMotion ? 0 : 900; // long enough to see the truck, short enough not to hold up the page
     const start = performance.now();
 
-    // Track the images needed straight away (lazy ones load later) plus the web fonts
-    const images = [...document.images].filter((img) => img.loading !== "lazy");
-    let total = images.length + 2; // + fonts + page load
+    // Track only what the first screen needs: the high-priority images (first hero
+    // photo, loader truck) plus the web fonts. Everything else keeps loading behind it.
+    const images = [...document.querySelectorAll('img[fetchpriority="high"]')];
+    let total = images.length + 1; // + fonts
     let done = 0;
 
     function tick() {
@@ -40,13 +41,6 @@
         tick();
     }
 
-    let pageLoaded = document.readyState === "complete";
-    if (pageLoaded) {
-        tick();
-    } else {
-        window.addEventListener("load", () => { pageLoaded = true; tick(); }, { once: true });
-    }
-
     let shown = 0;
 
     function finish() {
@@ -55,7 +49,7 @@
             loader.classList.add("is-hidden");
             document.dispatchEvent(new Event("loader:done"));
             setTimeout(() => loader.remove(), 700);
-        }, reduceMotion ? 0 : 700);
+        }, reduceMotion ? 0 : 450);
     }
 
     function step() {
@@ -71,7 +65,7 @@
         percentText.textContent = value;
         loader.style.setProperty("--progress", (shown / 100).toFixed(3));
 
-        if (value >= 100 && pageLoaded) {
+        if (value >= 100) {
             finish();
         } else {
             requestAnimationFrame(step);
@@ -281,9 +275,6 @@
             element.dataset.reveal = element.dataset.revealDir;
         });
     }, { threshold: 0 });
-
-    // Make sure the hidden state is applied before anything reveals
-    void document.body.offsetHeight;
 
     // Start once the loading screen is gone, so the hero animates in right as the site appears
     const loader = document.getElementById("loader");
