@@ -69,24 +69,6 @@
     });
 })();
 
-/* ---------- Underline under "like our own" draws in when the heading is on screen ---------- */
-(function () {
-    const marks = document.querySelectorAll(".ink-mark");
-    if (!marks.length) return;
-    if (!("IntersectionObserver" in window)) {
-        marks.forEach((mark) => mark.classList.add("is-drawn"));
-        return;
-    }
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            entry.target.classList.add("is-drawn");
-            observer.unobserve(entry.target);
-        });
-    }, { threshold: 0.8 });
-    marks.forEach((mark) => observer.observe(mark));
-})();
-
 /* ---------- Process route: the truck drives the full width of the road ---------- */
 (function () {
     const route = document.querySelector(".process-route");
