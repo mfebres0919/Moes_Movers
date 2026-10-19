@@ -2963,10 +2963,8 @@ textarea.form-control {
 .reviews-rows .review-text p {
     font-size: 0.9375rem;
     line-height: 1.55;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    /* No line limit: the Google reviews are kept short (long ones trimmed with an
+       ellipsis in the HTML), so each card always shows the whole quote */
 }
 
 .reviews-rows .review-author {
