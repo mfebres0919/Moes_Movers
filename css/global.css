@@ -2629,6 +2629,13 @@ textarea.form-control {
     margin: 1rem auto 0; /* the paragraph is narrower than the header, so centre the box too */
 }
 
+/* "Read more reviews on Google" sits right under the intro paragraph */
+.reviews-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.75rem;
+}
+
 .reviews-track {
     display: flex;
     gap: 1.25rem;
@@ -2721,14 +2728,6 @@ textarea.form-control {
     color: var(--color-gray);
 }
 
-.reviews-footer {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.25rem;
-    margin-top: 2rem;
-}
 
 .reviews-controls {
     display: flex;
@@ -2807,9 +2806,6 @@ textarea.form-control {
     animation-play-state: paused;
 }
 
-.reviews-footer {
-    justify-content: center;
-}
 
 .reviews-track {
     padding-block: 1.5rem 2rem;
