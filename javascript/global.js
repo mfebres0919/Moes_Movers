@@ -180,7 +180,7 @@
 })();
 
 /* ---------- Header logo: click to go home ----------
-   The logo has no href, so checkers don't count it as a duplicate of the
+   The logo isn't a link, so checkers don't count it as a duplicate of the
    "Home" link beside it (it's hidden from keyboards and screen readers). */
 (function () {
     const brand = document.querySelector(".brand[data-href]");
