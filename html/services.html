@@ -85,7 +85,7 @@
         <!-- Main navigation bar -->
         <div class="navbar" id="navbar">
             <div class="container navbar-inner">
-                <a class="brand" href="../index.html" aria-label="Move with Moe, home">
+                <a class="brand" href="../index.html" tabindex="-1" aria-hidden="true">
                     <img class="brand-logo brand-logo-m" src="../images/brand/logo-m-header.webp" alt="" width="192" height="102" decoding="async">
                 </a>
 
@@ -186,7 +186,7 @@
                 <ul class="services-grid" id="services-track" aria-label="Moving services">
                     <li class="service-card service-card--red" id="home-moves">
                                 <div class="service-card-top">
-                                    <span class="service-card-number">01</span>
+                                    <span class="service-card-number" data-num="01" aria-hidden="true"></span>
                                     <span class="service-card-icon">
                                         <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6a1 1 0 0 1 1 1v1H8V4a1 1 0 0 1 1-1z"/><path d="M16 5h2a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg>
                                     </span>
@@ -204,7 +204,7 @@
                     </li>
                     <li class="service-card service-card--charcoal" id="apartment-condo-moves">
                                 <div class="service-card-top">
-                                    <span class="service-card-number">02</span>
+                                    <span class="service-card-number" data-num="02" aria-hidden="true"></span>
                                     <span class="service-card-icon">
                                         <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>
                                     </span>
@@ -222,7 +222,7 @@
                     </li>
                     <li class="service-card service-card--maroon" id="packing-unpacking">
                                 <div class="service-card-top">
-                                    <span class="service-card-number">03</span>
+                                    <span class="service-card-number" data-num="03" aria-hidden="true"></span>
                                     <span class="service-card-icon">
                                         <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M1 5h13v11H1zM14 9h4.5L22 12.5V16h-8z"/><circle cx="5.5" cy="17.5" r="2"/><circle cx="17.5" cy="17.5" r="2"/></svg>
                                     </span>
@@ -240,7 +240,7 @@
                     </li>
                     <li class="service-card service-card--light" id="commercial-office-moves">
                                 <div class="service-card-top">
-                                    <span class="service-card-number">04</span>
+                                    <span class="service-card-number" data-num="04" aria-hidden="true"></span>
                                     <span class="service-card-icon">
                                         <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
                                     </span>
@@ -258,7 +258,7 @@
                     </li>
                     <li class="service-card service-card--red" id="storage-moves">
                                 <div class="service-card-top">
-                                    <span class="service-card-number">05</span>
+                                    <span class="service-card-number" data-num="05" aria-hidden="true"></span>
                                     <span class="service-card-icon">
                                         <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9 12 4l9 5v11H3z"/><path d="M7 20v-7h10v7M7 16h10"/></svg>
                                     </span>
@@ -330,7 +330,7 @@
                             Get a Free Quote
                             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
                         </a>
-                        <a class="btn btn-ghost btn-lg" href="../index.html#quote" data-consultation="in-person">
+                        <a class="btn btn-ghost btn-lg" href="../index.html#quote-form" data-consultation="in-person">
                             Book a Free Walkthrough
                         </a>
                     </div>
@@ -374,9 +374,9 @@
                 <nav class="footer-col" aria-labelledby="footer-areas">
                     <h2 class="footer-heading" id="footer-areas">Service Areas</h2>
                     <ul class="footer-links">
-                        <li><a href="../index.html#areas" data-region="houston">Houston</a></li>
-                        <li><a href="../index.html#areas" data-region="nearby">Houston Suburbs</a></li>
-                        <li><a href="../index.html#areas" data-region="texas">Statewide Across Texas</a></li>
+                        <li><a href="../index.html#areas-houston" data-region="houston">Houston</a></li>
+                        <li><a href="../index.html#areas-nearby" data-region="nearby">Houston Suburbs</a></li>
+                        <li><a href="../index.html#areas-texas" data-region="texas">Statewide Across Texas</a></li>
                     </ul>
                 </nav>
 
@@ -417,7 +417,8 @@
 
             <div class="footer-bottom">
                 <p>&copy; <span id="footer-year">2026</span> Moe&rsquo;s Movers. Fully insured, licensed, and accredited.</p>
-                <p class="footer-license">TXDMV # 010005908C · USDOT # 4288855</p>
+                <div class="footer-license">TXDMV # 010005908C · USDOT # 4288855</div>
+                <p class="footer-legal"><a href="accessibility.html">Accessibility</a><span aria-hidden="true"> · </span><a href="privacy.html">Privacy Policy</a></p>
                 <p>Website concept by <a href="https://migsflow.com" target="_blank" rel="noopener">MigsFlow</a></p>
             </div>
         </div>

@@ -3430,3 +3430,48 @@ textarea.form-control {
 html.lightbox-open {
     overflow: hidden;
 }
+
+/* =========================================================
+   ACCESSIBILITY: contrast safety + decorative content
+   Text on gradients/photos also gets a solid dark base colour, so it
+   stays readable if an image fails to load and contrast checkers
+   (which ignore images) measure it correctly. Numbers like "01" and
+   the review stars are decorative, so they're drawn with CSS.
+   ========================================================= */
+.review-card:nth-child(even) { background-color: var(--color-maroon-dark); }
+.process-card-red, .service-card--red { background-color: var(--color-maroon); }
+.process-card-charcoal, .service-card--charcoal { background-color: #0B1F24; }
+.process-card-maroon, .service-card--maroon { background-color: var(--color-maroon); }
+.contact-info { background-color: #0B1F24; }
+
+.process-number::before, .service-card-number::before, .process-step-num::before { content: attr(data-num); }
+/* The "01" sits on the bright yellow top of the yellow-to-teal cards: dark ink reads there */
+.process-card-red .process-number, .service-card--red .service-card-number { color: var(--color-maroon-dark); }
+.google-stars::before { content: "\2605\2605\2605\2605\2605"; }
+.area-anchor { position: absolute; top: 0; }
+.areas { position: relative; }
+button.area-chip { font: inherit; cursor: pointer; }
+.footer-legal a { color: inherit; text-decoration: underline; text-underline-offset: 3px; transition: color var(--transition); }
+.footer-legal a:hover, .footer-legal a:focus-visible { color: var(--color-red); }
+
+/* =========================================================
+   ACCESSIBILITY: see-through tints drawn as inset shadows
+   Contrast checkers (WAVE) treat a faint rgba() background as a solid
+   colour, so white text on a 8% white wash "fails" even though it sits
+   on a dark section. The same wash as an inset shadow looks identical,
+   still fades on hover, and the checker sees the real dark background.
+   ========================================================= */
+.hero, .page-hero, .final-cta, .areas { background-color: var(--color-black); }
+
+.btn-ghost {
+    background-color: transparent;
+    box-shadow: inset 0 0 0 100vmax rgba(255, 255, 255, 0.08);
+    transition: color var(--transition), border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+}
+.btn-ghost:hover { background-color: transparent; box-shadow: inset 0 0 0 100vmax var(--color-white); }
+
+@media (min-width: 80rem) {
+    .nav-link.is-active { background-color: #ECF2F4; } /* 8% teal on the white bar, as a solid colour */
+}
+/* Reviewer names are citations (not headings): keep their original look */
+cite.review-name { display: block; font-style: normal; }

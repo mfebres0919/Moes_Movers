@@ -587,7 +587,17 @@
         if (!button) return;
         const zipField = document.getElementById("quote-from");
         if (zipField && button.dataset.zip) zipField.value = button.dataset.zip;
+        // Chips are buttons now: take the visitor to the form with the ZIP filled in
+        const target = document.getElementById("quote");
+        if (target) {
+            target.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+            if (zipField) setTimeout(() => zipField.focus({ preventScroll: true }), 600);
+        }
     });
+
+    // Arriving from another page via a service-area link (#areas-texas etc.)
+    const hashRegion = location.hash.match(/^#areas-(houston|nearby|texas)$/);
+    if (hashRegion) selectRegion(hashRegion[1]);
 
     /* ---------- ZIP checker ---------- */
     const METRO_PREFIXES = ["770", "772", "773", "774", "775"]; // Houston, Sugar Land, Katy, Spring

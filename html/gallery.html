@@ -84,7 +84,7 @@
         <!-- Main navigation bar -->
         <div class="navbar" id="navbar">
             <div class="container navbar-inner">
-                <a class="brand" href="../index.html" aria-label="Move with Moe, home">
+                <a class="brand" href="../index.html" tabindex="-1" aria-hidden="true">
                     <img class="brand-logo brand-logo-m" src="../images/brand/logo-m-header.webp" alt="" width="192" height="102" decoding="async">
                 </a>
 
@@ -177,7 +177,7 @@
              Filter tabs show one service type at a time (script.js).
              Moe's own job photos. TODO: add a move between Texas cities when he
              sends one. -->
-        <section class="projects projects-page has-texture has-texture--particles" id="work" aria-labelledby="work-title">
+        <section class="projects projects-page has-texture has-texture--particles" id="work" aria-label="Photo gallery">
             <div class="container">
                 <div class="projects-header">
                     <div>
@@ -517,7 +517,7 @@
                             Get a Free Quote
                             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
                         </a>
-                        <a class="btn btn-ghost btn-lg" href="../index.html#quote" data-consultation="in-person">
+                        <a class="btn btn-ghost btn-lg" href="../index.html#quote-form" data-consultation="in-person">
                             Book a Free Walkthrough
                         </a>
                     </div>
@@ -561,9 +561,9 @@
                 <nav class="footer-col" aria-labelledby="footer-areas">
                     <h2 class="footer-heading" id="footer-areas">Service Areas</h2>
                     <ul class="footer-links">
-                        <li><a href="../index.html#areas" data-region="houston">Houston</a></li>
-                        <li><a href="../index.html#areas" data-region="nearby">Houston Suburbs</a></li>
-                        <li><a href="../index.html#areas" data-region="texas">Statewide Across Texas</a></li>
+                        <li><a href="../index.html#areas-houston" data-region="houston">Houston</a></li>
+                        <li><a href="../index.html#areas-nearby" data-region="nearby">Houston Suburbs</a></li>
+                        <li><a href="../index.html#areas-texas" data-region="texas">Statewide Across Texas</a></li>
                     </ul>
                 </nav>
 
@@ -604,7 +604,8 @@
 
             <div class="footer-bottom">
                 <p>&copy; <span id="footer-year">2026</span> Moe&rsquo;s Movers. Fully insured, licensed, and accredited.</p>
-                <p class="footer-license">TXDMV # 010005908C · USDOT # 4288855</p>
+                <div class="footer-license">TXDMV # 010005908C · USDOT # 4288855</div>
+                <p class="footer-legal"><a href="accessibility.html">Accessibility</a><span aria-hidden="true"> · </span><a href="privacy.html">Privacy Policy</a></p>
                 <p>Website concept by <a href="https://migsflow.com" target="_blank" rel="noopener">MigsFlow</a></p>
             </div>
         </div>
