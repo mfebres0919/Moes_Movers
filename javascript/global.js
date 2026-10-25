@@ -179,6 +179,23 @@
     if (year) year.textContent = new Date().getFullYear();
 })();
 
+/* ---------- Header logo: click to go home ----------
+   The logo has no href, so checkers don't count it as a duplicate of the
+   "Home" link beside it (it's hidden from keyboards and screen readers). */
+(function () {
+    const brand = document.querySelector(".brand[data-href]");
+    if (!brand) return;
+    brand.addEventListener("click", () => {
+        const target = brand.dataset.href;
+        if (target === "#top") {
+            if (window.lenis) window.lenis.scrollTo(0);
+            else window.scrollTo({ top: 0, behavior: "smooth" });
+        } else {
+            window.location.href = target;
+        }
+    });
+})();
+
 /* ---------- Highlight the nav link for the section on screen ----------
    Off for now: the menu links will go to separate pages (About, Services,
    Our Work, Contact), so Home stays highlighted on the homepage. */
@@ -257,7 +274,7 @@
 
             // Once finished, drop the reveal styles so the element's own transitions work normally
             element.addEventListener("transitionend", function cleanup(event) {
-                if (event.target !== element || event.propertyName !== "opacity") return;
+                if (event.target !== element || event.propertyName !== "filter") return;
                 element.removeEventListener("transitionend", cleanup);
                 if (!element.classList.contains("is-revealed")) return; // reset again before it finished
                 element.removeAttribute("data-reveal");
