@@ -263,7 +263,9 @@
                     </ol>
                 </div>
 
-                <form class="quote-form" id="quote-form" action="#" method="post" novalidate>
+                <form class="quote-form" id="quote-form" name="quote" action="#" method="post" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+                    <input type="hidden" name="form-name" value="quote">
+                    <p class="visually-hidden" aria-hidden="true"><label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
 
                     <!-- Step 1: Property type. Step 2 then shows only the questions
                          for that type (script.js); hidden ones are disabled so
@@ -1345,7 +1347,9 @@
                             <span>Ready for a quote or a free walkthrough? <a href="#quote">Fill out our quote form</a> instead. This form is for general questions about our services.</span>
                         </p>
 
-                        <form class="contact-form" id="contact-form" action="#" method="post" novalidate>
+                        <form class="contact-form" id="contact-form" name="contact" action="#" method="post" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+                            <input type="hidden" name="form-name" value="contact">
+                            <p class="visually-hidden" aria-hidden="true"><label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
                             <div class="contact-field">
                                 <label for="contact-first">First name</label>
                                 <input type="text" id="contact-first" name="first_name" autocomplete="given-name" placeholder="Enter your first name" required>

@@ -308,6 +308,24 @@
     }
 })();
 
+/* ---------- Send a form to Netlify Forms ----------
+   Netlify finds forms marked data-netlify="true" when the site deploys and
+   emails each submission to the addresses set under Site configuration >
+   Notifications. Checkbox groups are joined into one line ("Packing,
+   Furniture assembly") so they read cleanly in the email. Disabled fields
+   (questions that don't apply) are left out. Resolves true on success. */
+window.sendToNetlify = function (form) {
+    const values = new Map();
+    new FormData(form).forEach((value, key) => {
+        values.set(key, values.has(key) ? `${values.get(key)}, ${value}` : value);
+    });
+    return fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams([...values]).toString()
+    }).then((response) => response.ok).catch(() => false);
+};
+
 /* ---------- Contact form (general questions; homepage and contact page) ---------- */
 (function () {
     const form = document.getElementById("contact-form");
@@ -326,10 +344,19 @@
             return;
         }
 
-        successName.textContent = document.getElementById("contact-first").value.trim() || "neighbor";
-        form.hidden = true;
-        success.hidden = false;
-        success.focus();
+        const button = form.querySelector('[type="submit"]');
+        button.disabled = true;
+        window.sendToNetlify(form).then((sent) => {
+            button.disabled = false;
+            if (!sent) {
+                alert("Sorry, your message didn't go through. Please try again, or call us at (979) 888-8887.");
+                return;
+            }
+            successName.textContent = document.getElementById("contact-first").value.trim() || "neighbor";
+            form.hidden = true;
+            success.hidden = false;
+            success.focus();
+        });
     });
 })();
 

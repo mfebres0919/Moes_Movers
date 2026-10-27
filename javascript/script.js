@@ -190,6 +190,19 @@
             return;
         }
 
+        const button = form.querySelector('[type="submit"]');
+        button.disabled = true;
+        window.sendToNetlify(form).then((sent) => {
+            button.disabled = false;
+            if (!sent) {
+                alert("Sorry, your request didn't go through. Please try again, or call us at (979) 888-8887.");
+                return;
+            }
+            showSuccess();
+        });
+    });
+
+    function showSuccess() {
         const firstName = document.getElementById("quote-name").value.trim().split(" ")[0];
         successName.textContent = firstName || "neighbor";
 
@@ -202,7 +215,7 @@
         form.hidden = true;
         success.hidden = false;
         success.focus();
-    });
+    }
 })();
 
 /* ---------- Quote form: questions that match the property type ----------
