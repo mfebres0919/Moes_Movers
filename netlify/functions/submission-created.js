@@ -122,7 +122,11 @@ function buildEmail(form, data) {
       <!-- Message -->
       <tr><td style="padding:36px 40px 8px;">
         <p style="margin:0 0 6px;font-family:${BODY};font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:${ACCENT};">Request received</p>
-        <h1 style="margin:0 0 18px;font-family:${HEADING};font-size:40px;line-height:1;font-weight:400;letter-spacing:0.5px;text-transform:uppercase;color:${INK};">Thanks for reaching out, ${name}!</h1>
+        <!-- Headline is an image so it shows in his Bebas Neue font in every inbox -->
+        <h1 style="margin:0 0 20px;font-size:0;line-height:0;">
+          <img src="${SITE}/images/email/headline-thanks.png" width="520" alt="Thanks for reaching out!" style="display:block;width:100%;max-width:520px;height:auto;border:0;font-family:${HEADING};font-size:36px;line-height:1;color:${INK};">
+        </h1>
+        <p style="margin:0 0 8px;font-family:${BODY};font-size:17px;line-height:1.5;font-weight:600;color:${INK};">Hi ${name},</p>
         <p style="margin:0 0 16px;font-family:${BODY};font-size:16px;line-height:1.65;color:${GRAY};">We received ${message.what} and will get back to you <strong style="color:${INK};">shortly</strong>.</p>
       </td></tr>
       ${summaryHtml}
@@ -146,7 +150,7 @@ function buildEmail(form, data) {
             </td>
             <td style="vertical-align:middle;font-family:${BODY};">
               <div style="font-size:15px;color:${GRAY};">Talk soon,</div>
-              <div style="font-family:${HEADING};font-size:26px;line-height:1.1;letter-spacing:0.5px;text-transform:uppercase;color:${INK};">Moe</div>
+              <div style="font-size:18px;line-height:1.3;font-weight:700;color:${INK};">Moe</div>
               <div style="font-size:13px;color:${ACCENT};font-weight:600;">Founder, Moe&rsquo;s Movers</div>
             </td>
           </tr></table>
