@@ -1,0 +1,38 @@
+# Old WordPress addresses -> new pages (301 = moved permanently, so Google
+# passes their ranking to the new page). Netlify matches with or without the
+# trailing slash. Collected from the old site via the Internet Archive.
+
+# Main pages
+/about-us                          /html/about.html                            301
+/contact-us                        /html/contact.html                          301
+/partner-with-moe                  /html/contact.html                          301
+/testimonials                      /#reviews                                   301
+/faq                               /html/services.html                         301
+
+# Services
+/service/apartment-moving-services /html/service-apartment-condo-moves.html    301
+/service/commercial-movers         /html/service-commercial-office-moves.html  301
+/service/residential-moves         /html/service-home-moves.html               301
+/service/pricing                   /#quote                                     301
+/service/get-started-today         /#quote                                     301
+/service/book-your-move-form       /#quote                                     301
+/service/*                         /html/services.html                         301
+/service-category/commercial-movers /html/service-commercial-office-moves.html 301
+/service-category/*                /html/services.html                         301
+
+# Past moves / portfolio
+/project                           /html/gallery.html                          301
+/project/*                         /html/gallery.html                          301
+/project-category/*                /html/gallery.html                          301
+/pasttransactios                   /html/gallery.html                          301
+
+# Legal notices from the old site that the new site doesn't have yet.
+# 302 (temporary) until replacement pages are added.
+/consumer-protection-notice        /html/contact.html                          302
+/rights-and-responsibilities       /html/contact.html                          302
+/iabs                              /html/contact.html                          302
+
+# Old WordPress system addresses
+/wp-admin/*                        /                                           301
+/wp-login.php                      /                                           301
+/feed/*                            /                                           301
