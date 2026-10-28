@@ -6,7 +6,9 @@
 /* ---------- Loading screen: counts to 100% while the truck drives across ---------- */
 (function () {
     const loader = document.getElementById("loader");
-    if (!loader) {
+    // Plays once per visit: skipped if it already ran this session
+    if (loader && document.documentElement.classList.contains("loader-seen")) loader.remove();
+    if (!loader || !loader.isConnected) {
         document.dispatchEvent(new Event("loader:done"));
         return;
     }
@@ -44,6 +46,7 @@
     let shown = 0;
 
     function finish() {
+        try { sessionStorage.setItem("loaderSeen", "1"); } catch (e) { /* storage blocked */ }
         loader.classList.add("is-done");
         setTimeout(() => {
             loader.classList.add("is-hidden");

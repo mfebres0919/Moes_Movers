@@ -225,6 +225,11 @@ h4 {
     animation: loader-failsafe 0.6s ease 8s forwards;
 }
 
+/* Already played during this visit (javascript/loader-check.js) */
+.loader-seen .loader {
+    display: none;
+}
+
 .loader.is-hidden {
     visibility: hidden;
     opacity: 0;
