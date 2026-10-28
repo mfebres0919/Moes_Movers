@@ -13,7 +13,7 @@
 
     const percentText = document.getElementById("loader-percent");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const MIN_TIME = reduceMotion ? 0 : 900; // long enough to see the truck, short enough not to hold up the page
+    const MIN_TIME = reduceMotion ? 0 : 500; // long enough to see the truck, short enough not to hold up the page
     const start = performance.now();
 
     // Track only what the first screen needs: the high-priority images (first hero
@@ -49,7 +49,7 @@
             loader.classList.add("is-hidden");
             document.dispatchEvent(new Event("loader:done"));
             setTimeout(() => loader.remove(), 700);
-        }, reduceMotion ? 0 : 450);
+        }, reduceMotion ? 0 : 200);
     }
 
     function step() {
@@ -209,8 +209,7 @@
 
     // [selector, direction, stagger in seconds between matches, restart the stagger every N matches]
     const groups = [
-        [".hero-eyebrow, .hero-title, .hero-text, .hero-actions, .hero-badges, .hero-controls", "up", 0.12],
-        [".page-hero-content > *", "up", 0.12],
+        // (Hero content isn't listed: it's on screen at load, so it shows at once)
         [".about-story-content > *", "left", 0.08],
         [".about-story-photo", "right", 0],
         [".about-accordion-item", "up", 0.1],
@@ -417,13 +416,15 @@ document.querySelectorAll("[data-reviews]").forEach((root) => {
     const menu = document.getElementById("site-menu");
     if (!menu) return;
 
-    const file = (url) => new URL(url, location.href).pathname.split("/").pop() || "index.html";
+    // Page name without ".html": Netlify's pretty URLs serve and link pages
+    // with or without the extension, so both forms must match
+    const file = (url) => new URL(url, location.href).pathname.split("/").pop().replace(/\.html$/, "") || "index";
     const here = file(location.href);
-    if (here === "index.html") return; // the homepage marks Home in its HTML
+    if (here === "index") return; // the homepage marks Home in its HTML
 
     const navLinks = [...menu.querySelectorAll(".nav-link")];
     const isServicePage = here.startsWith("service-");
-    const target = navLinks.find((link) => file(link.href) === (isServicePage ? "services.html" : here) && !link.hash);
+    const target = navLinks.find((link) => file(link.href) === (isServicePage ? "services" : here) && !link.hash);
     if (!target) return;
 
     navLinks.forEach((link) => {
