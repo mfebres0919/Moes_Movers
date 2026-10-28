@@ -328,6 +328,37 @@ window.sendToNetlify = function (form) {
     }).then((response) => response.ok).catch(() => false);
 };
 
+/* ---------- Form -> "sent" message transition (quote and contact forms) ----------
+   setSending() swaps the button label to "Sending…" while the request is out;
+   showFormSuccess() fades the form out, then reveals the confirmation with
+   its entrance animation (css/global.css). Reduced motion: an instant swap. */
+window.setSending = function (button, on) {
+    const label = button.querySelector(".btn-label, .quote-next-label");
+    if (label) {
+        if (on) {
+            label.dataset.text = label.textContent;
+            label.textContent = "Sending\u2026";
+        } else if (label.dataset.text) {
+            label.textContent = label.dataset.text;
+        }
+    }
+    button.disabled = on;
+    button.classList.toggle("is-sending", on);
+    button.toggleAttribute("aria-busy", on);
+};
+
+window.showFormSuccess = function (form, success) {
+    const instant = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    form.classList.add("form-leaving");
+    setTimeout(() => {
+        form.hidden = true;
+        form.classList.remove("form-leaving");
+        success.hidden = false;
+        success.classList.add("form-success-in");
+        success.focus({ preventScroll: true });
+    }, instant ? 0 : 300);
+};
+
 /* ---------- Contact form (general questions; homepage and contact page) ---------- */
 (function () {
     const form = document.getElementById("contact-form");
@@ -347,17 +378,15 @@ window.sendToNetlify = function (form) {
         }
 
         const button = form.querySelector('[type="submit"]');
-        button.disabled = true;
+        window.setSending(button, true);
         window.sendToNetlify(form).then((sent) => {
-            button.disabled = false;
+            window.setSending(button, false);
             if (!sent) {
                 alert("Sorry, your message didn't go through. Please try again, or call us at (979) 888-8887.");
                 return;
             }
             successName.textContent = document.getElementById("contact-first").value.trim() || "neighbor";
-            form.hidden = true;
-            success.hidden = false;
-            success.focus();
+            window.showFormSuccess(form, success);
         });
     });
 })();

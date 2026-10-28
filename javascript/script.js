@@ -191,9 +191,9 @@
         }
 
         const button = form.querySelector('[type="submit"]');
-        button.disabled = true;
+        window.setSending(button, true);
         window.sendToNetlify(form).then((sent) => {
-            button.disabled = false;
+            window.setSending(button, false);
             if (!sent) {
                 alert("Sorry, your request didn't go through. Please try again, or call us at (979) 888-8887.");
                 return;
@@ -212,9 +212,7 @@
         });
         setProgress(steps.length);
         progressText.textContent = "All done!";
-        form.hidden = true;
-        success.hidden = false;
-        success.focus();
+        window.showFormSuccess(form, success);
     }
 })();
 

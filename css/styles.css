@@ -509,7 +509,6 @@
     padding: 2.5rem 1rem 1rem;
     text-align: center;
     color: var(--color-gray);
-    animation: quote-step-in 0.4s ease;
 }
 
 .quote-success[hidden] {
