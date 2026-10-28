@@ -768,10 +768,19 @@
         document.body.appendChild(script);
     }
 
+    // Wait until the page itself has finished loading and the browser is idle,
+    // so the map's script and tiles never compete with the first paint (this
+    // matters when a visitor lands straight on /#areas)
+    function whenSettled(callback) {
+        const idle = () => ("requestIdleCallback" in window ? requestIdleCallback(callback, { timeout: 2000 }) : setTimeout(callback, 300));
+        if (document.readyState === "complete") idle();
+        else window.addEventListener("load", idle, { once: true });
+    }
+
     const observer = new IntersectionObserver(([entry]) => {
         if (!entry.isIntersecting) return;
         observer.disconnect();
-        loadLeaflet();
+        whenSettled(loadLeaflet);
     }, { rootMargin: "600px 0px" });
     observer.observe(mapEl);
 })();
