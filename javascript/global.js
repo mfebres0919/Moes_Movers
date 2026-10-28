@@ -549,3 +549,17 @@ document.querySelectorAll("[data-reviews]").forEach((root) => {
     }, { threshold: 0.8 });
     marks.forEach((mark) => observer.observe(mark));
 })();
+
+/* ---------- Pause animations in sections that aren't on screen ----------
+   Looping CSS animations (tickers, the drifting truck, floating circles)
+   only run while their section is near the screen, which saves phones work
+   while the page loads and while scrolling elsewhere. */
+(function () {
+    if (!("IntersectionObserver" in window)) return;
+    const sections = document.querySelectorAll("main > section, .site-footer");
+    sections.forEach((section) => section.classList.add("is-offscreen"));
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => entry.target.classList.toggle("is-offscreen", !entry.isIntersecting));
+    }, { rootMargin: "200px 0px" });
+    sections.forEach((section) => observer.observe(section));
+})();

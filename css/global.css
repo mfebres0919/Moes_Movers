@@ -3422,3 +3422,9 @@ button.is-sending {
         stroke-dashoffset: 0;
     }
 }
+
+/* Sections off screen pause their looping animations (global.js) */
+.is-offscreen,
+.is-offscreen * {
+    animation-play-state: paused !important;
+}
