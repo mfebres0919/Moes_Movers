@@ -298,7 +298,20 @@
     // Start once the loading screen is gone, so the hero animates in right as the site appears
     const loader = document.getElementById("loader");
     function start() {
+        const root = document.documentElement;
+        // Arrived on a section link: make sure we're there before measuring
+        if (root.classList.contains("hash-landing")) {
+            const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+            if (target) {
+                const offset = parseFloat(getComputedStyle(root).scrollPaddingTop) || 0;
+                window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - offset, behavior: "instant" });
+            }
+            root.classList.remove("hash-landing"); // smooth scrolling is back for clicks
+        }
         targets.forEach((element) => {
+            // Already on screen when the page opens: show it at once, no fade
+            const box = element.getBoundingClientRect();
+            if (box.top < window.innerHeight && box.bottom > 0) element.removeAttribute("data-reveal");
             showObserver.observe(element);
             hideObserver.observe(element);
         });

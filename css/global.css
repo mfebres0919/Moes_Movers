@@ -101,6 +101,11 @@ html {
     }
 }
 
+/* Arriving on a section link (/#areas): jump there instantly (loader-check.js) */
+html.hash-landing {
+    scroll-behavior: auto;
+}
+
 /* Lenis does its own smoothing; CSS smooth scroll on top would fight it */
 html.lenis.lenis-smooth {
     scroll-behavior: auto;
