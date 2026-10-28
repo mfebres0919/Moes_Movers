@@ -38,7 +38,7 @@ for (const page of pages) {
         preload: "media",      // full stylesheet loads as media="print" (non-blocking), then switches to all
         noscriptFallback: true,
         pruneSource: false,    // keep the full CSS files intact for other pages
-        inlineFonts: false,
+        inlineFonts: true,     // @font-face rules (and the size-matched fallback) inline, so text never jumps
         reduceInlineStyles: false,
         logLevel: "warn"
     });
