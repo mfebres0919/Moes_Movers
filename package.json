@@ -1,0 +1,12 @@
+{
+  "name": "moes-movers-site",
+  "private": true,
+  "description": "Build step for Netlify: minify CSS/JS and inline first-screen CSS (see tools/build.mjs)",
+  "scripts": {
+    "build": "node tools/build.mjs"
+  },
+  "devDependencies": {
+    "beasties": "0.2.0",
+    "esbuild": "0.24.0"
+  }
+}

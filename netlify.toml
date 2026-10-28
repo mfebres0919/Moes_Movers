@@ -1,9 +1,8 @@
-# Netlify build: minify the CSS and JavaScript at publish time so visitors
-# download smaller files. The repo keeps the readable source; only the
-# published copy is minified. Vendor scripts (already minified) are skipped.
+# Netlify build: tools/build.mjs minifies the CSS/JS and inlines each page's
+# first-screen CSS at publish time. The repo keeps the readable source.
 [build]
   publish = "."
-  command = "npx -y esbuild@0.24.0 css/*.css javascript/*.js --minify --outdir=. --outbase=. --allow-overwrite --log-level=warning"
+  command = "npm run build"
 
 [functions]
   directory = "netlify/functions"
