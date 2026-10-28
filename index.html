@@ -28,7 +28,7 @@
     <link rel="preload" href="fonts/poppins-latin-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/poppins-latin-600.woff2" as="font" type="font/woff2" crossorigin>
 
-    <script src="javascript/loader-check.js"></script>
+    <script src="javascript/hash-check.js"></script>
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/styles.css">
 
@@ -39,21 +39,6 @@
 </head>
 <body>
     <!-- ===== Loading screen ===== -->
-    <div class="loader" id="loader" role="status" aria-live="polite" aria-label="Loading Moe's Movers">
-        <div class="loader-inner">
-            <p class="loader-brand"><img class="loader-logo" src="images/brand/logo-yellow.webp" alt="Move with Moe" width="560" height="64" decoding="async"></p>
-            <div class="loader-track" aria-hidden="true">
-                <picture class="loader-truck">
-                    <source type="image/webp" srcset="images/brand/loader-truck-right-320.webp">
-                    <img src="images/brand/loader-truck-right.png" alt="" width="560" height="293" decoding="async" fetchpriority="high">
-                </picture>
-                <span class="loader-road"></span>
-            </div>
-            <div class="loader-progress" aria-hidden="true"><span class="loader-progress-fill"></span></div>
-            <div class="loader-percent"><span id="loader-percent">0</span>%</div>
-        </div>
-    </div>
-
     <a class="skip-link" href="#main">Skip to main content</a>
 
     <!-- ===== Header / Navigation ===== -->

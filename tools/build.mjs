@@ -5,7 +5,7 @@
    2. For each page, inline the CSS that page actually uses into <head> and
       load the full stylesheets without blocking the first paint (Beasties).
       A <noscript> fallback keeps the page styled without JavaScript.
-   3. Inline the tiny loading-screen check (javascript/loader-check.js) on the
+   3. Inline the tiny section-link check (javascript/hash-check.js) on the
       homepage so it no longer costs its own network request.
 
    MigsFlow handbook exception (approved for page speed): the published HTML
@@ -29,7 +29,7 @@ await build({
     logLevel: "warning"
 });
 
-// 2 + 3. Inline first-screen CSS and the loader check
+// 2 + 3. Inline first-screen CSS and the section-link check
 const pages = ["index.html", ...list("html", ".html")];
 for (const page of pages) {
     const beasties = new Beasties({
@@ -45,8 +45,8 @@ for (const page of pages) {
     let html = await beasties.process(readFileSync(join(root, page), "utf8"));
 
     if (page === "index.html") {
-        const check = readFileSync(join(root, "javascript/loader-check.js"), "utf8");
-        html = html.replace('<script src="javascript/loader-check.js"></script>', `<script>${check}</script>`);
+        const check = readFileSync(join(root, "javascript/hash-check.js"), "utf8");
+        html = html.replace('<script src="javascript/hash-check.js"></script>', `<script>${check}</script>`);
     }
     writeFileSync(join(root, page), html);
 }

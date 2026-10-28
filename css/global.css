@@ -101,7 +101,7 @@ html {
     }
 }
 
-/* Arriving on a section link (/#areas): jump there instantly (loader-check.js) */
+/* Arriving on a section link (/#areas): jump there instantly (hash-check.js) */
 html.hash-landing {
     scroll-behavior: auto;
 }
@@ -209,136 +209,6 @@ h4 {
 
 .skip-link:focus {
     transform: translateY(0);
-}
-
-/* ---------- Loading screen ----------
-   global.js sets --progress (0 to 1) and adds .is-done at 100%.
-   The failsafe animation hides it on its own if JavaScript never runs. */
-.loader {
-    --progress: 0;
-
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    display: grid;
-    place-items: center;
-    padding: var(--gutter);
-    color: var(--color-white);
-    background-color: var(--color-black);
-    background-image: radial-gradient(ellipse 60% 50% at 50% 55%, rgba(14, 96, 112, 0.22), transparent 70%);
-    transition: opacity 0.3s ease, visibility 0.3s;
-    animation: loader-failsafe 0.6s ease 8s forwards;
-}
-
-/* Already played during this visit (javascript/loader-check.js) */
-.loader-seen .loader {
-    display: none;
-}
-
-.loader.is-hidden {
-    visibility: hidden;
-    opacity: 0;
-    pointer-events: none;
-}
-
-@keyframes loader-failsafe {
-    to {
-        visibility: hidden;
-        opacity: 0;
-    }
-}
-
-.loader-inner {
-    width: min(100%, 34rem);
-    text-align: center;
-}
-
-.loader-brand {
-    font-family: var(--font-heading);
-    font-weight: 400;
-    font-size: clamp(2.25rem, 6vw, 3.25rem);
-    line-height: 1;
-    letter-spacing: 0.04em;
-}
-
-/* The truck rides left to right as --progress grows (loader-truck-right is a mirrored copy), then drives off at the end */
-.loader-track {
-    position: relative;
-    height: 7rem;
-    margin-top: 2rem;
-}
-
-.loader-truck {
-    position: absolute;
-    bottom: 0.6rem;
-    left: 0;
-    width: 9.5rem;
-    transform: translateX(calc(var(--progress) * (min(100vw - 2 * var(--gutter), 34rem) - 9.5rem)));
-    transition: transform 0.25s linear;
-}
-
-.loader-truck img {
-    width: 100%;
-    height: auto;
-    filter: drop-shadow(0 0.5rem 0.5rem rgba(0, 0, 0, 0.5));
-    animation: loader-bob 0.5s ease-in-out infinite alternate;
-}
-
-@keyframes loader-bob {
-    to {
-        translate: 0 -2px;
-    }
-}
-
-.loader.is-done .loader-truck {
-    transform: translateX(calc(100vw + 10rem));
-    transition: transform 0.9s cubic-bezier(0.55, 0, 0.8, 0.4);
-}
-
-.loader-road {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 3px;
-    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.3) 55%, transparent 55%);
-    background-size: 1.75rem 3px;
-    mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
-}
-
-.loader-progress {
-    height: 4px;
-    margin-top: 1.75rem;
-    overflow: hidden;
-    background-color: rgba(255, 255, 255, 0.12);
-}
-
-.loader-progress-fill {
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(90deg, var(--color-maroon), var(--color-red-bright));
-    transform: scaleX(var(--progress));
-    transform-origin: left; /* fills the same way the truck drives */
-    transition: transform 0.25s linear;
-}
-
-.loader-percent {
-    margin-top: 0.85rem;
-    font-family: var(--font-heading);
-    font-weight: 400;
-    font-size: 1.75rem;
-    letter-spacing: 0.06em;
-    color: rgba(255, 255, 255, 0.85);
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .loader-truck,
-    .loader-truck img,
-    .loader-progress-fill {
-        animation: none;
-        transition: none;
-    }
 }
 
 /* ---------- Section headings ---------- */
@@ -1800,14 +1670,6 @@ textarea.form-control {
     }
 }
 
-
-/* ---------- Move with Moe wordmark (logo image instead of text) ---------- */
-.loader-logo {
-    display: block;
-    width: min(80%, 22rem);
-    height: auto;
-    margin-inline: auto;
-}
 
 /* Header: the M on its own */
 .brand-logo-m {
