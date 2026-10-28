@@ -18,9 +18,9 @@
     const MIN_TIME = reduceMotion ? 0 : 500; // long enough to see the truck, short enough not to hold up the page
     const start = performance.now();
 
-    // Track only what the first screen needs: the high-priority images (first hero
-    // photo, loader truck) plus the web fonts. Everything else keeps loading behind it.
-    const images = [...document.querySelectorAll('img[fetchpriority="high"]')];
+    // Track only the loader's own images (logo, truck) plus the web fonts. The hero
+    // photo keeps loading behind it, so the loader never waits on a big download.
+    const images = [...loader.querySelectorAll("img")];
     let total = images.length + 1; // + fonts
     let done = 0;
 
