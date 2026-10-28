@@ -411,7 +411,8 @@ window.showFormSuccess = function (form, success) {
    cards as many times as needed to be wider than the screen, so the end of
    the track never comes into view, even on very wide monitors. The loop
    time is set from the half's width so the speed stays the same (40px a
-   second) at any size. Rebuilt when the window is resized. Copies are
+   second) at any size. Built when the row comes within 800px of the screen,
+   then rebuilt when the window is resized. Copies are
    hidden from screen readers. Pauses on hover and while a card is pressed.
    Reduced motion: no animation; the row scrolls by hand. */
 document.querySelectorAll("[data-reviews]").forEach((root) => {
@@ -442,15 +443,32 @@ document.querySelectorAll("[data-reviews]").forEach((root) => {
         track.style.animationDuration = `${(setWidth * perHalf) / SPEED}s`;
     }
 
-    build();
+    let built = false;
     let lastWidth = window.innerWidth;
     let resizeTimer;
     window.addEventListener("resize", () => {
-        if (window.innerWidth === lastWidth) return; // ignore phone toolbar show/hide
+        if (!built || window.innerWidth === lastWidth) return; // ignore phone toolbar show/hide
         lastWidth = window.innerWidth;
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(build, 200);
     });
+
+    // Build the looping copies only when the reviews get close to the screen,
+    // so pages don't create hundreds of extra cards before they're needed.
+    // Until then the original cards sit in the row as normal.
+    const start = () => {
+        if (built) return;
+        built = true;
+        lastWidth = window.innerWidth;
+        build();
+    };
+    if (!("IntersectionObserver" in window)) return start();
+    const observer = new IntersectionObserver(([entry]) => {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+        start();
+    }, { rootMargin: "800px 0px" });
+    observer.observe(root);
 });
 
 /* ---------- Current page in the menu ----------
