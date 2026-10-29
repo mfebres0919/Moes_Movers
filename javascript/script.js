@@ -198,6 +198,7 @@
                 alert("Sorry, your request didn't go through. Please try again, or call us at (979) 888-8887.");
                 return;
             }
+            if (window.trackFormSent) window.trackFormSent("quote_request");
             showSuccess();
         });
     });

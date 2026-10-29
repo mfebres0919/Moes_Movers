@@ -315,6 +315,7 @@ window.showFormSuccess = function (form, success) {
                 alert("Sorry, your message didn't go through. Please try again, or call us at (979) 888-8887.");
                 return;
             }
+            if (window.trackFormSent) window.trackFormSent("contact_message");
             successName.textContent = document.getElementById("contact-first").value.trim() || "neighbor";
             window.showFormSuccess(form, success);
         });
