@@ -36,3 +36,4 @@
 /wp-admin/*                        /                                           301
 /wp-login.php                      /                                           301
 /feed/*                            /                                           301
+/checkout                          /                                           301
